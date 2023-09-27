@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://1ulstek31iwg"]
+
+[ext_resource type="Script" path="res://turret.gd" id="1_4qfjp"]
+
+[node name="Turret" type="Area2D"]
+script = ExtResource("1_4qfjp")
+rotation_speed = 5.0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 1, 0, 0.392157)
+polygon = PackedVector2Array(8, 8, -8, 8, -8, -8, -2, -8, -2, -24, 2, -24, 2, -8, 8, -8)
+
+[node name="CannonMouth" type="Area2D" parent="."]
+position = Vector2(0, -26)

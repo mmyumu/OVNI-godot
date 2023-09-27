@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://blbpq1q6ur422"]
+
+[ext_resource type="PackedScene" uid="uid://xsyxsqvbvltk" path="res://player.tscn" id="1_gy300"]
+[ext_resource type="Script" path="res://main_stage.gd" id="1_holjf"]
+
+[node name="MainStage" type="Node"]
+script = ExtResource("1_holjf")
+
+[node name="Player" parent="." instance=ExtResource("1_gy300")]
+position = Vector2(576, 576)
+
+[connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
