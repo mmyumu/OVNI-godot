@@ -7,8 +7,10 @@ var last_fire: float = 0.
 #var rotation_direction = 0
 var rs_look = Vector2.ZERO
 var deadzone = 0.3
+var previous_rs_look
 
 var projectile = preload("res://projectile.tscn")
+
 
 signal shoot(projectile, direction, location)
 
@@ -22,11 +24,7 @@ func _process(delta):
 	rs_look.y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	rs_look.x = -Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 	if rs_look.length() >= deadzone:
-		rotation = lerp(rotation, rs_look.angle(), 0.3)
-#		rotation = rs_look.angle()
-#	rotation_direction = Input.get_axis("rotate_left", "rotate_right")
-#	rotation += rotation_direction * rotation_speed * delta
-	
+		rotation = lerp_angle(rotation, rs_look.angle(), 0.05)
 	check_shoot(delta)
 
 

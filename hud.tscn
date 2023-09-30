@@ -1,3 +1,75 @@
-[gd_scene format=3 uid="uid://csrjim7erxwl"]
+[gd_scene load_steps=4 format=3 uid="uid://csrjim7erxwl"]
+
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_04pe5"]
+[ext_resource type="Script" path="res://hud.gd" id="1_6pjce"]
+[ext_resource type="Script" path="res://StartLabel.gd" id="2_qtv1r"]
 
 [node name="HUD" type="CanvasLayer"]
+process_mode = 2
+script = ExtResource("1_6pjce")
+
+[node name="HP" type="Node" parent="."]
+
+[node name="HPLabel" type="Label" parent="HP"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+offset_right = 81.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_04pe5")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="HPSeparatorLabel" type="Label" parent="HP"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 95.0
+offset_top = -55.0
+offset_right = 115.0
+offset_bottom = 3.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "/"
+
+[node name="MaxHPLabel" type="Label" parent="HP"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 120.0
+offset_top = -45.0
+offset_right = 201.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_04pe5")
+theme_override_font_sizes/font_size = 32
+text = "0
+"
+
+[node name="StartPlay" type="Node" parent="."]
+
+[node name="StartLabel" type="Label" parent="StartPlay"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -11.5
+offset_right = 115.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_04pe5")
+theme_override_font_sizes/font_size = 64
+text = "Time left"
+horizontal_alignment = 1
+script = ExtResource("2_qtv1r")
+theme_override_font_sizes/font_size = 64
+
+[node name="StartTimer" type="Timer" parent="StartPlay"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="StartPlay/StartTimer" to="." method="_on_start_timer_timeout"]

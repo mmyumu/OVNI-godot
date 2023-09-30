@@ -1,6 +1,8 @@
 extends Area2D
 
 @export var speed = 400
+@export var hp = 100
+@export var max_hp = 100
 
 var screen_size: Vector2
 
