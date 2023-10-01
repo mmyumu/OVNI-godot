@@ -2,7 +2,25 @@
 
 [ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_04pe5"]
 [ext_resource type="Script" path="res://hud.gd" id="1_6pjce"]
-[ext_resource type="Script" path="res://StartLabel.gd" id="2_qtv1r"]
+
+[sub_resource type="GDScript" id="GDScript_b8lme"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+#	print(GlobalVariables.input_type)
+#	var input_events = InputMap.action_get_events(\"start_play\")
+#	for input_event in input_events:
+#		if input_event is InputEventJoypadButton:
+#			print(input_event)
+			
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 2
@@ -65,8 +83,7 @@ theme_override_fonts/font = ExtResource("1_04pe5")
 theme_override_font_sizes/font_size = 64
 text = "Time left"
 horizontal_alignment = 1
-script = ExtResource("2_qtv1r")
-theme_override_font_sizes/font_size = 64
+script = SubResource("GDScript_b8lme")
 
 [node name="StartTimer" type="Timer" parent="StartPlay"]
 wait_time = 3.0

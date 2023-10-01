@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://blbpq1q6ur422"]
+[gd_scene load_steps=5 format=3 uid="uid://blbpq1q6ur422"]
 
-[ext_resource type="PackedScene" uid="uid://xsyxsqvbvltk" path="res://player.tscn" id="1_gy300"]
+[ext_resource type="PackedScene" uid="uid://xsyxsqvbvltk" path="res://player/player.tscn" id="1_gy300"]
 [ext_resource type="Script" path="res://main_stage.gd" id="1_holjf"]
 [ext_resource type="PackedScene" uid="uid://csrjim7erxwl" path="res://hud.tscn" id="3_ww8p0"]
+[ext_resource type="PackedScene" uid="uid://dgamdwdlcwo4c" path="res://enemies/spawner.tscn" id="4_hcxan"]
 
 [node name="MainStage" type="Node"]
 script = ExtResource("1_holjf")
@@ -12,5 +13,10 @@ position = Vector2(576, 576)
 
 [node name="HUD" parent="." instance=ExtResource("3_ww8p0")]
 
+[node name="Spawner" parent="." instance=ExtResource("4_hcxan")]
+
+[node name="SpawnTimer" type="Timer" parent="Spawner"]
+
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
 [connection signal="start_play" from="HUD" to="." method="_on_hud_start_play"]
+[connection signal="timeout" from="Spawner/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

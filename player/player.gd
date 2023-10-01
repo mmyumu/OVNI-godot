@@ -4,13 +4,11 @@ extends Area2D
 @export var hp = 100
 @export var max_hp = 100
 
-var screen_size: Vector2
-
 signal shoot(projectile, direction, location)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,7 +24,7 @@ func _process(delta):
 		velocity *= speed
 
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+	position = position.clamp(Vector2.ZERO, GlobalVariables.screen_size)
 
 
 func _on_turret_shoot(projectile, direction, location):

@@ -1,10 +1,12 @@
-extends Node
+extends Node2D
 
 var input_type = "joypad"
 
+var screen_size: Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	screen_size = get_viewport_rect().size
 #	set_process_input(true)
 #	guess_input_device()
 
