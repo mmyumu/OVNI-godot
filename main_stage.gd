@@ -1,6 +1,7 @@
 extends Node
 
 var rng = RandomNumberGenerator.new()
+var enemy_index = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,7 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	update_hp()
 
 func _on_player_shoot(projectile, direction, location):
 	var spawned_projectile = projectile.instantiate()
@@ -35,5 +36,6 @@ func _on_spawn_timer_timeout():
 	var x = rng.randi_range(0, GlobalVariables.screen_size.x)
 	var y = rng.randi_range(0, GlobalVariables.screen_size.y/2)
 	var spawn_position = Vector2(x, y)
-	$Spawner.spawn(spawn_position)
+	$Spawner.spawn(spawn_position, enemy_index)
+	enemy_index += 1
 	

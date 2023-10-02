@@ -11,8 +11,9 @@ func _ready():
 func _process(delta):
 	pass
 
-func spawn(position):
+func spawn(position, enemy_index):
 	var spawned_enemy = enemy.instantiate()
+	spawned_enemy.name = "Enemy%s" % enemy_index
 	get_parent().add_child(spawned_enemy)
 	spawned_enemy.position = position
 	spawned_enemy.rotation = TAU/2

@@ -9,7 +9,7 @@ var rs_look = Vector2.ZERO
 var deadzone = 0.3
 var previous_rs_look
 
-var projectile = preload("res://projectile.tscn")
+var projectile = preload("res://player/projectile.tscn")
 
 
 signal shoot(projectile, direction, location)

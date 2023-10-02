@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://b81m66m0b04m7"]
 
-[ext_resource type="Script" path="res://projectile.gd" id="1_qqgpp"]
+[ext_resource type="Script" path="res://player/projectile.gd" id="1_m8qk4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l08y2"]
 size = Vector2(4, 10)
 
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" groups=["Player", "Projectile"]]
 position = Vector2(567, 325)
-script = ExtResource("1_qqgpp")
+script = ExtResource("1_m8qk4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_l08y2")

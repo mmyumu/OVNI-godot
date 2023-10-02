@@ -86,7 +86,6 @@ horizontal_alignment = 1
 script = SubResource("GDScript_b8lme")
 
 [node name="StartTimer" type="Timer" parent="StartPlay"]
-wait_time = 3.0
 one_shot = true
 
 [connection signal="timeout" from="StartPlay/StartTimer" to="." method="_on_start_timer_timeout"]

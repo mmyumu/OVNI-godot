@@ -26,6 +26,10 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, GlobalVariables.screen_size)
 
-
 func _on_turret_shoot(projectile, direction, location):
 	shoot.emit(projectile, direction, location)
+
+func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	print("on area shape entered player: %s" % area)
+	if area.is_in_group("Enemies"):
+		hp -= 10		
