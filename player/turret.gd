@@ -1,4 +1,4 @@
-extends Area2D
+extends Polygon2D
 
 @export var rotation_speed = 5
 @export var fire_rate: float = 2 # Fire/second - TODO: should be computed from player fire_rate and specific projectile fire_rate
