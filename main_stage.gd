@@ -16,6 +16,8 @@ func _process(delta):
 func _on_player_shoot(projectile, direction, location):
 	var spawned_projectile = projectile.instantiate()
 	add_child(spawned_projectile)
+	spawned_projectile.add_to_group("Player")
+	spawned_projectile.get_node("ProjectileShape").color = Color(0, 0, 255, 0.5)
 	spawned_projectile.rotation = direction
 	spawned_projectile.position = location
 	spawned_projectile.velocity = spawned_projectile.velocity.rotated(direction)
@@ -36,6 +38,20 @@ func _on_spawn_timer_timeout():
 	var x = rng.randi_range(0, GlobalVariables.screen_size.x)
 	var y = rng.randi_range(0, GlobalVariables.screen_size.y/2)
 	var spawn_position = Vector2(x, y)
-	$Spawner.spawn(spawn_position, enemy_index)
+	var enemy = $Spawner.spawn(spawn_position, enemy_index)
+	
+	enemy.shoot.connect(_on_enemy_shoot)
+	
 	enemy_index += 1
 	
+func _on_enemy_shoot(projectile, direction, location):
+	print("main_stage _on_enemy_shoot")
+	var spawned_projectile = projectile.instantiate()
+	add_child(spawned_projectile)
+	spawned_projectile.add_to_group("Enemies")
+	spawned_projectile.get_node("ProjectileShape").color = Color(255, 0, 0, 0.5)
+	spawned_projectile.speed = 200
+	spawned_projectile.rotation = direction
+	spawned_projectile.position = location
+	spawned_projectile.velocity = spawned_projectile.velocity.rotated(direction)
+	print("direction: ", direction)

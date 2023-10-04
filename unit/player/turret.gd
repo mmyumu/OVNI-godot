@@ -9,7 +9,7 @@ var rs_look = Vector2.ZERO
 var deadzone = 0.3
 var previous_rs_look
 
-var projectile = preload("res://unit/player/projectile.tscn")
+var projectile = preload("res://unit/projectile.tscn")
 
 
 signal shoot(projectile, direction, location)
@@ -31,7 +31,6 @@ func _process(delta):
 func check_shoot(delta: float):
 	var fire_delay = 1/fire_rate
 	last_fire -= delta
-#	print("position:", position, ", global_position:", global_position)
 	if last_fire < 0 and Input.is_action_pressed("shoot"):
 		shoot.emit(projectile, rotation, $CannonMouth.global_position)
 		last_fire = fire_delay

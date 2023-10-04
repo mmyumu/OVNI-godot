@@ -18,3 +18,5 @@ func spawn(position, enemy_index):
 	spawned_enemy.position = position
 	spawned_enemy.rotation = TAU/2
 	print("Spawned enemy %s at x=%s, y=%s" % [spawned_enemy.name, position.x, position.y])
+	
+	return spawned_enemy
