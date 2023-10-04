@@ -3,8 +3,10 @@ extends Area2D
 @export var speed = 400
 @export var hp = 100
 @export var max_hp = 100
+@export var damage = 10
 
 signal shoot(projectile, direction, location)
+signal game_over()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,4 +33,7 @@ func _on_turret_shoot(projectile, direction, location):
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("Enemies"):
-		hp -= 10		
+		if "damage" in area:
+			hp -= area.damage
+		if hp <= 0:
+			game_over.emit()

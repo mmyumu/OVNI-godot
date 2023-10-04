@@ -27,9 +27,7 @@ func update_hp():
 	$HUD/HP/MaxHPLabel.text = str($Player.max_hp)
 
 func _on_hud_start_play():
-	$Player.show()
-	$Spawner/SpawnTimer.start()
-	get_tree().paused = false
+	start_stop_game(true)
 
 
 func _on_spawn_timer_timeout():
@@ -45,7 +43,6 @@ func _on_spawn_timer_timeout():
 	enemy_index += 1
 	
 func _on_enemy_shoot(projectile, direction, location):
-	print("main_stage _on_enemy_shoot")
 	var spawned_projectile = projectile.instantiate()
 	add_child(spawned_projectile)
 	spawned_projectile.add_to_group("Enemies")
@@ -54,4 +51,19 @@ func _on_enemy_shoot(projectile, direction, location):
 	spawned_projectile.rotation = direction
 	spawned_projectile.position = location
 	spawned_projectile.velocity = spawned_projectile.velocity.rotated(direction)
-	print("direction: ", direction)
+
+
+func _on_player_game_over():
+	start_stop_game(false)
+	await get_tree().create_timer(2.0).timeout
+	get_tree().change_scene_to_file("res://menu.tscn")
+
+func start_stop_game(start):
+	if start:
+		$Player.show()
+		$Spawner/SpawnTimer.start()
+		get_tree().paused = false
+	else:
+		$Player.hide()
+		$Spawner/SpawnTimer.stop()
+		get_tree().paused = true

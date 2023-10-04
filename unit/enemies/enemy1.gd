@@ -2,6 +2,7 @@ extends Area2D
 
 @export var hp = 10
 @export var max_hp = 10
+@export var damage = 5
 
 signal shoot(projectile, direction, location)
 
@@ -19,10 +20,11 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 	if area.is_in_group("Player"):
 		
 		# TODO : get the
-		if area.is_in_group("Projectile"):
-			hp -= 10
-			if hp <= 0:
-				queue_free()
+#		if area.is_in_group("Projectile"):
+		if "damage" in area:
+			hp -= area.damage
+		if hp <= 0:
+			queue_free()
 
 
 func _on_weapon_shoot(projectile, direction, location):

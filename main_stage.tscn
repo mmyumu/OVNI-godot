@@ -21,6 +21,7 @@ position = Vector2(640, 576)
 [node name="Background" parent="." instance=ExtResource("5_0nbiv")]
 speed = 500.0
 
+[connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
 [connection signal="start_play" from="HUD" to="." method="_on_hud_start_play"]
 [connection signal="timeout" from="Spawner/SpawnTimer" to="." method="_on_spawn_timer_timeout"]
