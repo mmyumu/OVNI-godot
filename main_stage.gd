@@ -1,15 +1,12 @@
 extends Node
 
-var rng = RandomNumberGenerator.new()
 var enemy_index = 0
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().paused = true
 	update_hp()
 	$Player.hide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	update_hp()
 
@@ -33,13 +30,8 @@ func _on_hud_start_play():
 func _on_spawn_timer_timeout():
 	# TODO: improve spawn position (outside of screen? not on player?)
 	# TODO: spawn waves of enemies instead of enemies 1 by 1 (scripted? random mechanism?)
-	var x = rng.randi_range(0, GlobalVariables.screen_size.x)
-	var y = rng.randi_range(0, GlobalVariables.screen_size.y/2)
-	var spawn_position = Vector2(x, y)
-	var enemy = $Spawner.spawn(spawn_position, enemy_index)
-	
+	var enemy = $Spawner.spawn(enemy_index)
 	enemy.shoot.connect(_on_enemy_shoot)
-	
 	enemy_index += 1
 	
 func _on_enemy_shoot(projectile, direction, location):
