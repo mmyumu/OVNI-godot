@@ -2,7 +2,7 @@ extends Polygon2D
 
 var rng = RandomNumberGenerator.new()
 
-var enemy = preload("res://unit/enemies/enemy1.tscn")
+var enemy = preload("res://unit/enemies/enemy.tscn")
 
 var min_point
 var max_point

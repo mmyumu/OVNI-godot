@@ -24,6 +24,7 @@ polygon = PackedVector2Array(0, 0, 0, -32, 553.974, -31.5672, 1280, -31, 1280, 0
 speed = 500.0
 
 [connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
+[connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
 [connection signal="start_play" from="HUD" to="." method="_on_hud_start_play"]
 [connection signal="timeout" from="Spawner/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

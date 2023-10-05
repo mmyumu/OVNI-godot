@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjoccyfcff2jx"]
+
+[ext_resource type="PackedScene" uid="uid://eoyctovw0etd" path="res://unit/projectile.tscn" id="1_tqnnm"]
+
+[node name="Projectile" instance=ExtResource("1_tqnnm")]
+damage = 5
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]

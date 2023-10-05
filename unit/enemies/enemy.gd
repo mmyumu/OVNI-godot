@@ -13,18 +13,18 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	position = $AI.compute_position(delta, position)
 
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("Player"):
-		
-		# TODO : get the
-#		if area.is_in_group("Projectile"):
 		if "damage" in area:
 			hp -= area.damage
 		if hp <= 0:
 			queue_free()
+		
+		if area.is_in_group("Projectile"):
+			area.queue_free()
 
 
 func _on_weapon_shoot(projectile, direction, location):

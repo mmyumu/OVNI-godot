@@ -3,6 +3,7 @@ extends Node2D
 var input_type = "joypad"
 
 var screen_size: Vector2
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

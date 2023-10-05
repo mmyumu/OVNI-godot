@@ -6,6 +6,7 @@ extends Area2D
 @export var damage = 10
 
 signal shoot(projectile, direction, location)
+signal player_hit(damage)
 signal game_over()
 
 # Called when the node enters the scene tree for the first time.
@@ -35,5 +36,8 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 	if area.is_in_group("Enemies"):
 		if "damage" in area:
 			hp -= area.damage
+			player_hit.emit(area.damage)
 		if hp <= 0:
 			game_over.emit()
+		if area.is_in_group("Projectile"):
+			area.queue_free()
