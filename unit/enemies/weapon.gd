@@ -17,3 +17,7 @@ func _process(delta):
 func _on_shoot_timer_timeout():
 #	print("weapon _on_shoot_timer_timeout")
 	shoot.emit(projectile, $CannonMouth.global_rotation, $CannonMouth.global_position)
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	$ShootTimer.start()

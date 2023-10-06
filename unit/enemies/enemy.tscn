@@ -23,6 +23,7 @@ position = Vector2(0, -24)
 
 [node name="AI" type="Node" parent="."]
 script = ExtResource("3_rldtg")
+approach_speed = 0.2
 
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
 [connection signal="shoot" from="Weapon" to="." method="_on_weapon_shoot"]
