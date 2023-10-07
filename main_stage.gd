@@ -29,7 +29,6 @@ func update_hp():
 func _on_hud_start_play():
 	start_stop_game(true)
 
-
 func _on_spawn_timer_timeout():
 	# TODO: improve spawn position (outside of screen? not on player?)
 	# TODO: spawn waves of enemies instead of enemies 1 by 1 (scripted? random mechanism?)

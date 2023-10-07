@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://unit/enemies/enemy.gd" id="1_utwqf"]
 [ext_resource type="PackedScene" uid="uid://bq8gn3xifxca1" path="res://unit/enemies/weapon.tscn" id="2_d2til"]
-[ext_resource type="Script" path="res://unit/enemies/ai.gd" id="3_rldtg"]
+[ext_resource type="PackedScene" uid="uid://bpkibt80wtrf6" path="res://unit/enemies/approach_ai.tscn" id="3_dgkip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w04ol"]
 size = Vector2(48, 48)
@@ -21,9 +21,7 @@ shape = SubResource("RectangleShape2D_w04ol")
 [node name="Weapon" parent="." instance=ExtResource("2_d2til")]
 position = Vector2(0, -24)
 
-[node name="AI" type="Node" parent="."]
-script = ExtResource("3_rldtg")
-approach_speed = 0.2
+[node name="AI" parent="." instance=ExtResource("3_dgkip")]
 
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
 [connection signal="shoot" from="Weapon" to="." method="_on_weapon_shoot"]
