@@ -41,7 +41,6 @@ func _on_enemy_shoot(projectile, direction, location):
 	add_child(spawned_projectile)
 	spawned_projectile.add_to_group("Enemies")
 	spawned_projectile.get_node("ProjectileShape").color = Color(255, 0, 0, 0.5)
-	spawned_projectile.speed = 200
 	spawned_projectile.rotation = direction
 	spawned_projectile.position = location
 	spawned_projectile.velocity = spawned_projectile.velocity.rotated(direction)

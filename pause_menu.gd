@@ -14,7 +14,7 @@ func _shortcut_input(event):
 	if Input.is_action_pressed("pause"):
 		var is_paused = get_tree().paused
 		get_tree().paused = !is_paused
-		
+
 		if is_paused:
 			$PauseMessage/PauseLabel.hide()
 			$PauseMessage/ResumeLabel.hide()

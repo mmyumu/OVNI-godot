@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://eoyctovw0etd"]
 
-[ext_resource type="Script" path="res://unit/projectile.gd" id="1_fyl2t"]
+[ext_resource type="Script" path="res://unit/projectiles/bullet.gd" id="1_aasoj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l08y2"]
 size = Vector2(4, 10)
 
 [node name="Projectile" type="Area2D" groups=["Projectile"]]
 position = Vector2(567, 325)
-script = ExtResource("1_fyl2t")
+script = ExtResource("1_aasoj")
+speed = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_l08y2")

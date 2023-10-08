@@ -2,7 +2,7 @@ extends Marker2D
 
 signal shoot(projectile, direction, location)
 
-var projectile = preload("res://unit/projectile.tscn")
+@export var projectile = preload("res://unit/projectiles/bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

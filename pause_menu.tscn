@@ -10,6 +10,7 @@ script = ExtResource("1_otuif")
 [node name="PauseMessage" type="Node" parent="."]
 
 [node name="PauseLabel" type="Label" parent="PauseMessage"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,6 +27,7 @@ theme_override_font_sizes/font_size = 64
 text = "Pause"
 
 [node name="ResumeLabel" type="Label" parent="PauseMessage"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
