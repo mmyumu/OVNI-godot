@@ -3,8 +3,10 @@ extends Area2D
 @export var hp = 10
 @export var max_hp = 10
 @export var damage = 5
+@export var money = 1000
 
 signal shoot(projectile, direction, location)
+signal enemy_destroyed(enemy)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +24,7 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 			hp -= area.damage
 		if hp <= 0:
 			queue_free()
+			enemy_destroyed.emit(self)
 		
 		if area.is_in_group("Projectile"):
 			area.queue_free()

@@ -5,6 +5,8 @@ extends Area2D
 @export var max_hp = 100
 @export var damage = 10
 
+var money = 0
+
 signal shoot(projectile, direction, location)
 signal player_hit(damage)
 signal game_over()
