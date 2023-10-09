@@ -10,7 +10,6 @@ func _ready():
 	$Player.hide()
 
 func _process(delta):
-#	update_hp()
 	pass
 
 func _on_player_shoot(projectile, direction, location):
@@ -24,7 +23,7 @@ func _on_player_shoot(projectile, direction, location):
 
 func update_hud_hp():
 	if $Player:
-		$HUD/HP/HPLabel.text = str($Player.hp)
+		$HUD/HP/HPLabel.text = str(max($Player.hp, 0))
 		$HUD/HP/MaxHPLabel.text = str($Player.max_hp)
 
 func update_hud_money():
@@ -33,14 +32,6 @@ func update_hud_money():
 
 func _on_hud_start_play():
 	start_stop_game(true)
-
-func _on_spawn_timer_timeout():
-	# TODO: improve spawn position (outside of screen? not on player?)
-	# TODO: spawn waves of enemies instead of enemies 1 by 1 (scripted? random mechanism?)
-	var enemy = $Spawner.spawn(enemy_index)
-	enemy.shoot.connect(_on_enemy_shoot)
-	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
-	enemy_index += 1
 	
 func _on_enemy_shoot(projectile, direction, location):
 	var spawned_projectile = projectile.instantiate()
@@ -72,6 +63,10 @@ func start_stop_game(start):
 		$HUD/GameOverLabel.show()
 		get_tree().paused = true
 
-
 func _on_player_player_hit(damage):
 	update_hud_hp()
+
+func _on_spawner_enemy_spawned(enemy):
+	add_child(enemy)
+	enemy.shoot.connect(_on_enemy_shoot)
+	enemy.enemy_destroyed.connect(_on_enemy_destroyed)

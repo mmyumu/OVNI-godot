@@ -7,6 +7,10 @@ var enemy = preload("res://unit/enemies/enemy.tscn")
 var min_point
 var max_point
 
+var enemy_index = 0
+
+signal enemy_spawned(enemy)
+
 func _ready():
 	var min_x
 	var max_x
@@ -46,9 +50,15 @@ func spawn(enemy_index):
 	var spawn_position = Vector2(x, y)
 	var spawned_enemy = enemy.instantiate()
 	spawned_enemy.name = "Enemy%s" % enemy_index
-	get_parent().add_child(spawned_enemy)
 	spawned_enemy.position = spawn_position
 	spawned_enemy.rotation = TAU/2
-	print("Spawned enemy %s at x=%s, y=%s" % [spawned_enemy.name, spawn_position.x, spawn_position.y])
+#	print("Spawned enemy %s at x=%s, y=%s" % [spawned_enemy.name, spawn_position.x, spawn_position.y])
+	
+	enemy_spawned.emit(spawned_enemy)
 	
 	return spawned_enemy
+
+
+func _on_spawn_timer_timeout():
+	spawn(enemy_index)
+	enemy_index += 1

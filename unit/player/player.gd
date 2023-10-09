@@ -41,5 +41,3 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 			player_hit.emit(area.damage)
 		if hp <= 0:
 			game_over.emit()
-		if area.is_in_group("Projectile"):
-			area.queue_free()

@@ -21,8 +21,6 @@ position = Vector2(640, 576)
 [node name="Spawner" parent="." instance=ExtResource("4_hcxan")]
 polygon = PackedVector2Array(0, 0, 0, -64, 1280, -64, 1280, 0)
 
-[node name="SpawnTimer" type="Timer" parent="Spawner"]
-
 [node name="Background" parent="." instance=ExtResource("5_0nbiv")]
 speed = 500.0
 
@@ -30,4 +28,4 @@ speed = 500.0
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
 [connection signal="start_play" from="HUD" to="." method="_on_hud_start_play"]
-[connection signal="timeout" from="Spawner/SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="enemy_spawned" from="Spawner" to="." method="_on_spawner_enemy_spawned"]
