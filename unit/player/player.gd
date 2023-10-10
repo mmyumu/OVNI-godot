@@ -6,6 +6,7 @@ extends Area2D
 @export var damage = 10
 
 var money = 0
+var invulnerable = false
 
 signal shoot(projectile, direction, location)
 signal player_hit(damage)
@@ -35,6 +36,8 @@ func _on_turret_shoot(projectile, direction, location):
 	shoot.emit(projectile, direction, location)
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if invulnerable:
+		return
 	if area.is_in_group("Enemies"):
 		if "damage" in area:
 			hp -= area.damage

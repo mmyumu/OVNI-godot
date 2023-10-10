@@ -1,15 +1,18 @@
 extends Polygon2D
 
+#@export var enemies: Array[PackedScene]
+@export var max_wave_count = 3
+
 var rng = RandomNumberGenerator.new()
-
-var enemy = preload("res://unit/enemies/enemy.tscn")
-
+var enemy = preload("res://unit/enemies/fighter_enemy.tscn")
 var min_point
 var max_point
-
 var enemy_index = 0
+var spawn_wave_counter = 0
 
 signal enemy_spawned(enemy)
+
+var current_enemies: Array[Node] = []
 
 func _ready():
 	var min_x
@@ -44,6 +47,14 @@ func _ready():
 func _process(delta):
 	pass
 
+func get_spawned_enemies():
+	var spawned_enemies = []
+	for current_enemy in current_enemies:
+		if is_instance_valid(current_enemy):
+			spawned_enemies.append(current_enemy)
+
+	return spawned_enemies
+
 func start():
 	$SpawnTimer.start()
 	$SpawnWaveTimer.start()
@@ -70,16 +81,14 @@ func spawn(spawn_position):
 	
 	enemy_spawned.emit(spawned_enemy)
 	enemy_index += 1
+	
+	current_enemies.append(spawned_enemy)
 	return spawned_enemy
 
 func spawn_wave(number_of_enemies):
 	var x_offset = 50
 	var y_offset = 50
 	var spawned_enemies = []
-#	var spawned_enemy = spawn_random()
-#	var spawned_position = Vector2(spawned_enemy.position)
-#	spawned_enemies.append(spawned_enemy)
-
 	var spawned_position
 	
 	for i in range(number_of_enemies):
@@ -94,6 +103,8 @@ func spawn_wave(number_of_enemies):
 		
 		spawned_position = Vector2(spawned_enemy.position)
 		spawned_enemies.append(spawned_enemy)
+		
+	spawn_wave_counter += 1
 	
 	return spawned_enemies
 
@@ -102,3 +113,15 @@ func _on_spawn_timer_timeout():
 
 func _on_spawn_wave_timer_timeout():
 	spawn_wave(3)
+	if spawn_wave_counter >= max_wave_count:
+		stop_spawning()
+
+func stop_spawning():
+	$SpawnTimer.stop()
+	$SpawnWaveTimer.stop()
+
+func spawning_over():
+	return spawn_wave_counter >= max_wave_count
+
+func spawning_cleared():
+	return spawning_over() and len(get_spawned_enemies()) == 0

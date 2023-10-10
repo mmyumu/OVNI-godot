@@ -10,7 +10,7 @@ func _ready():
 	$Player.hide()
 
 func _process(delta):
-	pass
+	check_stage_completed()
 
 func _on_player_shoot(projectile, direction, location):
 	var spawned_projectile = projectile.instantiate()
@@ -51,15 +51,15 @@ func _on_player_game_over():
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://menu.tscn")
 
-func start_stop_game(start):
+func start_stop_game(start: bool, game_over:bool = true):
 	if start:
 		$Player.show()
 		$Spawner.start()
 		$HUD/GameOverLabel.hide()
 		get_tree().paused = false
 	else:
-		$Player.hide()
 		$Spawner.stop()
+		$Player.hide()
 		$HUD/GameOverLabel.show()
 		get_tree().paused = true
 
@@ -70,3 +70,11 @@ func _on_spawner_enemy_spawned(enemy):
 	add_child(enemy)
 	enemy.shoot.connect(_on_enemy_shoot)
 	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
+
+func check_stage_completed():
+	if $Spawner.spawning_cleared():
+		$HUD/StageCompletedLabel.show()
+		$Player.invulnerable = true
+		
+		await get_tree().create_timer(2.0).timeout
+		get_tree().change_scene_to_file("res://menu.tscn")
