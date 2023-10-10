@@ -54,12 +54,12 @@ func _on_player_game_over():
 func start_stop_game(start):
 	if start:
 		$Player.show()
-		$Spawner/SpawnTimer.start()
+		$Spawner.start()
 		$HUD/GameOverLabel.hide()
 		get_tree().paused = false
 	else:
 		$Player.hide()
-		$Spawner/SpawnTimer.stop()
+		$Spawner.stop()
 		$HUD/GameOverLabel.show()
 		get_tree().paused = true
 

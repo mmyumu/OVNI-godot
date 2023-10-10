@@ -20,7 +20,8 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	var to_be_freed = (is_in_group("Player") and area.is_in_group("Enemies")) \
+	var to_be_freed = !area.is_in_group("Projectile") and \
+			(is_in_group("Player") and area.is_in_group("Enemies")) \
 			or (is_in_group("Enemies") and area.is_in_group("Player"))
 	if to_be_freed:
 		queue_free()

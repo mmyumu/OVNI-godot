@@ -10,5 +10,10 @@ script = ExtResource("1_87q1l")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="SpawnWaveTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="SpawnWaveTimer" to="." method="_on_spawn_wave_timer_timeout"]

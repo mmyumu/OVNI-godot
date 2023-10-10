@@ -44,21 +44,61 @@ func _ready():
 func _process(delta):
 	pass
 
-func spawn(enemy_index):
+func start():
+	$SpawnTimer.start()
+	$SpawnWaveTimer.start()
+
+func stop():
+	$SpawnTimer.stop()
+	$SpawnWaveTimer.stop()
+
+func get_random_position():
 	var x = rng.randi_range(min_point.x, max_point.x)
 	var y = rng.randi_range(min_point.y, max_point.y)
-	var spawn_position = Vector2(x, y)
+	return Vector2(x, y)
+
+func spawn_random():
+	return spawn(get_random_position())
+	
+func spawn(spawn_position):
+	var enemy_name = "Enemy%s" % enemy_index
+	
 	var spawned_enemy = enemy.instantiate()
-	spawned_enemy.name = "Enemy%s" % enemy_index
+	spawned_enemy.name = enemy_name
 	spawned_enemy.position = spawn_position
 	spawned_enemy.rotation = TAU/2
-#	print("Spawned enemy %s at x=%s, y=%s" % [spawned_enemy.name, spawn_position.x, spawn_position.y])
 	
 	enemy_spawned.emit(spawned_enemy)
-	
+	enemy_index += 1
 	return spawned_enemy
 
+func spawn_wave(number_of_enemies):
+	var x_offset = 50
+	var y_offset = 50
+	var spawned_enemies = []
+#	var spawned_enemy = spawn_random()
+#	var spawned_position = Vector2(spawned_enemy.position)
+#	spawned_enemies.append(spawned_enemy)
+
+	var spawned_position
+	
+	for i in range(number_of_enemies):
+		if i > 0:
+			await get_tree().create_timer(0.1).timeout
+
+		if spawned_position == null:
+			spawned_position = get_random_position()
+		
+		var spawn_position = Vector2(spawned_position.x - x_offset, spawned_position.y - y_offset)
+		var spawned_enemy = spawn(spawn_position)
+		
+		spawned_position = Vector2(spawned_enemy.position)
+		spawned_enemies.append(spawned_enemy)
+	
+	return spawned_enemies
 
 func _on_spawn_timer_timeout():
-	spawn(enemy_index)
-	enemy_index += 1
+	spawn_random()
+
+func _on_spawn_wave_timer_timeout():
+	spawn_wave(3)
