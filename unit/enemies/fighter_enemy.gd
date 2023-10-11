@@ -18,6 +18,7 @@ signal enemy_destroyed(enemy)
 func _ready():
 	ai = ai_scene.instantiate()
 	weapon = weapon_scene.instantiate()
+	weapon.position = $WeaponSlot.position
 	add_child(weapon)
 	weapon.shoot.connect(_on_weapon_shoot)
 

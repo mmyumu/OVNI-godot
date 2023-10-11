@@ -20,4 +20,7 @@ polygon = PackedVector2Array(3, 3, 2, 2, 1, 2, 1, 3, -1, 3, -1, 2, -2, 2, -3, 3,
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_w04ol")
 
+[node name="WeaponSlot" type="Marker2D" parent="."]
+position = Vector2(0, -26)
+
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
