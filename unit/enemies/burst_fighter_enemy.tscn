@@ -1,15 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwkq4slm2hqyf"]
+[gd_scene load_steps=5 format=3 uid="uid://c2f1y2bb81lt2"]
 
-[ext_resource type="PackedScene" uid="uid://iaxqjwj784uv" path="res://unit/enemies/base_enemy.tscn" id="1_xlwuu"]
-[ext_resource type="PackedScene" uid="uid://bpkibt80wtrf6" path="res://unit/enemies/ais/approach_ai.tscn" id="2_lwapo"]
-[ext_resource type="PackedScene" uid="uid://bq8gn3xifxca1" path="res://unit/enemies/weapons/rifle.tscn" id="3_psmhn"]
+[ext_resource type="PackedScene" uid="uid://iaxqjwj784uv" path="res://unit/enemies/base_enemy.tscn" id="1_ti18o"]
+[ext_resource type="PackedScene" uid="uid://bpkibt80wtrf6" path="res://unit/enemies/ais/approach_ai.tscn" id="2_p3e4u"]
+[ext_resource type="PackedScene" uid="uid://dkw7riakfgkp2" path="res://unit/enemies/weapons/burst_rifle.tscn" id="3_186dc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1udk0"]
 size = Vector2(48, 48)
 
-[node name="FighterEnemy" instance=ExtResource("1_xlwuu")]
-ai_scene = ExtResource("2_lwapo")
-weapon_scene = ExtResource("3_psmhn")
+[node name="BurstFighterEnemy" instance=ExtResource("1_ti18o")]
+ai_scene = ExtResource("2_p3e4u")
+weapon_scene = ExtResource("3_186dc")
 
 [node name="Polygon2D" type="Polygon2D" parent="." index="0"]
 scale = Vector2(8, 8)

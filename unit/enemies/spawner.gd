@@ -1,10 +1,10 @@
 extends Polygon2D
 
-#@export var enemies: Array[PackedScene]
+@export var enemies_scenes: Array[PackedScene]
 @export var max_wave_count = 3
 
 var rng = RandomNumberGenerator.new()
-var enemy = preload("res://unit/enemies/fighter_enemy.tscn")
+#var enemy = preload("res://unit/enemies/fighter_enemy.tscn")
 var min_point
 var max_point
 var enemy_index = 0
@@ -74,7 +74,8 @@ func spawn_random():
 func spawn(spawn_position):
 	var enemy_name = "Enemy%s" % enemy_index
 	
-	var spawned_enemy = enemy.instantiate()
+	var enemy_scene = enemies_scenes[randi() % enemies_scenes.size()]
+	var spawned_enemy = enemy_scene.instantiate()
 	spawned_enemy.name = enemy_name
 	spawned_enemy.position = spawn_position
 	spawned_enemy.rotation = TAU/2

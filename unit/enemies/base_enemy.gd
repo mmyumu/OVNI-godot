@@ -1,3 +1,4 @@
+class_name BaseEnemy
 extends Area2D
 
 @export var hp = 10
@@ -32,6 +33,7 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 	if area.is_in_group("Player"):
 		if "damage" in area:
 			hp -= area.damage
+			print(hp)
 		if hp <= 0:
 			queue_free()
 			enemy_destroyed.emit(self)
