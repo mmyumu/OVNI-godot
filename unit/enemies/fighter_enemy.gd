@@ -6,8 +6,10 @@ extends Area2D
 @export var money = 1000
 
 @export var ai_scene: PackedScene
+@export var weapon_scene: PackedScene
 
 var ai
+var weapon
 
 signal shoot(projectile, direction, location)
 signal enemy_destroyed(enemy)
@@ -15,7 +17,9 @@ signal enemy_destroyed(enemy)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ai = ai_scene.instantiate()
-	pass # Replace with function body.
+	weapon = weapon_scene.instantiate()
+	add_child(weapon)
+	weapon.shoot.connect(_on_weapon_shoot)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

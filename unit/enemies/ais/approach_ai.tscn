@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bpkibt80wtrf6"]
 
-[ext_resource type="Script" path="res://unit/enemies/approach_ai.gd" id="1_gv777"]
+[ext_resource type="Script" path="res://unit/enemies/ais/approach_ai.gd" id="1_gv777"]
 
 [node name="ApproachAI" type="Node"]
 script = ExtResource("1_gv777")
