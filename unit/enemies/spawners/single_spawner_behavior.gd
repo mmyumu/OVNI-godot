@@ -3,14 +3,14 @@ extends Node
 signal spawn_triggered(spawn_position)
 signal over()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func set_polygon(polygon):
+	$BoundariesUtil.set_boundaries(polygon)
 
 func start():
 	$SpawnTimer.start()
@@ -19,4 +19,5 @@ func stop():
 	$SpawnTimer.stop()
 
 func _on_spawn_timer_timeout():
-	spawn_triggered.emit(null)
+	var spawn_position = $BoundariesUtil.get_random_position()
+	spawn_triggered.emit(spawn_position)

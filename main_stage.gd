@@ -11,7 +11,7 @@ func _ready():
 	$Player.hide()
 	
 	for node in get_children():
-		if node is BaseSpawner:
+		if node is Spawner:
 			current_spawners.append(node)
 
 func _process(delta):
