@@ -1,5 +1,4 @@
-class_name BaseEnemy
-extends Area2D
+class_name BaseEnemy extends Area2D
 
 @export var hp = 10
 @export var max_hp = 10

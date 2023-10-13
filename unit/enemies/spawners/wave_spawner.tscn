@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bpluebfpabrm1"]
+
+[node name="WaveSpawner"]
+
+[node name="SpawnWaveTimer" type="Timer" parent="." index="1"]
+wait_time = 3.0

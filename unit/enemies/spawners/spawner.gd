@@ -1,20 +1,26 @@
-extends Polygon2D
+class_name BaseSpawner extends Polygon2D
 
 @export var enemies_scenes: Array[PackedScene]
-@export var max_wave_count = 3
+#@export var max_wave_count = 3
+@export var behavior_scene: PackedScene
 
+var current_enemies: Array[Node] = []
+var behavior
 var rng = RandomNumberGenerator.new()
-#var enemy = preload("res://unit/enemies/fighter_enemy.tscn")
 var min_point
 var max_point
 var enemy_index = 0
 var spawn_wave_counter = 0
+var spawning = true
 
 signal enemy_spawned(enemy)
 
-var current_enemies: Array[Node] = []
-
 func _ready():
+	behavior = behavior_scene.instantiate()
+	behavior.spawn_triggered.connect(_on_spawn_triggered)
+	set_boundaries()
+	
+func set_boundaries():
 	var min_x
 	var max_x
 	var min_y
@@ -47,30 +53,28 @@ func _ready():
 func _process(delta):
 	pass
 
-func get_spawned_enemies():
-	var spawned_enemies = []
-	for current_enemy in current_enemies:
-		if is_instance_valid(current_enemy):
-			spawned_enemies.append(current_enemy)
-
-	return spawned_enemies
-
 func start():
-	$SpawnTimer.start()
-	$SpawnWaveTimer.start()
+	spawning = true
+	behavior.start()
 
 func stop():
-	$SpawnTimer.stop()
-	$SpawnWaveTimer.stop()
+	spawning = false
+	behavior.stop()
 
 func get_random_position():
 	var x = rng.randi_range(min_point.x, max_point.x)
 	var y = rng.randi_range(min_point.y, max_point.y)
 	return Vector2(x, y)
 
+func _on_spawn_triggered(spawn_position):
+	if spawn_position:
+		spawn(spawn_position)
+	else:
+		spawn_random()
+
 func spawn_random():
 	return spawn(get_random_position())
-	
+
 func spawn(spawn_position):
 	var enemy_name = "Enemy%s" % enemy_index
 	
@@ -109,20 +113,17 @@ func spawn_wave(number_of_enemies):
 	
 	return spawned_enemies
 
-func _on_spawn_timer_timeout():
-	spawn_random()
+#func _on_spawn_timer_timeout():
+#	spawn_random()
 
-func _on_spawn_wave_timer_timeout():
-	spawn_wave(3)
-	if spawn_wave_counter >= max_wave_count:
-		stop_spawning()
+#func _on_spawn_wave_timer_timeout():
+#	spawn_wave(3)
+#	if spawn_wave_counter >= max_wave_count:
+#		stop_spawning()
 
-func stop_spawning():
-	$SpawnTimer.stop()
-	$SpawnWaveTimer.stop()
+#func stop_spawning():
+#	$SpawnTimer.stop()
+#	$SpawnWaveTimer.stop()
 
-func spawning_over():
-	return spawn_wave_counter >= max_wave_count
-
-func spawning_cleared():
-	return spawning_over() and len(get_spawned_enemies()) == 0
+#func spawning_over():
+#	return spawn_wave_counter >= max_wave_count
