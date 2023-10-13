@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://unit/enemies/weapons/burst_rifle.gd" id="1_sbfxy"]
 
 [node name="BurstRifle" type="Marker2D"]
+editor_description = "Burst rifle"
 script = ExtResource("1_sbfxy")
 
 [node name="ShootTimer" type="Timer" parent="."]

@@ -1,5 +1,4 @@
-class_name BaseEnemy
-extends Area2D
+class_name BaseEnemy extends Area2D
 
 @export var hp = 10
 @export var max_hp = 10
@@ -11,6 +10,7 @@ extends Area2D
 
 var ai
 var weapon
+var on_screen: bool = false
 
 signal shoot(projectile, direction, location)
 signal enemy_destroyed(enemy)
@@ -33,7 +33,6 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 	if area.is_in_group("Player"):
 		if "damage" in area:
 			hp -= area.damage
-			print(hp)
 		if hp <= 0:
 			queue_free()
 			enemy_destroyed.emit(self)
@@ -45,3 +44,11 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 func _on_weapon_shoot(projectile, direction, location):
 #	print("enemy _on_weapon_shoot")
 	shoot.emit(projectile, direction, location)
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	on_screen = true
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	on_screen = false

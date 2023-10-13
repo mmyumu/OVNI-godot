@@ -1,6 +1,7 @@
-extends Node
+class_name MainStage extends Node
 
-var enemy_index = 0
+var current_enemies = []
+var current_spawners = []
 
 func _ready():
 	GlobalVariables.player = $Player
@@ -8,6 +9,10 @@ func _ready():
 	update_hud_hp()
 	update_hud_money()
 	$Player.hide()
+	
+	for node in get_children():
+		if node is Spawner:
+			current_spawners.append(node)
 
 func _process(delta):
 	check_stage_completed()
@@ -54,27 +59,57 @@ func _on_player_game_over():
 func start_stop_game(start: bool, game_over:bool = true):
 	if start:
 		$Player.show()
-		$Spawner.start()
+		start_spawners()
 		$HUD/GameOverLabel.hide()
 		get_tree().paused = false
 	else:
-		$Spawner.stop()
+		stop_spawners()
 		$Player.hide()
 		$HUD/GameOverLabel.show()
 		get_tree().paused = true
+
+func start_spawners():
+	for spawner in current_spawners:
+		spawner.start()
+
+func stop_spawners():
+	for spawner in current_spawners:
+		spawner.stop()
 
 func _on_player_player_hit(damage):
 	update_hud_hp()
 
 func _on_spawner_enemy_spawned(enemy):
+	current_enemies.append(enemy)
 	add_child(enemy)
 	enemy.shoot.connect(_on_enemy_shoot)
 	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
+	
+func get_spawned_enemies():
+	var spawned_enemies = []
+	for current_enemy in current_enemies:
+		if is_instance_valid(current_enemy):
+			spawned_enemies.append(current_enemy)
+
+	return spawned_enemies
+
+func spawning_over():
+	for spawner in current_spawners:
+		if not spawner.is_over():
+			return false
+	return true
+
+func spawning_cleared():
+	return spawning_over() and len(get_spawned_enemies()) == 0
 
 func check_stage_completed():
-	if $Spawner.spawning_cleared():
+	if spawning_over():
+		stop_spawners()
+
+	if spawning_cleared():
 		$HUD/StageCompletedLabel.show()
 		$Player.invulnerable = true
 		
 		await get_tree().create_timer(2.0).timeout
 		get_tree().change_scene_to_file("res://menu.tscn")
+
