@@ -95,7 +95,7 @@ func get_spawned_enemies():
 
 func spawning_over():
 	for spawner in current_spawners:
-		if spawner.spawning:
+		if not spawner.is_over():
 			return false
 	return true
 
@@ -103,6 +103,9 @@ func spawning_cleared():
 	return spawning_over() and len(get_spawned_enemies()) == 0
 
 func check_stage_completed():
+	if spawning_over():
+		stop_spawners()
+
 	if spawning_cleared():
 		$HUD/StageCompletedLabel.show()
 		$Player.invulnerable = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://blbpq1q6ur422"]
+[gd_scene load_steps=11 format=3 uid="uid://blbpq1q6ur422"]
 
 [ext_resource type="PackedScene" uid="uid://xsyxsqvbvltk" path="res://unit/player/player.tscn" id="1_gy300"]
 [ext_resource type="Script" path="res://main_stage.gd" id="1_holjf"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://yj50gy0yj403" path="res://unit/enemies/spawners/single_spawner_behavior.tscn" id="7_0yd7d"]
 [ext_resource type="PackedScene" uid="uid://cwkq4slm2hqyf" path="res://unit/enemies/fighter_enemy.tscn" id="7_2q6f0"]
 [ext_resource type="PackedScene" uid="uid://c2f1y2bb81lt2" path="res://unit/enemies/burst_fighter_enemy.tscn" id="8_2xb2g"]
+[ext_resource type="PackedScene" uid="uid://0lrm5ip1b7ql" path="res://unit/enemies/spawners/wave_spawner_behavior.tscn" id="10_ufbqx"]
 
 [node name="MainStage" type="Node"]
 process_mode = 1
@@ -24,12 +25,20 @@ position = Vector2(640, 576)
 [node name="Background" parent="." instance=ExtResource("5_0nbiv")]
 speed = 500.0
 
-[node name="Spawner" parent="." instance=ExtResource("6_mrpxm")]
+[node name="SingleSpawner" parent="." instance=ExtResource("6_mrpxm")]
+position = Vector2(0, -40)
 enemies_scenes = Array[PackedScene]([ExtResource("7_2q6f0"), ExtResource("8_2xb2g")])
-behavior_scene = ExtResource("7_0yd7d")
+
+[node name="SingleSpawnerBehavior" parent="SingleSpawner" instance=ExtResource("7_0yd7d")]
+spawn_count = 0
+
+[node name="WaveSpawnerBehavior" parent="SingleSpawner" instance=ExtResource("10_ufbqx")]
+spawn_period = 2.0
 
 [connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
 [connection signal="shoot" from="Player" to="." method="_on_player_shoot"]
 [connection signal="start_play" from="HUD" to="." method="_on_hud_start_play"]
-[connection signal="enemy_spawned" from="Spawner" to="." method="_on_spawner_enemy_spawned"]
+[connection signal="enemy_spawned" from="SingleSpawner" to="." method="_on_spawner_enemy_spawned"]
+[connection signal="spawn_triggered" from="SingleSpawner/SingleSpawnerBehavior" to="SingleSpawner" method="_on_spawn_triggered"]
+[connection signal="spawn_triggered" from="SingleSpawner/WaveSpawnerBehavior" to="SingleSpawner" method="_on_spawn_triggered"]

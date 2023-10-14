@@ -1,18 +1,31 @@
-extends Node2D
+extends Node
 
-var spawn_wave_counter = 0
+@export_range(0, 10, 0.01) var spawn_period: float = 1
+@export var wave_count: int = 3
+@export_range(0, 100) var wave_size: int = 3
+
+var spawned_wave_counter = 0
 
 signal spawn_triggered(spawn_position)
-signal over()
+#signal over()
 
 func _ready():
-	pass # Replace with function body.
+	$SpawnTimer.wait_time = spawn_period
 
 func _process(delta):
 	pass
 
 func set_polygon(polygon):
 	$BoundariesUtil.set_boundaries(polygon)
+
+func start():
+	$SpawnTimer.start()
+
+func stop():
+	$SpawnTimer.stop()
+
+func is_over():
+	return spawned_wave_counter >= wave_count
 
 func spawn_wave(number_of_enemies):
 	var x_offset = 50
@@ -32,6 +45,13 @@ func spawn_wave(number_of_enemies):
 
 		spawned_position = spawn_position
 
-	spawn_wave_counter += 1
+	spawned_wave_counter += 1
+	
+	if wave_count > 0 and is_over():
+		stop()
 
 	return spawned_enemies
+
+
+func _on_spawn_timer_timeout():
+	spawn_wave(wave_size)

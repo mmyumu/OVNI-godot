@@ -2,10 +2,12 @@ class_name Spawner extends Polygon2D
 
 @export var enemies_scenes: Array[PackedScene]
 #@export var max_wave_count = 3
-@export var behavior_scene: PackedScene
+#@export var behavior_scene: PackedScene
+#@export_range(0.001, 100, 0.01) var spawn_timer: float
 
+var behaviors = []
 var current_enemies: Array[Node] = []
-var behavior
+#var behavior
 var enemy_index = 0
 var spawn_wave_counter = 0
 var spawning = true
@@ -13,10 +15,18 @@ var spawning = true
 signal enemy_spawned(enemy)
 
 func _ready():
-	behavior = behavior_scene.instantiate()
-	behavior.spawn_triggered.connect(_on_spawn_triggered)
-	behavior.set_polygon(polygon)
-	add_child(behavior)
+	behaviors = get_tree().get_nodes_in_group("Behavior")
+	for behavior in behaviors:
+		behavior.set_polygon(polygon)
+#	var behaviors = []
+#	for child in get_children():
+#		if child is Behavior:
+#			pass
+#	behavior = behavior_scene.instantiate()
+#	behavior.spawn_triggered.connect(_on_spawn_triggered)
+#	behavior.set_polygon(polygon)
+#	behavior.set_timer(spawn_timer)
+#	add_child(behavior)
 #	set_boundaries()
 	
 #func set_boundaries():
@@ -54,11 +64,13 @@ func _process(delta):
 
 func start():
 	spawning = true
-	behavior.start()
+	for behavior in behaviors:
+		behavior.start()
 
 func stop():
 	spawning = false
-	behavior.stop()
+	for behavior in behaviors:
+		behavior.stop()
 
 func _on_spawn_triggered(spawn_position):
 	spawn(spawn_position)
@@ -83,6 +95,12 @@ func spawn(spawn_position):
 	
 	current_enemies.append(spawned_enemy)
 	return spawned_enemy
+
+func is_over():
+	for behavior in behaviors:
+		if not behavior.is_over():
+			return false
+	return true
 
 #func spawn_wave(number_of_enemies):
 #	var x_offset = 50
@@ -121,3 +139,7 @@ func spawn(spawn_position):
 
 #func spawning_over():
 #	return spawn_wave_counter >= max_wave_count
+
+#
+#func _on_single_spawner_behavior_spawn_triggered(spawn_position):
+#	pass # Replace with function body.
