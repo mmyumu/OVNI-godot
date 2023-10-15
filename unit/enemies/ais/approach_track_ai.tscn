@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://clb402vjpfwf5"]
+
+[ext_resource type="Script" path="res://unit/enemies/ais/approach_track_ai.gd" id="1_pjpp0"]
+
+[node name="ApproachTrackAI" type="Node"]
+script = ExtResource("1_pjpp0")

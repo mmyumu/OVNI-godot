@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 @export_range(0, 10, 0.01) var spawn_period: float = 1
 @export var spawn_count: int = 3

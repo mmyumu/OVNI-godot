@@ -24,7 +24,7 @@ func _process(delta):
 	rs_look.y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	rs_look.x = -Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 	if rs_look.length() >= deadzone:
-		rotation = lerp_angle(rotation, rs_look.angle(), 0.05)
+		rotation = lerp_angle(rotation, rs_look.angle(), 5 * delta)
 	check_shoot(delta)
 
 

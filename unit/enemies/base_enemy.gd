@@ -10,7 +10,6 @@ class_name BaseEnemy extends Area2D
 
 var ai
 var weapon
-var on_screen: bool = false
 
 signal shoot(projectile, direction, location)
 signal enemy_destroyed(enemy)
@@ -26,7 +25,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position = ai.compute_position(delta, position)
+	if ai.has_method('compute_position'):
+		position = ai.compute_position(delta, position)
+	if ai.has_method('compute_rotation'):
+		rotation = ai.compute_rotation(delta, self)	
 
 
 func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
@@ -44,11 +46,3 @@ func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index)
 func _on_weapon_shoot(projectile, direction, location):
 #	print("enemy _on_weapon_shoot")
 	shoot.emit(projectile, direction, location)
-
-
-func _on_visible_on_screen_notifier_2d_screen_entered():
-	on_screen = true
-
-
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	on_screen = false

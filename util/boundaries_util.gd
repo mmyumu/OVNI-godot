@@ -38,10 +38,12 @@ func set_boundaries(polygon):
 		if p.y > max_y:
 			max_y = p.y
 
-	min_point = to_global(Vector2(min_x, min_y))
-	max_point = to_global(Vector2(max_x, max_y))
+	var local_min_point = Vector2(min_x, min_y)
+	var local_max_point = Vector2(max_x, max_y)
+	min_point = to_global(local_min_point)
+	max_point = to_global(local_max_point)
 	
-	print("min_x=%s, max_x=%s, min_y=%s, max_y=%s" % [min_x, max_x, min_y, max_y])
+	print("position: %s, global_position: %s, local_min: %s, global_min: %s, local_max: %s, global_max: %s" % [position, global_position, local_min_point, min_point, local_max_point, max_point])
 
 func get_random_position():
 	var x = rng.randi_range(min_point.x, max_point.x)
