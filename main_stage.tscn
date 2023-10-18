@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://blbpq1q6ur422"]
+[gd_scene load_steps=13 format=3 uid="uid://blbpq1q6ur422"]
 
 [ext_resource type="PackedScene" uid="uid://xsyxsqvbvltk" path="res://unit/player/player.tscn" id="1_gy300"]
 [ext_resource type="Script" path="res://main_stage.gd" id="1_holjf"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://vtfrt2arq76r" path="res://unit/enemies/spawners/spawner.tscn" id="6_mrpxm"]
 [ext_resource type="PackedScene" uid="uid://yj50gy0yj403" path="res://unit/enemies/spawners/single_spawner_behavior.tscn" id="7_0yd7d"]
 [ext_resource type="PackedScene" uid="uid://ctcqt23i86kfk" path="res://unit/enemies/burst_fighter_enemy.tscn" id="8_2xb2g"]
+[ext_resource type="PackedScene" uid="uid://d0ntroeuo47fn" path="res://unit/enemies/burst_tracker_enemy.tscn" id="9_oex8x"]
 [ext_resource type="PackedScene" uid="uid://dww5wwd7qde02" path="res://unit/enemies/tracker_enemy.tscn" id="9_qau68"]
 [ext_resource type="PackedScene" uid="uid://0lrm5ip1b7ql" path="res://unit/enemies/spawners/wave_spawner_behavior.tscn" id="10_ufbqx"]
 [ext_resource type="PackedScene" uid="uid://16f74as41n6i" path="res://unit/enemies/fighter_enemy.tscn" id="11_et8d5"]
@@ -30,24 +31,24 @@ speed = 500.0
 position = Vector2(1312, -96)
 scale = Vector2(0.96, 0.96)
 polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
-enemies_scenes = Array[PackedScene]([ExtResource("9_qau68")])
+enemies_scenes = Array[PackedScene]([ExtResource("9_qau68"), ExtResource("9_oex8x")])
 
 [node name="SingleSpawnerBehavior" parent="TrackerSpawner" instance=ExtResource("7_0yd7d")]
-spawn_period = 2.0
+spawn_period = 3.0
 spawn_count = 0
 
 [node name="TrackerSpawner2" parent="." instance=ExtResource("6_mrpxm")]
 position = Vector2(-128, -96)
 scale = Vector2(0.96, 0.96)
 polygon = PackedVector2Array(0, 0, 100, 0, 100, 100, 0, 100)
-enemies_scenes = Array[PackedScene]([ExtResource("9_qau68")])
+enemies_scenes = Array[PackedScene]([ExtResource("9_qau68"), ExtResource("9_oex8x")])
 
 [node name="SingleSpawnerBehavior" parent="TrackerSpawner2" instance=ExtResource("7_0yd7d")]
-spawn_period = 2.0
+spawn_period = 3.0
 spawn_count = 0
 
 [node name="Spawner" parent="." instance=ExtResource("6_mrpxm")]
-position = Vector2(0, -40)
+position = Vector2(-1, 95)
 enemies_scenes = Array[PackedScene]([ExtResource("11_et8d5"), ExtResource("8_2xb2g")])
 
 [node name="SingleSpawnerBehavior" parent="Spawner" instance=ExtResource("7_0yd7d")]

@@ -1,13 +1,9 @@
 class_name Enemy extends Node2D
 
-
 @export var hp = 10
 @export var max_hp = 10
 @export var damage = 5
 @export var money = 1000
-
-#@export var ai_scene: PackedScene
-#@export var weapon_scene: PackedScene
 
 var ais
 var weapons
@@ -26,15 +22,6 @@ func _ready():
 	for weapon in weapons:
 		weapon.position = weapon_slot.position
 	
-#	if ai_scene:
-#		ai = ai_scene.instantiate()
-		
-#	if weapon_scene:
-#		weapon = weapon_scene.instantiate()
-#		weapon.position = weapon_slot.position
-#		add_child(weapon)
-#		weapon.shoot.connect(_on_weapon_shoot)
-
 func _process(delta):
 	for ai in ais:
 		ai.compute(delta, self)
