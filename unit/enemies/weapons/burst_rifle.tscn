@@ -1,13 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkw7riakfgkp2"]
+[gd_scene load_steps=3 format=3 uid="uid://chsflmhi2mt82"]
 
 [ext_resource type="Script" path="res://unit/enemies/weapons/burst_rifle.gd" id="1_sbfxy"]
+[ext_resource type="PackedScene" uid="uid://eoyctovw0etd" path="res://unit/projectiles/bullet.tscn" id="2_7pbtx"]
 
-[node name="BurstRifle" type="Marker2D"]
-editor_description = "Burst rifle"
+[node name="BurstRifle" type="Node2D"]
 script = ExtResource("1_sbfxy")
+projectile = ExtResource("2_7pbtx")
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 2.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

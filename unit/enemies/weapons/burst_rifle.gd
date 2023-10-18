@@ -1,9 +1,4 @@
-extends Marker2D
-
-signal shoot(projectile, direction, location)
-
-@export var projectile = preload("res://unit/projectiles/bullet.tscn")
-
+extends Weapon
 
 func _ready():
 	pass # Replace with function body.

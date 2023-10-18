@@ -1,25 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctfi6mcxxeni5"]
+[gd_scene load_steps=6 format=3 uid="uid://dww5wwd7qde02"]
 
-[ext_resource type="PackedScene" uid="uid://iaxqjwj784uv" path="res://unit/enemies/base_enemy.tscn" id="1_mhb2w"]
-[ext_resource type="PackedScene" uid="uid://clb402vjpfwf5" path="res://unit/enemies/ais/approach_track_ai.tscn" id="2_yp6nh"]
-[ext_resource type="PackedScene" uid="uid://dkw7riakfgkp2" path="res://unit/enemies/weapons/burst_rifle.tscn" id="3_ta5ox"]
+[ext_resource type="PackedScene" uid="uid://c1s5dlu8sauh7" path="res://unit/enemies/enemy.tscn" id="1_ymfwy"]
+[ext_resource type="PackedScene" uid="uid://bc8jg2l2amedy" path="res://unit/enemies/shapes/tracker_shape.tscn" id="2_6d101"]
+[ext_resource type="PackedScene" uid="uid://dkrl3u8l5w70v" path="res://unit/enemies/ais/approach_ai.tscn" id="3_2qlx2"]
+[ext_resource type="PackedScene" uid="uid://du45mmje3rt74" path="res://unit/enemies/ais/track_ai.tscn" id="4_igypu"]
+[ext_resource type="PackedScene" uid="uid://cydmhxnjxwg2q" path="res://unit/enemies/weapons/rifle.tscn" id="5_mraej"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6n66"]
-size = Vector2(48, 48)
+[node name="TrackerEnemy" instance=ExtResource("1_ymfwy")]
 
-[node name="TrackerEnemy" instance=ExtResource("1_mhb2w")]
-ai_scene = ExtResource("2_yp6nh")
-weapon_scene = ExtResource("3_ta5ox")
+[node name="TrackerShape" parent="." index="0" instance=ExtResource("2_6d101")]
 
-[node name="Polygon2D" type="Polygon2D" parent="." index="1"]
-scale = Vector2(8, 8)
-color = Color(1, 0, 0, 0.392157)
-polygon = PackedVector2Array(2, 0.5, 2, 2, 1, 3, -1, 3, -2, 2, -2, 0.5, -1.5, 1, -1, 1, -1, 0, -2, 0, -3, -1, -3, -3, -2, -2, -1, -2, 0, -1.25, 1, -2, 2, -2, 3, -3, 3, -1, 2, 0, 1, 0, 1, 1, 1.5, 1)
+[node name="ApproachAI" parent="." index="1" instance=ExtResource("3_2qlx2")]
 
-[node name="WeaponSlot" type="Marker2D" parent="." index="2"]
-position = Vector2(0, -16)
+[node name="TrackAI" parent="." index="2" instance=ExtResource("4_igypu")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3" groups=["Enemies"]]
-shape = SubResource("RectangleShape2D_k6n66")
+[node name="Rifle" parent="." index="3" instance=ExtResource("5_mraej")]
 
-[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="area_shape_entered" from="TrackerShape" to="." method="_on_area_shape_entered"]
+[connection signal="shoot" from="Rifle" to="." method="_on_weapon_shoot"]
