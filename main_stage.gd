@@ -3,6 +3,8 @@ class_name MainStage extends Node
 var current_enemies = []
 var current_spawners = []
 
+
+
 func _ready():
 	GlobalVariables.player = $Player
 	get_tree().paused = true

@@ -6,7 +6,7 @@ extends Node2D
 var spawn_counter = 0
 
 signal spawn_triggered(spawn_position)
-#signal over()
+
 
 func _ready():
 	$SpawnTimer.wait_time = spawn_period

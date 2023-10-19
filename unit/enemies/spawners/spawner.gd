@@ -1,18 +1,15 @@
 class_name Spawner extends Polygon2D
 
 @export var enemies_scenes: Array[PackedScene]
-#@export var max_wave_count = 3
-#@export var behavior_scene: PackedScene
-#@export_range(0.001, 100, 0.01) var spawn_timer: float
 
 var behaviors = []
 var current_enemies: Array[Node] = []
-#var behavior
 var enemy_index = 0
 var spawn_wave_counter = 0
 var spawning = true
 
 signal enemy_spawned(enemy)
+
 
 func _ready():
 	for child in get_children():

@@ -12,12 +12,10 @@ signal shoot(projectile, direction, location)
 signal player_hit(damage)
 signal game_over()
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity: Vector2 = Vector2.ZERO
 	var v_x = Input.get_axis("move_left", "move_right")

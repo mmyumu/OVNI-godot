@@ -13,6 +13,7 @@ var shape: Shape
 signal shoot(projectile, direction, location)
 signal enemy_destroyed(enemy)
 
+
 func _ready():
 	shape = find_children('', 'Shape')[0]
 	ais = find_children('', 'AI')
