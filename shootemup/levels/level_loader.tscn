@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce0vn8j4kxt0b"]
+
+[ext_resource type="Script" path="res://shootemup/levels/level_loader.gd" id="1_g0sap"]
+[ext_resource type="PackedScene" uid="uid://cggfwmbsf3bwi" path="res://shootemup/levels/level_01.tscn" id="2_fw7jw"]
+
+[node name="LevelLoader" type="Node2D"]
+script = ExtResource("1_g0sap")
+levels = Array[PackedScene]([ExtResource("2_fw7jw")])
