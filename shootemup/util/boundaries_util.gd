@@ -41,7 +41,7 @@ func set_boundaries(polygon):
 	min_point = to_global(local_min_point)
 	max_point = to_global(local_max_point)
 	
-	print("position: %s, global_position: %s, local_min: %s, global_min: %s, local_max: %s, global_max: %s" % [position, global_position, local_min_point, min_point, local_max_point, max_point])
+	print("%s position: %s, global_position: %s, local_min: %s, global_min: %s, local_max: %s, global_max: %s" % [name, position, global_position, local_min_point, min_point, local_max_point, max_point])
 
 func get_random_position():
 	var x = rng.randi_range(min_point.x, max_point.x)

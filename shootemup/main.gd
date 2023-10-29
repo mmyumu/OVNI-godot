@@ -1,27 +1,30 @@
 class_name MainStage extends Node
 
-var current_enemies = []
-#var current_spawners = []
+@export var scenario_scenes: Array[PackedScene]
+@export var background_textures: Array[Texture]
 
+var current_enemies = []
 
 
 func _ready():
-#	var level = $Level.instantiate_level()
-#	add_child(level)
 	GlobalVariables.player = $Player
 	get_tree().paused = true
 	update_hud_hp()
 	update_hud_money()
 	$Player.hide()
 	
-#	for node in level.get_children():
-#		if node is Spawner:
-#			current_spawners.append(node)
-			
-	pass
+	var background_texture: Texture = background_textures[randi() % background_textures.size()]
+	$Level/Background.set_texture(background_texture)
+	
+	var scenario_scene: PackedScene = scenario_scenes[randi() % scenario_scenes.size()]
+	var scenario = scenario_scene.instantiate()
+	$Level.set_scenario(scenario)
+	
+	scenario.scenario_completed.connect(stage_completed)
 
 func _process(delta):
-	check_stage_completed()
+	pass
+#	check_stage_completed()
 
 func _on_player_shoot(projectile, direction, location):
 	var spawned_projectile = projectile.instantiate()
@@ -65,23 +68,15 @@ func _on_player_game_over():
 func start_stop_game(start: bool, game_over:bool = true):
 	if start:
 		$Player.show()
-		start_spawners()
+		$Level.start()
 		$HUD/GameOverLabel.hide()
 		get_tree().paused = false
 	else:
-		stop_spawners()
+		$Level.stop()
 		$Player.hide()
 		$HUD/GameOverLabel.show()
 		get_tree().paused = true
-
-func start_spawners():
-	for spawner in $Level.get_spawners():
-		spawner.start()
-
-func stop_spawners():
-	for spawner in $Level.get_spawners():
-		spawner.stop()
-
+#
 func _on_player_player_hit(damage):
 	update_hud_hp()
 
@@ -90,7 +85,7 @@ func _on_enemy_spawned(enemy):
 	add_child(enemy)
 	enemy.shoot.connect(_on_enemy_shoot)
 	enemy.enemy_destroyed.connect(_on_enemy_destroyed)
-	
+
 func get_spawned_enemies():
 	var spawned_enemies = []
 	for current_enemy in current_enemies:
@@ -99,23 +94,9 @@ func get_spawned_enemies():
 
 	return spawned_enemies
 
-func spawning_over():
-	for spawner in $Level.get_spawners():
-		if not spawner.is_over():
-			return false
-	return true
-
-func spawning_cleared():
-	return spawning_over() and len(get_spawned_enemies()) == 0
-
-func check_stage_completed():
-	if spawning_over():
-		stop_spawners()
-
-	if spawning_cleared():
+func stage_completed():
 		$HUD/StageCompletedLabel.show()
 		$Player.invulnerable = true
 		
 		await get_tree().create_timer(2.0).timeout
 		get_tree().change_scene_to_file("res://menu.tscn")
-

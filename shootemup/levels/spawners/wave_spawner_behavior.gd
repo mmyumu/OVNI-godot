@@ -1,4 +1,4 @@
-extends Node2D
+extends Behavior
 
 @export_range(0, 10, 0.01) var spawn_period: float = 1
 @export var wave_count: int = 3
@@ -6,14 +6,9 @@ extends Node2D
 
 var spawned_wave_counter = 0
 
-signal spawn_triggered(spawn_position)
-
-
 func _ready():
+	super._ready()
 	$SpawnTimer.wait_time = spawn_period
-
-func _process(delta):
-	pass
 
 func set_polygon(polygon):
 	$BoundariesUtil.set_boundaries(polygon)

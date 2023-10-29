@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq46u763dl11o"]
+
+[ext_resource type="Script" path="res://shootemup/levels/level.gd" id="1_nfq03"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_nfq03")

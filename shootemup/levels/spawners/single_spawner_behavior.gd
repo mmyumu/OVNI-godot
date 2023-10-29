@@ -1,26 +1,24 @@
-extends Node2D
+extends Behavior
 
 @export_range(0, 10, 0.01) var spawn_period: float = 1
 @export var spawn_count: int = 3
 
 var spawn_counter = 0
 
-signal spawn_triggered(spawn_position)
-
 
 func _ready():
+	super._ready()
 	$SpawnTimer.wait_time = spawn_period
-
-func _process(delta):
-	pass
 
 func set_polygon(polygon):
 	$BoundariesUtil.set_boundaries(polygon)
 
 func start():
+	super.start()
 	$SpawnTimer.start()
 
 func stop():
+	super.stop()
 	$SpawnTimer.stop()
 
 func is_over():

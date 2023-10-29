@@ -4,3 +4,4 @@
 
 [node name="ApproachAI" type="Node2D"]
 script = ExtResource("1_gv777")
+approach_speed = 0.2

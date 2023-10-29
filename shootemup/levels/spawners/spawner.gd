@@ -6,27 +6,33 @@ var behaviors = []
 var current_enemies: Array[Node] = []
 var enemy_index = 0
 var spawn_wave_counter = 0
-var spawning = true
+var _is_started = false
 
 signal enemy_spawned(enemy)
 
 
 func _ready():
 	for child in get_children():
-		if child.is_in_group("Behavior"):
+		if child is Behavior:
+#		if child.is_in_group("Behavior"):
+			child.spawn_triggered.connect(_on_spawn_triggered)
 			behaviors.append(child)
 			child.set_polygon(polygon)	
+			
 
 func _process(delta):
 	pass
 
-func start():
-	spawning = true
+func start(force=false):
+	if not force and _is_started:
+		return
+
+	_is_started = true
 	for behavior in behaviors:
 		behavior.start()
 
 func stop():
-	spawning = false
+	_is_started = false
 	for behavior in behaviors:
 		behavior.stop()
 
@@ -56,3 +62,12 @@ func is_over():
 		if not behavior.is_over():
 			return false
 	return true
+
+func is_depleted():
+	var valid_enemies = []
+	for enemy in current_enemies:
+		if is_instance_valid(enemy):
+			valid_enemies.append(enemy)
+		else:
+			current_enemies.erase(enemy)
+	return is_over() and len(valid_enemies) == 0
