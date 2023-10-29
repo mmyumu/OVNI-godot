@@ -14,11 +14,9 @@ signal enemy_spawned(enemy)
 func _ready():
 	for child in get_children():
 		if child is Behavior:
-#		if child.is_in_group("Behavior"):
 			child.spawn_triggered.connect(_on_spawn_triggered)
 			behaviors.append(child)
 			child.set_polygon(polygon)	
-			
 
 func _process(delta):
 	pass
@@ -35,6 +33,10 @@ func stop():
 	_is_started = false
 	for behavior in behaviors:
 		behavior.stop()
+
+func restart():
+	for behavior in behaviors:
+		behavior.restart()
 
 func _on_spawn_triggered(spawn_position):
 	spawn(spawn_position)
@@ -64,10 +66,13 @@ func is_over():
 	return true
 
 func is_depleted():
+	return is_over() and len(get_enemies()) == 0
+
+func get_enemies():
 	var valid_enemies = []
 	for enemy in current_enemies:
 		if is_instance_valid(enemy):
 			valid_enemies.append(enemy)
 		else:
 			current_enemies.erase(enemy)
-	return is_over() and len(valid_enemies) == 0
+	return valid_enemies

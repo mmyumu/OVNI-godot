@@ -2,25 +2,25 @@
 
 [ext_resource type="Script" path="res://shootemup/levels/scenarios/scenario01.gd" id="1_jdo17"]
 [ext_resource type="PackedScene" uid="uid://vtfrt2arq76r" path="res://shootemup/levels/spawners/spawner.tscn" id="2_7i6sp"]
-[ext_resource type="PackedScene" uid="uid://dww5wwd7qde02" path="res://shootemup/units/enemies/tracker_enemy.tscn" id="3_85wtt"]
-[ext_resource type="PackedScene" uid="uid://d0ntroeuo47fn" path="res://shootemup/units/enemies/burst_tracker_enemy.tscn" id="4_jsv4q"]
 [ext_resource type="PackedScene" uid="uid://yj50gy0yj403" path="res://shootemup/levels/spawners/single_spawner_behavior.tscn" id="5_475qe"]
+[ext_resource type="PackedScene" uid="uid://16f74as41n6i" path="res://shootemup/units/enemies/fighter_enemy.tscn" id="6_87dce"]
+[ext_resource type="PackedScene" uid="uid://ctcqt23i86kfk" path="res://shootemup/units/enemies/burst_fighter_enemy.tscn" id="7_jtggt"]
 
 [node name="Scenario01" type="Node2D"]
 script = ExtResource("1_jdo17")
 
-[node name="TrackerSpawner" parent="." instance=ExtResource("2_7i6sp")]
+[node name="FighterSpawnerRight" parent="." instance=ExtResource("2_7i6sp")]
 position = Vector2(1312, -100)
 polygon = PackedVector2Array(0, -4, 100, -4, 100, 100, 0, 100)
-enemies_scenes = Array[PackedScene]([ExtResource("3_85wtt"), ExtResource("4_jsv4q")])
+enemies_scenes = Array[PackedScene]([ExtResource("6_87dce"), ExtResource("7_jtggt")])
 
-[node name="SingleSpawnerBehavior" parent="TrackerSpawner" instance=ExtResource("5_475qe")]
+[node name="SingleSpawnerBehavior" parent="FighterSpawnerRight" instance=ExtResource("5_475qe")]
 spawn_count = 1
 
-[node name="TrackerSpawner2" parent="." instance=ExtResource("2_7i6sp")]
+[node name="FighterSpawnerLeft" parent="." instance=ExtResource("2_7i6sp")]
 position = Vector2(-132, -100)
 polygon = PackedVector2Array(0, -4, 100, -4, 100, 100, 0, 100)
-enemies_scenes = Array[PackedScene]([ExtResource("3_85wtt"), ExtResource("4_jsv4q")])
+enemies_scenes = Array[PackedScene]([ExtResource("6_87dce"), ExtResource("7_jtggt")])
 
-[node name="SingleSpawnerBehavior" parent="TrackerSpawner2" instance=ExtResource("5_475qe")]
+[node name="SingleSpawnerBehavior" parent="FighterSpawnerLeft" instance=ExtResource("5_475qe")]
 spawn_count = 2

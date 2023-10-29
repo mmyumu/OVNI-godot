@@ -19,6 +19,10 @@ func start():
 func stop():
 	$SpawnTimer.stop()
 
+func restart():
+	spawned_wave_counter = 0
+	start()
+
 func is_over():
 	return spawned_wave_counter >= wave_count
 
