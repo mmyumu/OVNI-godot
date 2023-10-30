@@ -24,7 +24,6 @@ func _ready():
 
 func _process(delta):
 	pass
-#	check_stage_completed()
 
 func _on_player_shoot(projectile, direction, location):
 	var spawned_projectile = projectile.instantiate()

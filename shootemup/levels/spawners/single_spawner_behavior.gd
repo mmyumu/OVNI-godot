@@ -1,7 +1,7 @@
 extends Behavior
 
 @export_range(0, 10, 0.01) var spawn_period: float = 1
-@export var spawn_count: int = 3
+@export_range(0, 20, 1, "or_greater") var spawn_count: int = 3
 
 var spawned_counter = 0
 

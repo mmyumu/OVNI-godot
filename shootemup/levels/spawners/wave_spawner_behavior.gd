@@ -2,7 +2,9 @@ extends Behavior
 
 @export_range(0, 10, 0.01) var spawn_period: float = 1
 @export var wave_count: int = 3
-@export_range(0, 100) var wave_size: int = 3
+@export_range(0, 100, 1, "or_greater") var wave_size: int = 3
+#@export_enum("true", "false") var instant_spawn
+@export var instant_spawn: bool		# Spawn starts when behavior is started
 
 var spawned_wave_counter = 0
 
@@ -15,6 +17,9 @@ func set_polygon(polygon):
 
 func start():
 	$SpawnTimer.start()
+	
+	if instant_spawn:
+		spawn_wave(wave_size)
 
 func stop():
 	$SpawnTimer.stop()
