@@ -16,7 +16,7 @@ polygon = PackedVector2Array(0, -4, 100, -4, 100, 100, 0, 100)
 enemies_scenes = Array[PackedScene]([ExtResource("6_87dce"), ExtResource("7_jtggt")])
 
 [node name="SingleSpawnerBehavior" parent="FighterSpawnerRight" instance=ExtResource("5_475qe")]
-spawn_count = 1
+spawn_count = 20
 
 [node name="FighterSpawnerLeft" parent="." instance=ExtResource("2_7i6sp")]
 position = Vector2(-132, -100)
@@ -24,7 +24,7 @@ polygon = PackedVector2Array(0, -4, 100, -4, 100, 100, 0, 100)
 enemies_scenes = Array[PackedScene]([ExtResource("6_87dce"), ExtResource("7_jtggt")])
 
 [node name="SingleSpawnerBehavior" parent="FighterSpawnerLeft" instance=ExtResource("5_475qe")]
-spawn_count = 1
+spawn_count = 20
 
 [node name="FighterSpawnerTop" parent="." instance=ExtResource("2_7i6sp")]
 position = Vector2(0, -48)
@@ -35,3 +35,4 @@ spawn_period = 3.0
 wave_count = 6
 wave_size = 4
 instant_spawn = true
+x_offset = 100
