@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c486n4h63xkna"]
+
+[ext_resource type="PackedScene" uid="uid://ch7s01w5lmnap" path="res://base/background.tscn" id="1_fhmdp"]
+[ext_resource type="PackedScene" uid="uid://c8febs81nc1bq" path="res://base/hud.tscn" id="2_p2qqx"]
+
+[node name="Main" type="Node"]
+
+[node name="Background" parent="." instance=ExtResource("1_fhmdp")]
+
+[node name="HUD" parent="." instance=ExtResource("2_p2qqx")]
