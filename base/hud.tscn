@@ -33,4 +33,10 @@ offset_bottom = 27.0
 theme_override_fonts/font = ExtResource("1_88l3s")
 text = "Research"
 
+[node name="ResearchFacility2" type="Button" parent="ConstructionMenu"]
+offset_right = 168.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("1_88l3s")
+text = "Research"
+
 [connection signal="pressed" from="RootMenu/Construction" to="." method="_on_construction_pressed"]
