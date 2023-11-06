@@ -1,10 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://s453mjhbb4v8"]
+[gd_scene load_steps=4 format=3 uid="uid://s453mjhbb4v8"]
 
 [ext_resource type="PackedScene" uid="uid://cw32gydusl10n" path="res://global/earth_3d.tscn" id="1_48n42"]
 [ext_resource type="Script" path="res://global/earth.gd" id="1_s4cfr"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_rlsxw"]
-viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1em45"]
 
@@ -13,7 +10,6 @@ script = ExtResource("1_s4cfr")
 
 [node name="Screen" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
-texture = SubResource("ViewportTexture_rlsxw")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 vrs_texture = SubResource("ViewportTexture_1em45")
