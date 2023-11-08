@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://5rud03wcahv0"]
+
+[ext_resource type="Script" path="res://base/constructions/research_facility.gd" id="1_mb4ni"]
+
+[node name="ResearchFacility" type="Polygon2D"]
+position = Vector2(64, 64)
+color = Color(0, 0.716667, 1, 0.392157)
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+script = ExtResource("1_mb4ni")
+outLine = Color(0.784314, 0.435294, 0.223529, 1)
+width = 1.0
