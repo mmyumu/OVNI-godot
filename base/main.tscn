@@ -13,6 +13,9 @@ script = ExtResource("1_a23l8")
 
 [node name="Base" parent="." instance=ExtResource("3_vl7ke")]
 position = Vector2(5, 5)
+width = null
+height = null
+placing_input_timeout = 0.05
 
 [node name="BaseNameLabel" type="Label" parent="."]
 offset_left = 1128.0
@@ -25,4 +28,5 @@ text = "Base name"
 [node name="BaseMenu" parent="." instance=ExtResource("5_20fy7")]
 position = Vector2(1105, 110)
 
+[connection signal="placing_over" from="Base" to="." method="_on_base_placing_over"]
 [connection signal="construction_selected" from="BaseMenu" to="." method="_on_base_menu_construction_selected"]

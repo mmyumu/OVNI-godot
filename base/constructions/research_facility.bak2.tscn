@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmfrpwgnos4na"]
+
+[ext_resource type="Script" path="res://base/constructions/research_facility.bak2.gd" id="1_rhlc8"]
+
+[node name="ResearchFacility" type="Polygon2D"]
+polygon = PackedVector2Array(0, 0)
+script = ExtResource("1_rhlc8")
