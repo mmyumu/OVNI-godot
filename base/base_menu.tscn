@@ -19,18 +19,27 @@ text = "Construction"
 [node name="ResearchFacility" type="Button" parent="ConstructionMenu"]
 offset_right = 168.0
 offset_bottom = 27.0
-focus_neighbor_bottom = NodePath("../Back")
+focus_neighbor_bottom = NodePath("../Hospital")
 theme_override_fonts/font = ExtResource("1_whntg")
 text = "Research"
 
-[node name="Back" type="Button" parent="ConstructionMenu"]
+[node name="Hospital" type="Button" parent="ConstructionMenu"]
 offset_top = 28.0
 offset_right = 168.0
 offset_bottom = 55.0
-focus_neighbor_top = NodePath("../ResearchFacility")
+focus_neighbor_bottom = NodePath("../Back")
+theme_override_fonts/font = ExtResource("1_whntg")
+text = "Hospital"
+
+[node name="Back" type="Button" parent="ConstructionMenu"]
+offset_top = 56.0
+offset_right = 168.0
+offset_bottom = 83.0
+focus_neighbor_top = NodePath("../Hospital")
 theme_override_fonts/font = ExtResource("1_whntg")
 text = "Back"
 
 [connection signal="pressed" from="RootMenu/Construction" to="." method="_on_construction_pressed"]
 [connection signal="pressed" from="ConstructionMenu/ResearchFacility" to="." method="_on_research_facility_pressed"]
+[connection signal="pressed" from="ConstructionMenu/Hospital" to="." method="_on_hospital_pressed"]
 [connection signal="pressed" from="ConstructionMenu/Back" to="." method="_on_back_pressed"]

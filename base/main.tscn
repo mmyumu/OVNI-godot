@@ -2,20 +2,14 @@
 
 [ext_resource type="Script" path="res://base/main.gd" id="1_a23l8"]
 [ext_resource type="PackedScene" uid="uid://ch7s01w5lmnap" path="res://base/background.tscn" id="1_fhmdp"]
-[ext_resource type="PackedScene" uid="uid://c3dwtc8rg6rw7" path="res://base/base.tscn" id="3_vl7ke"]
 [ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="4_yc5lt"]
+[ext_resource type="PackedScene" uid="uid://bmso1vmitbyk8" path="res://base/base_layout.tscn" id="5_0x8xb"]
 [ext_resource type="PackedScene" uid="uid://blpyi1fsj88sf" path="res://base/base_menu.tscn" id="5_20fy7"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_a23l8")
 
 [node name="Background" parent="." instance=ExtResource("1_fhmdp")]
-
-[node name="Base" parent="." instance=ExtResource("3_vl7ke")]
-position = Vector2(5, 5)
-width = null
-height = null
-placing_input_timeout = 0.05
 
 [node name="BaseNameLabel" type="Label" parent="."]
 offset_left = 1128.0
@@ -28,5 +22,8 @@ text = "Base name"
 [node name="BaseMenu" parent="." instance=ExtResource("5_20fy7")]
 position = Vector2(1105, 110)
 
-[connection signal="placing_over" from="Base" to="." method="_on_base_placing_over"]
+[node name="BaseLayout" parent="." instance=ExtResource("5_0x8xb")]
+position = Vector2(551, 360)
+
 [connection signal="construction_selected" from="BaseMenu" to="." method="_on_base_menu_construction_selected"]
+[connection signal="placing_over" from="BaseLayout" to="." method="_on_base_layout_placing_over"]

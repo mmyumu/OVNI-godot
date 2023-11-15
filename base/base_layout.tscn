@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://bmso1vmitbyk8"]
+
+[ext_resource type="Texture2D" uid="uid://bk5lsgsplm1hx" path="res://art/base_background.png" id="1_iu70q"]
+[ext_resource type="Script" path="res://base/base_layout.gd" id="1_rtkc2"]
+[ext_resource type="PackedScene" uid="uid://bkkdwm35hv0vv" path="res://base/base_grid.tscn" id="2_ccvif"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cutc8"]
+size = Vector2(32, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbb1j"]
+size = Vector2(32, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trc8l"]
+size = Vector2(640, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_myasj"]
+size = Vector2(640, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2am33"]
+size = Vector2(32, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xv26n"]
+size = Vector2(32, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtq00"]
+size = Vector2(640, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gat7o"]
+size = Vector2(640, 32)
+
+[node name="BaseLayout" type="Sprite2D"]
+position = Vector2(547, 356)
+texture = ExtResource("1_iu70q")
+script = ExtResource("1_rtkc2")
+
+[node name="PlacingInputTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="BaseGrid" parent="." instance=ExtResource("2_ccvif")]
+position = Vector2(-288, -208)
+
+[node name="WallsOld" type="Area2D" parent="."]
+visible = false
+position = Vector2(-320, -240)
+
+[node name="EastWallCollisionShape2D" type="CollisionShape2D" parent="WallsOld"]
+position = Vector2(689, 272)
+shape = SubResource("RectangleShape2D_cutc8")
+
+[node name="WestWallCollisionShape2D" type="CollisionShape2D" parent="WallsOld"]
+position = Vector2(15, 272)
+shape = SubResource("RectangleShape2D_mbb1j")
+
+[node name="NorthWallCollisionShape2D" type="CollisionShape2D" parent="WallsOld"]
+position = Vector2(352, 15)
+shape = SubResource("RectangleShape2D_trc8l")
+
+[node name="SouthWallCollisionShape2D" type="CollisionShape2D" parent="WallsOld"]
+position = Vector2(352, 529)
+shape = SubResource("RectangleShape2D_myasj")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+position = Vector2(-320, -240)
+
+[node name="EastWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(689, 272)
+shape = SubResource("RectangleShape2D_2am33")
+
+[node name="WestWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(15, 272)
+shape = SubResource("RectangleShape2D_xv26n")
+
+[node name="NorthWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(352, 15)
+shape = SubResource("RectangleShape2D_qtq00")
+
+[node name="SouthWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(352, 529)
+shape = SubResource("RectangleShape2D_gat7o")
+
+[connection signal="timeout" from="PlacingInputTimer" to="." method="_on_placing_input_timer_timeout"]
+[connection signal="area_shape_entered" from="WallsOld" to="." method="_on_walls_area_shape_entered"]

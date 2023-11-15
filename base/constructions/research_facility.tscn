@@ -1,9 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://5rud03wcahv0"]
+[gd_scene load_steps=2 format=3 uid="uid://dc5n08f2igol6"]
 
-[ext_resource type="Script" path="res://base/constructions/research_facility.gd" id="1_gsqu1"]
+[ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/constructions/construction.tscn" id="1_ouvbc"]
 
-[node name="ResearchFacility" type="Polygon2D"]
-position = Vector2(64, 64)
-color = Color(0, 0.716667, 1, 0.392157)
-polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-script = ExtResource("1_gsqu1")
+[node name="ResearchFacility" instance=ExtResource("1_ouvbc")]
+color = Color(0.313726, 0.65098, 0.447059, 1)
