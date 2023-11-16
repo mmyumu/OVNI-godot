@@ -23,7 +23,6 @@ text = "Base name"
 position = Vector2(1105, 110)
 
 [node name="BaseLayout" parent="." instance=ExtResource("5_0x8xb")]
-position = Vector2(551, 360)
 
 [connection signal="construction_selected" from="BaseMenu" to="." method="_on_base_menu_construction_selected"]
 [connection signal="placing_over" from="BaseLayout" to="." method="_on_base_layout_placing_over"]

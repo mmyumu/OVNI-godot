@@ -27,6 +27,7 @@ text = "Research"
 offset_top = 28.0
 offset_right = 168.0
 offset_bottom = 55.0
+focus_neighbor_top = NodePath("../ResearchFacility")
 focus_neighbor_bottom = NodePath("../Back")
 theme_override_fonts/font = ExtResource("1_whntg")
 text = "Hospital"

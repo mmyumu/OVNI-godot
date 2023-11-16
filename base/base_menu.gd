@@ -10,7 +10,15 @@ signal construction_selected(construction_scene)
 func _ready():
 	display_root_menu()
 
-func set_last_focus():
+func disable():
+	for node in find_children("*", "Button", true):
+		node.disabled = true
+		node.set_focus_mode(0)
+
+func enable():
+	for node in find_children("*", "Button", true):
+		node.disabled = false
+		node.set_focus_mode(2)	
 	last_focus_control.grab_focus()
 
 func _on_construction_pressed():
@@ -18,7 +26,6 @@ func _on_construction_pressed():
 	$ConstructionMenu.show()
 	
 	$ConstructionMenu/ResearchFacility.grab_focus()
-	last_focus_control = $ConstructionMenu/ResearchFacility
 
 func _on_back_pressed():
 	display_root_menu()
@@ -28,12 +35,11 @@ func display_root_menu():
 	$ConstructionMenu.hide()
 	
 	$RootMenu/Construction.grab_focus()
-	last_focus_control = $RootMenu/Construction
 
 func _on_research_facility_pressed():
-	last_focus_control.release_focus()
+	last_focus_control = $ConstructionMenu/ResearchFacility
 	construction_selected.emit(research_facility_scene)
 
 func _on_hospital_pressed():
-	last_focus_control.release_focus()
+	last_focus_control = $ConstructionMenu/Hospital
 	construction_selected.emit(hospital_scene)
