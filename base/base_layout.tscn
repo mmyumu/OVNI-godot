@@ -4,16 +4,16 @@
 [ext_resource type="Script" path="res://base/base_layout.gd" id="1_rtkc2"]
 [ext_resource type="PackedScene" uid="uid://bkkdwm35hv0vv" path="res://base/base_grid.tscn" id="2_ccvif"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_67r1d"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5t8yx"]
 size = Vector2(32, 480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0mil"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01ml1"]
 size = Vector2(32, 480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_asntc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d0jr"]
 size = Vector2(640, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipui4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5tex"]
 size = Vector2(640, 32)
 
 [node name="BaseLayout" type="Sprite2D"]
@@ -25,7 +25,7 @@ script = ExtResource("1_rtkc2")
 wait_time = 0.1
 
 [node name="BaseGrid" parent="." instance=ExtResource("2_ccvif")]
-position = Vector2(-288, -208)
+position = Vector2(-320, -240)
 width = 20
 height = 15
 grid_step = 32
@@ -33,22 +33,22 @@ color = Color(0.501961, 0.501961, 0.501961, 1)
 thickness = 1.0
 
 [node name="Walls" type="StaticBody2D" parent="."]
-position = Vector2(-320, -240)
+position = Vector2(-352, -272)
 
 [node name="EastWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
 position = Vector2(689, 272)
-shape = SubResource("RectangleShape2D_67r1d")
+shape = SubResource("RectangleShape2D_5t8yx")
 
 [node name="WestWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
 position = Vector2(15, 272)
-shape = SubResource("RectangleShape2D_h0mil")
+shape = SubResource("RectangleShape2D_01ml1")
 
 [node name="NorthWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
 position = Vector2(352, 15)
-shape = SubResource("RectangleShape2D_asntc")
+shape = SubResource("RectangleShape2D_2d0jr")
 
 [node name="SouthWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
 position = Vector2(352, 529)
-shape = SubResource("RectangleShape2D_ipui4")
+shape = SubResource("RectangleShape2D_r5tex")
 
 [connection signal="timeout" from="PlacingInputTimer" to="." method="_on_placing_input_timer_timeout"]

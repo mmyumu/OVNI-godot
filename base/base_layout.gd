@@ -26,11 +26,11 @@ func _ready():
 	create_walls()
 	$PlacingInputTimer.wait_time = placing_input_timeout
 	
-	$Walls.position.x = (texture.get_width() - $BaseGrid.get_width()) / 2 - position.x
-	$Walls.position.y = (texture.get_height() - $BaseGrid.get_height()) / 2 - position.y
+	$Walls.position.x = (texture.get_width() - $BaseGrid.get_width()) / 2 - position.x - wall_size
+	$Walls.position.y = (texture.get_height() - $BaseGrid.get_height()) / 2 - position.y - wall_size
 	
-	$BaseGrid.position.x = (texture.get_width() - $BaseGrid.get_width()) / 2 - position.x + wall_size
-	$BaseGrid.position.y = (texture.get_height() - $BaseGrid.get_height()) / 2 - position.y + wall_size
+	$BaseGrid.position.x = (texture.get_width() - $BaseGrid.get_width()) / 2 - position.x
+	$BaseGrid.position.y = (texture.get_height() - $BaseGrid.get_height()) / 2 - position.y
 
 func _process(delta):
 	if is_placing and can_use_placing_input:
