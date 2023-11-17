@@ -39,7 +39,7 @@ func _process(delta):
 func _input(event):
 	if is_placing:
 		if event.is_action_pressed("validate_placing"):
-			construction.validate_placing()
+			validate_placing()
 		elif event.is_action_pressed("cancel_placing"):
 			construction.cancel_placing()
 			is_placing = false
@@ -64,6 +64,10 @@ func _placing_input():
 			elif v_y < 0:
 				construction.move_up(grid_step)
 				lock_placing_input()
+
+func validate_placing():
+	$BaseGrid.validate_placing(construction)
+	construction.validate_placing()
 
 func create_map(w, h):
 	var map = []

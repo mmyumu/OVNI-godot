@@ -48,4 +48,31 @@ func get_height():
 	return height * grid_step
 
 func set_placing(construction_to_place: Construction):
+	construction_to_place.position.x = int(width / 2) * grid_step
+	construction_to_place.position.y = int(height / 2) * grid_step
 	add_child(construction_to_place)
+
+func validate_placing(construction: Construction):
+	if construction.check_can_place():
+		var collisionPolygon = CollisionPolygon2D.new()
+		collisionPolygon.set_polygon(construction.get_collision_polygon().get_polygon())
+		collisionPolygon.position = construction.get_collision_polygon().position
+			
+		var polygon = Polygon2D.new()
+		polygon.set_polygon(construction.get_collision_polygon().get_polygon())
+		polygon.position = construction.get_collision_polygon().position
+		polygon.color = construction.color
+		
+		var area2D = Area2D.new()
+		area2D.scale.x = 0.9
+		area2D.scale.y = 0.9
+		area2D.add_child(collisionPolygon)
+		
+		var node2D = Node2D.new()	
+		node2D.position = construction.position
+		node2D.add_child(area2D)
+		node2D.add_child(polygon)
+		
+		add_child(node2D)
+	else:
+		construction.collision_highlight()

@@ -6,4 +6,7 @@
 color = Color(0.901961, 0.188235, 0.2, 1)
 
 [node name="CollisionPolygon2D" parent="." index="0"]
-polygon = PackedVector2Array(32, 32, 32.3169, 0, 64.1862, 0, 64, 32, 96, 32, 96, 64, 64, 64, 64, 96, 32, 96, 32, 64, 0, 64, 0, 32)
+polygon = PackedVector2Array(32, 32, 32, 16, 64, 16, 64, 32, 80, 32, 80, 64, 64, 64, 64, 80, 32, 80, 32, 64, 16, 64, 16, 32)
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PackedVector2Array(32, 32, 32, 16, 64, 16, 64, 32, 80, 32, 80, 64, 64, 64, 64, 80, 32, 80, 32, 64, 16, 64, 16, 32)

@@ -17,16 +17,49 @@ class_name Construction extends CharacterBody2D
 		queue_redraw()
 
 var original_outline: Color
+var can_place: bool
 
 func _ready():
 	original_outline = outline
+	$Area2D/CollisionPolygon2D.set_polygon($CollisionPolygon2D.get_polygon())
+	check_can_place()
+
+func _input(event):
+	check_can_place()
+	
+func check_can_place():
+	if len($Area2D.get_overlapping_areas()) > 0:
+		outline = Color.DARK_RED
+		can_place = false
+	else:
+		outline = original_outline
+		can_place = true
+	return can_place
 
 func _draw():
 	var poly = $CollisionPolygon2D.get_polygon()
+	
+	var idx = 0
+	for p in poly:
+		p.x += $CollisionPolygon2D.position.x
+		p.y += $CollisionPolygon2D.position.y
+		poly[idx] = p
+		idx += 1
+		
+	
 	for i in range(1 , poly.size()):
 		draw_line(poly[i-1] , poly[i], outline , width)
 	draw_line(poly[poly.size() - 1] , poly[0], outline , width)
+	
+#	poly = $Area2D/CollisionPolygon2D.get_polygon()
+#	for i in range(1 , poly.size()):
+#		draw_line(poly[i-1] , poly[i], Color.GREEN_YELLOW , width)
+#	draw_line(poly[poly.size() - 1] , poly[0], Color.GREEN_YELLOW , width)
+	
 	draw_polygon(poly, PackedColorArray([color]))
+
+func get_collision_polygon():
+	return $CollisionPolygon2D
 
 func set_placing_mode():
 	color.a = 0.5
@@ -63,17 +96,20 @@ func move_down(grid_step: int):
 
 func collision_highlight():
 	var tween = create_tween()
-	outline = Color.DARK_RED
-	tween.tween_property(self, "outline", original_outline, 0.2)
-	print("tweenie from %s to %s" % [outline, original_outline])
+	
+	if can_place:
+		outline = Color.DARK_RED
+		tween.tween_property(self, "outline", original_outline, 0.2)
+	else:
+		outline = original_outline
+		tween.tween_property(self, "outline", Color.DARK_RED, 0.2)
 
 func validate_placing():
 	# Stop blinking/strong opacity?
 	# Play construction sound
-	print("validate placing")
+#	print("validate placing")
+	can_place = false
+	pass
 
 func cancel_placing():
 	queue_free()
-
-func _on_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	print("collision")

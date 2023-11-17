@@ -4,16 +4,16 @@
 [ext_resource type="Script" path="res://base/base_layout.gd" id="1_rtkc2"]
 [ext_resource type="PackedScene" uid="uid://bkkdwm35hv0vv" path="res://base/base_grid.tscn" id="2_ccvif"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5t8yx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g84wx"]
 size = Vector2(32, 480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_01ml1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvtos"]
 size = Vector2(32, 480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d0jr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ty6g"]
 size = Vector2(640, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5tex"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cj4qk"]
 size = Vector2(640, 32)
 
 [node name="BaseLayout" type="Sprite2D"]
@@ -37,18 +37,18 @@ position = Vector2(-352, -272)
 
 [node name="EastWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
 position = Vector2(689, 272)
-shape = SubResource("RectangleShape2D_5t8yx")
+shape = SubResource("RectangleShape2D_g84wx")
 
 [node name="WestWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
 position = Vector2(15, 272)
-shape = SubResource("RectangleShape2D_01ml1")
+shape = SubResource("RectangleShape2D_xvtos")
 
 [node name="NorthWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
 position = Vector2(352, 15)
-shape = SubResource("RectangleShape2D_2d0jr")
+shape = SubResource("RectangleShape2D_1ty6g")
 
 [node name="SouthWallCollisionShape2D" type="CollisionShape2D" parent="Walls"]
 position = Vector2(352, 529)
-shape = SubResource("RectangleShape2D_r5tex")
+shape = SubResource("RectangleShape2D_cj4qk")
 
 [connection signal="timeout" from="PlacingInputTimer" to="." method="_on_placing_input_timer_timeout"]
