@@ -62,6 +62,7 @@ func validate_placing(construction: Construction):
 		polygon.set_polygon(construction.get_collision_polygon().get_polygon())
 		polygon.position = construction.get_collision_polygon().position
 		polygon.color = construction.color
+		polygon.color.a = 1
 		
 		var area2D = Area2D.new()
 		area2D.scale.x = 0.9

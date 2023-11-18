@@ -18,22 +18,22 @@ class_name Construction extends CharacterBody2D
 
 var original_outline: Color
 var can_place: bool
+var first
 
 func _ready():
+	first = true
 	original_outline = outline
 	$Area2D/CollisionPolygon2D.set_polygon($CollisionPolygon2D.get_polygon())
-	check_can_place()
 
-func _input(event):
-	check_can_place()
-	
 func check_can_place():
 	if len($Area2D.get_overlapping_areas()) > 0:
 		outline = Color.DARK_RED
 		can_place = false
+		print("cannot place")
 	else:
 		outline = original_outline
 		can_place = true
+		print("can place")
 	return can_place
 
 func _draw():
@@ -64,7 +64,6 @@ func get_collision_polygon():
 func set_placing_mode():
 	color.a = 0.5
 	# Blink/low opacity?
-	print("placing mode enabled")
 
 func move_right(grid_step: int):
 	var collision = move_and_collide(Vector2.RIGHT * grid_step, true)
@@ -108,8 +107,16 @@ func validate_placing():
 	# Stop blinking/strong opacity?
 	# Play construction sound
 #	print("validate placing")
-	can_place = false
+#	can_place = false
 	pass
 
 func cancel_placing():
 	queue_free()
+
+
+func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	check_can_place()
+
+
+func _on_area_2d_area_shape_exited(area_rid, area, area_shape_index, local_shape_index):
+	check_can_place()
