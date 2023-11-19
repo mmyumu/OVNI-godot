@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0xxd1obrbyee"]
+
+[ext_resource type="PackedScene" uid="uid://ch7s01w5lmnap" path="res://base/background.tscn" id="1_s62fp"]
+[ext_resource type="PackedScene" uid="uid://s453mjhbb4v8" path="res://global/earth.tscn" id="2_6nkro"]
+[ext_resource type="PackedScene" uid="uid://cvxq13weiv5vs" path="res://global/global_menu.tscn" id="3_a6hb2"]
+
+[node name="Main" type="Node"]
+
+[node name="Background" parent="." instance=ExtResource("1_s62fp")]
+
+[node name="Earth" parent="." instance=ExtResource("2_6nkro")]
+position = Vector2(551, 360)
+
+[node name="GlobalMenu" parent="." instance=ExtResource("3_a6hb2")]
+position = Vector2(1105, 110)
