@@ -38,9 +38,9 @@ func _process(delta):
 
 func _input(event):
 	if is_placing:
-		if event.is_action_pressed("validate_placing"):
+		if event.is_action_pressed("validate"):
 			validate_placing()
-		elif event.is_action_pressed("cancel_placing"):
+		elif event.is_action_pressed("cancel"):
 			construction.cancel_placing()
 			is_placing = false
 			placing_over.emit()

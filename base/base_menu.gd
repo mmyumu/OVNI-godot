@@ -10,16 +10,22 @@ signal construction_selected(construction_scene)
 func _ready():
 	display_root_menu()
 
+func _input(event):
+	if event.is_action_pressed("cancel"):
+		display_root_menu()
+	
 func disable():
 	for node in find_children("*", "Button", true):
 		node.disabled = true
 		node.set_focus_mode(0)
+	set_process_input(false)
 
 func enable():
 	for node in find_children("*", "Button", true):
 		node.disabled = false
 		node.set_focus_mode(2)	
 	last_focus_control.grab_focus()
+	set_process_input(true)
 
 func _on_construction_pressed():
 	$RootMenu.hide()
@@ -27,7 +33,7 @@ func _on_construction_pressed():
 	
 	$ConstructionMenu/ResearchFacility.grab_focus()
 
-func _on_back_pressed():
+func _on_construction_back_pressed():
 	display_root_menu()
 
 func display_root_menu():

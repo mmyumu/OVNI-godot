@@ -43,4 +43,4 @@ text = "Back"
 [connection signal="pressed" from="RootMenu/Construction" to="." method="_on_construction_pressed"]
 [connection signal="pressed" from="ConstructionMenu/ResearchFacility" to="." method="_on_research_facility_pressed"]
 [connection signal="pressed" from="ConstructionMenu/Hospital" to="." method="_on_hospital_pressed"]
-[connection signal="pressed" from="ConstructionMenu/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="ConstructionMenu/Back" to="." method="_on_construction_back_pressed"]
