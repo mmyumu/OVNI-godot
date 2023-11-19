@@ -1,14 +1,14 @@
 @tool
 class_name Construction extends CharacterBody2D
 
-@export var outline: Color = Color("db996a"):
+@export var outline_color: Color = Color("db996a"):
 	set(value):
-		outline = value
+		outline_color = value
 		queue_redraw()
 
-@export var width: float = 2.0:
+@export var outline_width: float = 2.0:
 	set(value):
-		width = value
+		outline_width = value
 		queue_redraw()
 
 @export var color: Color = Color.CADET_BLUE:
@@ -16,50 +16,31 @@ class_name Construction extends CharacterBody2D
 		color = value
 		queue_redraw()
 
-var original_outline: Color
+var original_outline_color: Color
 var can_place: bool
 var first
 
 func _ready():
+	can_place = true
 	first = true
-	original_outline = outline
-	$Area2D/CollisionPolygon2D.set_polygon($CollisionPolygon2D.get_polygon())
+	original_outline_color = outline_color
+	
+	$DrawableCollisionPolygon2D.color = color
+	$DrawableCollisionPolygon2D.outline_color = outline_color
+	$DrawableCollisionPolygon2D.outline_width = outline_width
+	$Area2D/CollisionPolygon2D.set_polygon($DrawableCollisionPolygon2D.get_polygon())
 
 func check_can_place():
 	if len($Area2D.get_overlapping_areas()) > 0:
-		outline = Color.DARK_RED
+		$DrawableCollisionPolygon2D.outline_color = Color.DARK_RED
 		can_place = false
-		print("cannot place")
 	else:
-		outline = original_outline
+		$DrawableCollisionPolygon2D.outline_color = original_outline_color
 		can_place = true
-		print("can place")
 	return can_place
 
-func _draw():
-	var poly = $CollisionPolygon2D.get_polygon()
-	
-	var idx = 0
-	for p in poly:
-		p.x += $CollisionPolygon2D.position.x
-		p.y += $CollisionPolygon2D.position.y
-		poly[idx] = p
-		idx += 1
-		
-	
-	for i in range(1 , poly.size()):
-		draw_line(poly[i-1] , poly[i], outline , width)
-	draw_line(poly[poly.size() - 1] , poly[0], outline , width)
-	
-#	poly = $Area2D/CollisionPolygon2D.get_polygon()
-#	for i in range(1 , poly.size()):
-#		draw_line(poly[i-1] , poly[i], Color.GREEN_YELLOW , width)
-#	draw_line(poly[poly.size() - 1] , poly[0], Color.GREEN_YELLOW , width)
-	
-	draw_polygon(poly, PackedColorArray([color]))
-
 func get_collision_polygon():
-	return $CollisionPolygon2D
+	return $DrawableCollisionPolygon2D
 
 func set_placing_mode():
 	color.a = 0.5
@@ -97,11 +78,11 @@ func collision_highlight():
 	var tween = create_tween()
 	
 	if can_place:
-		outline = Color.DARK_RED
-		tween.tween_property(self, "outline", original_outline, 0.2)
+		$DrawableCollisionPolygon2D.outline_color = Color.DARK_RED
+		tween.tween_property($DrawableCollisionPolygon2D, "outline_color", original_outline_color, 0.2)
 	else:
-		outline = original_outline
-		tween.tween_property(self, "outline", Color.DARK_RED, 0.2)
+		$DrawableCollisionPolygon2D.outline_color = original_outline_color
+		tween.tween_property($DrawableCollisionPolygon2D, "outline_color", Color.DARK_RED, 0.2)
 
 func validate_placing():
 	# Stop blinking/strong opacity?

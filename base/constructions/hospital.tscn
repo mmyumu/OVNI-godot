@@ -3,10 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/constructions/construction.tscn" id="1_5c3q5"]
 
 [node name="Hospital" instance=ExtResource("1_5c3q5")]
-color = Color(0.901961, 0.188235, 0.2, 1)
+color = Color(0.705882, 0.0666667, 0.141176, 1)
 
-[node name="CollisionPolygon2D" parent="." index="0"]
-polygon = PackedVector2Array(32, 32, 32, 16, 64, 16, 64, 32, 80, 32, 80, 64, 64, 64, 64, 80, 32, 80, 32, 64, 16, 64, 16, 32)
+[node name="DrawableCollisionPolygon2D" parent="." index="0"]
+polygon = PackedVector2Array(-16, -32, 16, -32, 16, -16, 32, -16, 32, 16, 16, 16, 16, 32, -16, 32, -16, 16, -32, 16, -32, -16, -16, -16)
 
 [node name="CollisionPolygon2D" parent="Area2D" index="0"]
-polygon = PackedVector2Array(32, 32, 32, 16, 64, 16, 64, 32, 80, 32, 80, 64, 64, 64, 64, 80, 32, 80, 32, 64, 16, 64, 16, 32)
+position = Vector2(0, 0)
+polygon = PackedVector2Array(-16, -32, 16, -32, 16, -16, 32, -16, 32, 16, 16, 16, 16, 32, -16, 32, -16, 16, -32, 16, -32, -16, -16, -16)
