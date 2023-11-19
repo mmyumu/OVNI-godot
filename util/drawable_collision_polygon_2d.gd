@@ -15,11 +15,16 @@ class_name DrawableCollisionPolygon2D extends CollisionPolygon2D
 		outline_width = value
 		queue_redraw()
 
+@export var to_draw: bool = true:
+	set(value):
+		to_draw = value
+		queue_redraw()
 
 func _draw():
-	var poly = get_polygon()
-	
-	for i in range(1 , poly.size()):
-		draw_line(poly[i-1] , poly[i], outline_color , outline_width)
-	draw_line(poly[poly.size() - 1] , poly[0], outline_color , outline_width)
-	draw_polygon(poly, PackedColorArray([color]))
+	if to_draw:
+		var poly = get_polygon()
+		
+		for i in range(1 , poly.size()):
+			draw_line(poly[i-1] , poly[i], outline_color , outline_width)
+		draw_line(poly[poly.size() - 1] , poly[0], outline_color , outline_width)
+		draw_polygon(poly, PackedColorArray([color]))
