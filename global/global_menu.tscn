@@ -52,4 +52,5 @@ text = "Back"
 [connection signal="pressed" from="RootMenu/Bases" to="." method="_on_bases_pressed"]
 [connection signal="pressed" from="RootMenu/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="RootMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="BasesMenu/NewBase" to="." method="_on_new_base_pressed"]
 [connection signal="pressed" from="BasesMenu/Back" to="." method="_on_bases_back_pressed"]

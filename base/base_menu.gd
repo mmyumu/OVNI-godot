@@ -23,7 +23,7 @@ func disable():
 func enable():
 	for node in find_children("*", "Button", true):
 		node.disabled = false
-		node.set_focus_mode(2)	
+		node.set_focus_mode(2)
 	last_focus_control.grab_focus()
 	set_process_input(true)
 

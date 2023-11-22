@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bica1ulaw40un"]
+
+[ext_resource type="Script" path="res://global/earth_layout.gd" id="1_ihe4c"]
+[ext_resource type="PackedScene" uid="uid://3v3wlr67l7qe" path="res://global/earth_2d.tscn" id="1_m11kq"]
+[ext_resource type="Texture2D" uid="uid://c114sptn5mwra" path="res://art/cursor.png" id="3_bpsej"]
+
+[node name="EarthLayout" type="Node2D"]
+script = ExtResource("1_ihe4c")
+
+[node name="Earth2D" parent="." instance=ExtResource("1_m11kq")]
+
+[node name="Cursor" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_bpsej")

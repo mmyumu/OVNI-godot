@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3v3wlr67l7qe"]
+
+[ext_resource type="Texture2D" uid="uid://c5elu7ykpu37k" path="res://art/2k_earth_daymap_2D.jpg" id="1_2id4s"]
+
+[node name="Earth2D" type="Sprite2D"]
+texture = ExtResource("1_2id4s")
