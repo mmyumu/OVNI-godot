@@ -3,27 +3,24 @@ extends Node2D
 var mouse_sens= 500.0
 var is_creating_new_base: bool = false
 var mouse_pos
+var last_mouse_pos
 
 signal base_creation_over()
 
 func _ready():
+	$NewBaseDialog.close()
 	mouse_pos = to_local(get_global_mouse_position())
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_pos = event.position
 	if self.is_active():
 		if event.is_action_pressed("validate"):
-			print("validate new base")
-			is_creating_new_base = false
-			$Cursor.visible = false
-			base_creation_over.emit()
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			last_mouse_pos = get_global_mouse_position()
+			$NewBaseDialog.open()
 		elif event.is_action_pressed("cancel"):
-			print("cancel new base")
-			is_creating_new_base = false
-			$Cursor.visible = false
-			base_creation_over.emit()
+			creating_new_base_over()
 
 func _physics_process(delta):
 	if self.is_active():
@@ -44,5 +41,25 @@ func is_active():
 	return is_creating_new_base
 
 func set_creating_new_base():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 	$Cursor.visible = true
 	is_creating_new_base = true
+
+func creating_new_base_over():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$Cursor.visible = false
+	is_creating_new_base = false
+	base_creation_over.emit()
+
+func dialog_closed():
+	Input.warp_mouse(last_mouse_pos)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	get_tree().paused = false
+
+func _on_new_base_dialog_canceled():
+	dialog_closed()
+
+func _on_new_base_dialog_confirmed():
+	dialog_closed()
+	
+	creating_new_base_over()
