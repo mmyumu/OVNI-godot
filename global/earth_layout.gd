@@ -61,5 +61,9 @@ func _on_new_base_dialog_canceled():
 
 func _on_new_base_dialog_confirmed():
 	dialog_closed()
-	
+	var base: Base = Base.new()
+	base.name = "Toto"
+	base.location = Vector2(250, 250)
+	Saver.data.add_base(base)
+	Saver.save_data()
 	creating_new_base_over()
