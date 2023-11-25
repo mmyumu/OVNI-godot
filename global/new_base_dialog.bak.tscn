@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpvyllvvm0s14"]
+
+[ext_resource type="Script" path="res://global/new_base_dialog.bak.gd" id="1_fgybm"]
+
+[node name="NewBaseDialog" type="ConfirmationDialog"]
+process_mode = 2
+title = "Confirm base name"
+initial_position = 2
+size = Vector2i(300, 150)
+visible = true
+dialog_text = "Please choose the base name"
+dialog_close_on_escape = false
+script = ExtResource("1_fgybm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 292.0
+offset_bottom = 80.0
+placeholder_text = "Base name"

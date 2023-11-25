@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c7pckfymx32fb"]
+
+[node name="NewBase" type="PopupPanel"]
+title = "New base"
+initial_position = 2
+size = Vector2i(200, 100)
+mouse_passthrough_polygon = PackedVector2Array(0, 0, 0, 50, 50, 50, 50, 0)
+visible = true
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 196.0
+offset_bottom = 96.0
+text = "Base name"
+
+[node name="OkButton" type="Button" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 196.0
+offset_bottom = 96.0
