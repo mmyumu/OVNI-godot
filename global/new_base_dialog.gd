@@ -4,10 +4,10 @@ signal confirmed(base_name)
 signal canceled()
 
 func _ready():
-	$CanvasLayer/LineEdit.grab_focus()
+	$CanvasLayer/VBoxContainer/LineEdit.grab_focus()
 
 func _process(delta):
-	$CanvasLayer/HBoxContainer/OkButton.disabled = !is_valid_base_name()
+	$CanvasLayer/VBoxContainer/HBoxContainer/OkButton.disabled = !is_valid_base_name()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("validate") and is_valid_base_name():
@@ -27,8 +27,8 @@ func _on_cancel_button_pressed():
 
 func open():
 	get_tree().paused = true
-	$CanvasLayer/LineEdit.text = ""
-	$CanvasLayer/LineEdit.grab_focus()
+	$CanvasLayer/VBoxContainer/LineEdit.text = ""
+	$CanvasLayer/VBoxContainer/LineEdit.grab_focus()
 	visible = true
 
 func close():
@@ -37,11 +37,21 @@ func close():
 
 func confirm():
 	close()
-	confirmed.emit($CanvasLayer/LineEdit.text)
+	confirmed.emit($CanvasLayer/VBoxContainer/LineEdit.text)
 
 func cancel():
 	close()
 	canceled.emit()
 
 func is_valid_base_name():
-	return len($CanvasLayer/LineEdit.text) > 0
+	if len($CanvasLayer/VBoxContainer/LineEdit.text) == 0:
+		$CanvasLayer/VBoxContainer/ErrorLabel.text = "Please choose a base name"
+		return false
+	
+	for base in Saver.data.bases:
+		if base.name.to_lower() == $CanvasLayer/VBoxContainer/LineEdit.text.to_lower():
+			$CanvasLayer/VBoxContainer/ErrorLabel.text = "Base name already exists"
+			return false
+
+	$CanvasLayer/VBoxContainer/ErrorLabel.text = ""
+	return true

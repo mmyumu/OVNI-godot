@@ -6,45 +6,39 @@
 [node name="GlobalMenu" type="Node2D"]
 script = ExtResource("1_20pts")
 
-[node name="RootMenu" type="Node2D" parent="."]
+[node name="RootMenu" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(168, 0)
 
 [node name="Bases" type="Button" parent="RootMenu"]
-offset_right = 168.0
-offset_bottom = 27.0
+layout_mode = 2
 focus_neighbor_bottom = NodePath("../Save")
 theme_override_fonts/font = ExtResource("1_us1w5")
 text = "Bases"
 
 [node name="Save" type="Button" parent="RootMenu"]
-offset_top = 28.0
-offset_right = 168.0
-offset_bottom = 55.0
+layout_mode = 2
 focus_neighbor_top = NodePath("../Bases")
 focus_neighbor_bottom = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("1_us1w5")
 text = "Save"
 
 [node name="Quit" type="Button" parent="RootMenu"]
-offset_top = 56.0
-offset_right = 168.0
-offset_bottom = 83.0
+layout_mode = 2
 focus_neighbor_top = NodePath("../Save")
 theme_override_fonts/font = ExtResource("1_us1w5")
 text = "Quit"
 
-[node name="BasesMenu" type="Node2D" parent="."]
+[node name="BasesMenu" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(168, 0)
 
 [node name="NewBase" type="Button" parent="BasesMenu"]
-offset_right = 168.0
-offset_bottom = 27.0
+layout_mode = 2
 focus_neighbor_bottom = NodePath("../Back")
 theme_override_fonts/font = ExtResource("1_us1w5")
 text = "New base"
 
 [node name="Back" type="Button" parent="BasesMenu"]
-offset_top = 28.0
-offset_right = 168.0
-offset_bottom = 55.0
+layout_mode = 2
 focus_neighbor_top = NodePath("../NewBase")
 theme_override_fonts/font = ExtResource("1_us1w5")
 text = "Back"
