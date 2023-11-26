@@ -1,21 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://m0c6r8g6xxwj"]
+[gd_scene load_steps=3 format=3 uid="uid://m0c6r8g6xxwj"]
 
 [ext_resource type="Script" path="res://global/new_base_dialog.gd" id="1_fgybm"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="2_kgthl"]
 
 [node name="NewBaseDialog" type="Window"]
 process_mode = 2
 title = "Choose base name"
 initial_position = 2
-size = Vector2i(250, 90)
+size = Vector2i(300, 90)
 exclusive = true
 unresizable = true
 popup_window = true
+theme_override_fonts/title_font = ExtResource("2_kgthl")
 script = ExtResource("1_fgybm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer"]
-custom_minimum_size = Vector2(230, 0)
+custom_minimum_size = Vector2(280, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -23,6 +25,7 @@ offset_left = -115.0
 offset_right = 115.0
 offset_bottom = 31.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_kgthl")
 placeholder_text = "Base name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
@@ -43,12 +46,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 focus_neighbor_right = NodePath("../CancelButton")
+theme_override_fonts/font = ExtResource("2_kgthl")
 text = "Ok"
 
 [node name="CancelButton" type="Button" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 focus_neighbor_left = NodePath("../OkButton")
+theme_override_fonts/font = ExtResource("2_kgthl")
 text = "Cancel"
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]

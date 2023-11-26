@@ -7,7 +7,6 @@ var data: Data
 
 func _init():
 	data = Data.new()
-	print("init saver")
 
 func set_no_debug():
 	file_name = "user://save.res"
@@ -21,3 +20,6 @@ func load_data():
 		var loaded_data = ResourceLoader.load(file_name)
 		if loaded_data is Data: # Check that the data is valid
 			data = loaded_data
+
+func reset_data():
+	data = Data.new()

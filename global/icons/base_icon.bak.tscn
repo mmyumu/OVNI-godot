@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfdpfxcdvw1ci"]
+
+[ext_resource type="Texture2D" uid="uid://cd7ebo6gnk577" path="res://art/base_icon.png" id="1_ddu8j"]
+[ext_resource type="Script" path="res://global/icons/base_icon.bak.gd" id="2_lj6bh"]
+
+[node name="BaseIcon" type="Sprite2D"]
+texture = ExtResource("1_ddu8j")
+script = ExtResource("2_lj6bh")

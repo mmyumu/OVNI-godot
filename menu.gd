@@ -8,6 +8,7 @@ func _ready():
 	Saver.set_no_debug()
 
 func _on_start_button_pressed():
+	Saver.reset_data()
 	get_tree().change_scene_to_file("res://global/main.tscn")
 
 func _on_quit_button_pressed():
@@ -16,3 +17,4 @@ func _on_quit_button_pressed():
 
 func _on_continue_button_pressed():
 	Saver.load_data()
+	get_tree().change_scene_to_file("res://global/main.tscn")

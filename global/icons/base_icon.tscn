@@ -1,8 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfdpfxcdvw1ci"]
+[gd_scene load_steps=4 format=3 uid="uid://cxgfmcyhw68d4"]
 
 [ext_resource type="Script" path="res://global/icons/base_icon.gd" id="1_tndgm"]
 [ext_resource type="Texture2D" uid="uid://cd7ebo6gnk577" path="res://art/base_icon.png" id="1_xlipk"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="3_tjilp"]
 
-[node name="BaseIcon" type="Sprite2D"]
-texture = ExtResource("1_xlipk")
+[node name="BaseIcon" type="Node2D"]
 script = ExtResource("1_tndgm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xlipk")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("3_tjilp")
+theme_override_font_sizes/font_size = 10
+text = "test"
+horizontal_alignment = 1

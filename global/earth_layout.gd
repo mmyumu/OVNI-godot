@@ -6,6 +6,7 @@ var mouse_sens= 500.0
 var is_creating_new_base: bool = false
 var mouse_pos
 var last_mouse_pos
+var valid_base_location: bool = false
 
 signal base_creation_over()
 
@@ -14,17 +15,24 @@ func _ready():
 	mouse_pos = to_local(get_global_mouse_position())
 	$Cursor.visible = false
 	
-	if len($Area2D.get_overlapping_areas()) == 0:
-		$Cursor.set_invalid()
-	else:
+	for base in Saver.data.bases:
+		add_base(base)
+	
+	if $Area2D.overlaps_area($Cursor/Area2D):
 		$Cursor.set_valid()
+		valid_base_location = true
+	else:
+		$Cursor.set_invalid()
+		valid_base_location = false
+	
+	
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_pos = event.position
 		
 	if self.is_active():
-		if event.is_action_pressed("validate"):
+		if event.is_action_pressed("validate") and valid_base_location:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			last_mouse_pos = get_global_mouse_position()
 			$NewBaseDialog.open()
@@ -51,8 +59,6 @@ func is_active():
 
 func set_creating_new_base():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
-#	Input.warp_mouse(to_global(Vector2.ZERO))
-#	$Cursor.set_valid()
 	$Cursor.visible = true
 	is_creating_new_base = true
 
@@ -80,17 +86,18 @@ func _on_new_base_dialog_confirmed(base_name):
 	dialog_closed()
 	creating_new_base_over()
 	
+	add_base(base)
+
+func add_base(base: Base):
 	var base_icon = base_icon_scene.instantiate()
 	base_icon.set_base(base)
-	
 	add_child(base_icon)
-
 
 func _on_area_2d_mouse_entered():
 	$Cursor.set_valid()
-	print("entered")
+	valid_base_location = true
 
 
 func _on_area_2d_mouse_exited():
 	$Cursor.set_invalid()
-	print("exited")
+	valid_base_location = false
