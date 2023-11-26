@@ -1,20 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://bica1ulaw40un"]
+[gd_scene load_steps=6 format=3 uid="uid://bica1ulaw40un"]
 
 [ext_resource type="Script" path="res://global/earth_layout.gd" id="1_ihe4c"]
 [ext_resource type="PackedScene" uid="uid://3v3wlr67l7qe" path="res://global/earth_2d.tscn" id="1_m11kq"]
-[ext_resource type="Texture2D" uid="uid://c114sptn5mwra" path="res://art/cursor.png" id="3_bpsej"]
+[ext_resource type="PackedScene" uid="uid://plg0a0t7y63" path="res://cursor.tscn" id="3_skjdf"]
 [ext_resource type="PackedScene" uid="uid://m0c6r8g6xxwj" path="res://global/new_base_dialog.tscn" id="4_ieeqp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5mukj"]
+size = Vector2(1094, 546)
 
 [node name="EarthLayout" type="Node2D"]
 script = ExtResource("1_ihe4c")
 
 [node name="Earth2D" parent="." instance=ExtResource("1_m11kq")]
 
-[node name="Cursor" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("3_bpsej")
+[node name="Cursor" parent="." instance=ExtResource("3_skjdf")]
 
 [node name="NewBaseDialog" parent="." instance=ExtResource("4_ieeqp")]
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_5mukj")
+
 [connection signal="canceled" from="NewBaseDialog" to="." method="_on_new_base_dialog_canceled"]
 [connection signal="confirmed" from="NewBaseDialog" to="." method="_on_new_base_dialog_confirmed"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

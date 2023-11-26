@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://plg0a0t7y63"]
+
+[ext_resource type="Script" path="res://cursor.gd" id="1_pj5ox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8q1b"]
+size = Vector2(2, 2)
+
+[node name="Cursor" type="Sprite2D"]
+z_index = 1000
+script = ExtResource("1_pj5ox")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_o8q1b")

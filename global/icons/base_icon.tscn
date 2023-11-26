@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://dfdpfxcdvw1ci"]
+[gd_scene load_steps=3 format=3 uid="uid://dfdpfxcdvw1ci"]
+
+[ext_resource type="Script" path="res://global/icons/base_icon.gd" id="1_tndgm"]
+[ext_resource type="Texture2D" uid="uid://cd7ebo6gnk577" path="res://art/base_icon.png" id="1_xlipk"]
 
 [node name="BaseIcon" type="Sprite2D"]
+texture = ExtResource("1_xlipk")
+script = ExtResource("1_tndgm")

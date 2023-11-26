@@ -1,10 +1,10 @@
 class_name NewBaseDialog extends Window
 
-signal confirmed()
+signal confirmed(base_name)
 signal canceled()
 
 func _ready():
-	$CanvasLayer/TextEdit.grab_focus()
+	$CanvasLayer/LineEdit.grab_focus()
 
 func _process(delta):
 	$CanvasLayer/HBoxContainer/OkButton.disabled = !is_valid_base_name()
@@ -27,8 +27,8 @@ func _on_cancel_button_pressed():
 
 func open():
 	get_tree().paused = true
-	$CanvasLayer/TextEdit.text = ""
-	$CanvasLayer/TextEdit.grab_focus()
+	$CanvasLayer/LineEdit.text = ""
+	$CanvasLayer/LineEdit.grab_focus()
 	visible = true
 
 func close():
@@ -37,11 +37,11 @@ func close():
 
 func confirm():
 	close()
-	confirmed.emit()
+	confirmed.emit($CanvasLayer/LineEdit.text)
 
 func cancel():
 	close()
 	canceled.emit()
 
 func is_valid_base_name():
-	return len($CanvasLayer/TextEdit.text) > 0
+	return len($CanvasLayer/LineEdit.text) > 0
