@@ -1,8 +1,5 @@
 extends Node2D
 
-#var research_facility_scene: PackedScene = preload("res://base/constructions/research_facility.tscn")
-#var hospital_scene: PackedScene = preload("res://base/constructions/hospital.tscn")
-
 var last_focus_control
 
 signal construction_selected(construction_scene)
@@ -49,7 +46,6 @@ func _on_research_facility_pressed():
 func _on_hospital_pressed():
 	last_focus_control = $ConstructionMenu/Hospital
 	construction_selected.emit(ConstructionsData.SCENES[ConstructionsData.Type.HOSPITAL])
-
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://global/main.tscn")
