@@ -1,6 +1,6 @@
 extends Node2D
 
-var right_menu_button_scene: PackedScene = preload("res://util/right_menu_button.tscn")
+var menu_base_button_scene: PackedScene = preload("res://util/menu_base_button.tscn")
 var last_focus_control
 
 signal new_base_selected()
@@ -34,28 +34,26 @@ func display_root_menu():
 	$RootMenu/Bases.grab_focus()
 
 func build_bases_menu():
-	var previous_button: Button = $BasesMenu/NewBase
-
-	
+	var previous_menu_button: Button = $BasesMenu/NewBase
 	var i = 0
 	for base in Saver.data.bases:
-		var button = right_menu_button_scene.instantiate()
-		button.name = base.name
-		button.text = base.name
-		button.set_base(base)
-		button.base_pressed.connect(_on_base_pressed)
+		var menu_base_button = menu_base_button_scene.instantiate()
+		menu_base_button.name = base.name
+		menu_base_button.text = base.name
+		menu_base_button.set_base(base)
+		menu_base_button.menu_base_pressed.connect(_on_menu_base_pressed)
 		
-		$BasesMenu.add_child(button)
-		$BasesMenu.move_child(button, i + 1) # +1 because there is 1 button (new bases) before
+		$BasesMenu.add_child(menu_base_button)
+		$BasesMenu.move_child(menu_base_button, i + 1) # +1 because there is 1 button (new bases) before
 
-		previous_button.focus_neighbor_bottom = previous_button.get_path_to(button)
-		button.focus_neighbor_top = button.get_path_to(previous_button)
+		previous_menu_button.focus_neighbor_bottom = previous_menu_button.get_path_to(menu_base_button)
+		menu_base_button.focus_neighbor_top = menu_base_button.get_path_to(previous_menu_button)
 
-		previous_button = button
+		previous_menu_button = menu_base_button
 		i += 1
 
-	previous_button.focus_neighbor_bottom = $BasesMenu/Back.get_path()
-	$BasesMenu/Back.focus_neighbor_top = $BasesMenu/Back.get_path_to(previous_button)
+	previous_menu_button.focus_neighbor_bottom = $BasesMenu/Back.get_path()
+	$BasesMenu/Back.focus_neighbor_top = $BasesMenu/Back.get_path_to(previous_menu_button)
 
 func _on_save_pressed():
 	print("should save?")
@@ -65,6 +63,7 @@ func _on_bases_pressed():
 	$BasesMenu.show()
 	
 	$BasesMenu/NewBase.grab_focus()
+
 
 func _on_bases_back_pressed():
 	display_root_menu()
@@ -76,7 +75,7 @@ func _on_new_base_pressed():
 	last_focus_control = $BasesMenu/NewBase
 	new_base_selected.emit()
 
-func _on_base_pressed(base: BaseData):
+func _on_menu_base_pressed(menu_button: MenuBaseButton, base: BaseData):
 	Global.current_base = base
+	Global.last_menu_button = menu_button
 	get_tree().change_scene_to_file("res://base/main.tscn")
-	print("base pressed %s" % base)

@@ -1,6 +1,7 @@
 extends Node
 
 var current_base: BaseData
+var last_menu_button: Node
 
 func get_current_base():
 	if current_base:

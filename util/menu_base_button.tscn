@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0mqkrrodskmi"]
+
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_4duah"]
+[ext_resource type="Script" path="res://util/menu_base_button.gd" id="2_dtord"]
+
+[node name="MenuBaseButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_4duah")
+script = ExtResource("2_dtord")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

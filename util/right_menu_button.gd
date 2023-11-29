@@ -1,11 +1,6 @@
 class_name RightMenuButton extends Button
 
-var base
-
-signal base_pressed(base: BaseData)
-
-func set_base(base_to_set: BaseData):
-	base = base_to_set
+signal menu_button_pressed(button: RightMenuButton)
 
 func _on_pressed():
-	base_pressed.emit(base)
+	menu_button_pressed.emit(self)

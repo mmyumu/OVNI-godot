@@ -9,7 +9,10 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("cancel"):
-		display_root_menu()
+		if $RootMenu.visible:
+			get_tree().change_scene_to_file("res://global/main.tscn")
+		else:
+			display_root_menu()
 	
 func disable():
 	for node in find_children("*", "Button", true):
