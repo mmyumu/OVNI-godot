@@ -1,7 +1,7 @@
 extends Node
 
 var current_base: BaseData
-var last_menu_button: Node
+var last_menu_button_path: NodePath
 
 func get_current_base():
 	if current_base:
