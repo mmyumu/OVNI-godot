@@ -16,6 +16,8 @@ class_name Construction extends CharacterBody2D
 		color = value
 		queue_redraw()
 
+@export var construction_type : ConstructionsData.Type
+
 var original_outline_color: Color
 var can_place: bool
 var first

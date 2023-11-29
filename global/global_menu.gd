@@ -34,14 +34,17 @@ func display_root_menu():
 	$RootMenu/Bases.grab_focus()
 
 func build_bases_menu():
-	var previous_button: Button = get_node("./BasesMenu/NewBase")
-#	$BasesMenu/NewBase
+	var previous_button: Button = $BasesMenu/NewBase
+
 	
 	var i = 0
 	for base in Saver.data.bases:
 		var button = right_menu_button_scene.instantiate()
 		button.name = base.name
 		button.text = base.name
+		button.set_base(base)
+		button.base_pressed.connect(_on_base_pressed)
+		
 		$BasesMenu.add_child(button)
 		$BasesMenu.move_child(button, i + 1) # +1 because there is 1 button (new bases) before
 
@@ -72,3 +75,8 @@ func _on_quit_pressed():
 func _on_new_base_pressed():
 	last_focus_control = $BasesMenu/NewBase
 	new_base_selected.emit()
+
+func _on_base_pressed(base: BaseData):
+	Global.current_base = base
+	get_tree().change_scene_to_file("res://base/main.tscn")
+	print("base pressed %s" % base)

@@ -4,6 +4,7 @@
 
 [node name="Hospital" instance=ExtResource("1_5c3q5")]
 color = Color(0.705882, 0.0666667, 0.141176, 1)
+construction_type = 1
 
 [node name="DrawableCollisionPolygon2D" parent="." index="0"]
 polygon = PackedVector2Array(-16, -32, 16, -32, 16, -16, 32, -16, 32, 16, 16, 16, 16, 32, -16, 32, -16, 16, -32, 16, -32, -16, -16, -16)

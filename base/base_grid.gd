@@ -28,6 +28,14 @@ extends Node2D
 
 var construction_placed_scene: PackedScene = preload("res://base/constructions/construction_placed.tscn")
 
+func _ready():
+	for construction_data in Global.get_current_base().base_layout.constructions:
+		var construction = ConstructionsData.SCENES[construction_data.type].instantiate()
+		construction.position.x = construction_data.location.x * grid_step
+		construction.position.y = construction_data.location.y * grid_step
+		add_construction(construction)
+
+
 func _draw():
 	draw_grid()
 
@@ -56,8 +64,17 @@ func set_placing(construction_to_place: Construction):
 
 func validate_placing(construction: Construction):
 	if construction.check_can_place():
-		var construction_placed = construction_placed_scene.instantiate()
-		construction_placed.construction = construction
-		add_child(construction_placed)
+		add_construction(construction)
+		
+		var construction_data = ConstructionData.new()
+		construction_data.location = Vector2(construction.position.x / grid_step, construction.position.y / grid_step)
+		construction_data.type = construction.construction_type
+		Global.get_current_base().base_layout.constructions.append(construction_data)
+		Saver.save_data()
 	else:
 		construction.collision_highlight()
+
+func add_construction(construction: Construction):
+	var construction_placed = construction_placed_scene.instantiate()
+	construction_placed.construction = construction
+	add_child(construction_placed)

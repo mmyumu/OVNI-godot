@@ -12,17 +12,21 @@ script = ExtResource("1_a23l8")
 [node name="Background" parent="." instance=ExtResource("1_fhmdp")]
 
 [node name="BaseNameLabel" type="Label" parent="."]
-offset_left = 1128.0
-offset_top = 11.0
-offset_right = 1246.0
-offset_bottom = 34.0
+custom_minimum_size = Vector2(168, 0)
+offset_left = 1105.0
+offset_top = 7.0
+offset_right = 1273.0
+offset_bottom = 30.0
 theme_override_fonts/font = ExtResource("4_yc5lt")
 text = "Base name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="BaseMenu" parent="." instance=ExtResource("5_20fy7")]
 position = Vector2(1105, 110)
 
 [node name="BaseLayout" parent="." instance=ExtResource("5_0x8xb")]
+position = Vector2(551, 360)
 
 [connection signal="construction_selected" from="BaseMenu" to="." method="_on_base_menu_construction_selected"]
 [connection signal="placing_over" from="BaseLayout" to="." method="_on_base_layout_placing_over"]

@@ -8,3 +8,5 @@ offset_right = 8.0
 offset_bottom = 8.0
 theme_override_fonts/font = ExtResource("1_iwrfe")
 script = ExtResource("2_u3b07")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

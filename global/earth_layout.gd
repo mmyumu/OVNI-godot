@@ -77,7 +77,7 @@ func _on_new_base_dialog_canceled():
 	dialog_closed()
 
 func _on_new_base_dialog_confirmed(base_name):
-	var base: Base = Base.new()
+	var base: BaseData = BaseData.new()
 	base.name = base_name
 	base.location = Vector2(to_local(last_mouse_pos))
 	Saver.data.bases.append(base)
@@ -88,7 +88,7 @@ func _on_new_base_dialog_confirmed(base_name):
 	
 	add_base(base)
 
-func add_base(base: Base):
+func add_base(base: BaseData):
 	var base_icon = base_icon_scene.instantiate()
 	base_icon.set_base(base)
 	add_child(base_icon)
