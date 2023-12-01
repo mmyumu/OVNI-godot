@@ -5,11 +5,8 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$VBoxContainer/StartButton.grab_focus()
 	
-	Saver.set_no_debug()
-
 func _on_start_button_pressed():
-	Saver.reset_data()
-	get_tree().change_scene_to_file("res://global/main.tscn")
+	get_tree().change_scene_to_file("res://game_slots/main.tscn")
 
 func _on_quit_button_pressed():
 	get_tree().quit()
