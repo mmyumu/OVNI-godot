@@ -95,6 +95,7 @@ func _on_menu_base_pressed(menu_button: MenuBaseButton, base: BaseData):
 	get_tree().change_scene_to_file("res://base/main.tscn")
 
 func _on_menu_base_focus_entered(menu_button: MenuBaseButton, base: BaseData):
+	print("focus entered")
 	menu_base_focus_entered.emit(base)
 
 func _on_menu_base_focus_exited(menu_button: MenuBaseButton, base: BaseData):

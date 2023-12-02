@@ -18,10 +18,13 @@ class_name BaseIcon extends Node2D
 
 var base: BaseData
 
-var hightlighted: bool:
+var highlighted: bool:
 	set(value):
-		hightlighted = value
+		highlighted = value
 		queue_redraw()
+		blink()
+
+var tween: Tween
 
 func set_base(base_to_set: BaseData):
 	base = base_to_set
@@ -29,7 +32,7 @@ func set_base(base_to_set: BaseData):
 	position = base.location
 
 func _draw():
-	if hightlighted:
+	if highlighted:
 		var width = $Sprite2D.texture.get_width()
 		var height = $Sprite2D.texture.get_height()
 		var sprite_position = $Sprite2D.position
@@ -45,9 +48,16 @@ func _draw():
 		draw_line(bottom_left, top_left, color, thickness)
 
 		$Label.set("theme_override_colors/font_color", color)
-#		$Label.set("custom_colors/default_color", color)
 	else:
 		$Label.set("theme_override_colors/font_color", Color.WHITE)
-#		$Label.set("custom_colors/default_color", Color.WHITE)
-	
-#	draw_rect(Rect2(sprite_position.x, sprite_position.y, width, height), Color.GREEN)
+
+func blink():
+	if highlighted:
+		tween = create_tween()
+		
+		tween.tween_property($Label, "theme_override_colors/font_color", Color.WHITE, 0.5)
+		tween.chain().tween_property($Label, "theme_override_colors/font_color", color, 0.5)
+		tween.set_loops()
+	else:
+		if tween:
+			tween.stop()

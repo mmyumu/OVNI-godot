@@ -7,6 +7,7 @@ var is_creating_new_base: bool = false
 var mouse_pos
 var last_mouse_pos
 var valid_base_location: bool = false
+var highlighted_base: BaseData
 
 var base_icons: Array[BaseIcon] = []
 
@@ -95,17 +96,27 @@ func add_base(base: BaseData):
 	base_icon.set_base(base)
 	base_icons.append(base_icon)
 	add_child(base_icon)
+	
+#	if Global.current_base and base.name == Global.current_base.name:
+#		base_icon.highlighted = true
+#	else:
+#		base_icon.highlighted = false
+	if highlighted_base and highlighted_base.name == base.name:
+		base_icon.highlighted = true
+	else:
+		base_icon.highlighted = false
 
 func highlight_base(base: BaseData):
+	highlighted_base = base
 	for base_icon in base_icons:
 		if base_icon.base.name == base.name:
-			base_icon.hightlighted = true
+			base_icon.highlighted = true
 		else:
-			base_icon.hightlighted = false
+			base_icon.highlighted = false
 
 func unhighlight_base():
 	for base_icon in base_icons:
-		base_icon.hightlighted = false
+		base_icon.highlighted = false
 
 func _on_area_2d_mouse_entered():
 	$Cursor.set_valid()
