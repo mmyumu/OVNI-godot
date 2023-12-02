@@ -4,6 +4,8 @@ var menu_base_button_scene: PackedScene = preload("res://util/menu_base_button.t
 var last_focus_control
 
 signal new_base_selected()
+signal menu_base_focus_entered(base: BaseData)
+signal menu_base_focus_exited(base: BaseData)
 
 func _ready():
 	display_root_menu()
@@ -50,6 +52,8 @@ func build_bases_menu():
 			menu_base_button.text = base.name
 			menu_base_button.set_base(base)
 			menu_base_button.menu_base_pressed.connect(_on_menu_base_pressed)
+			menu_base_button.menu_base_focus_entered.connect(_on_menu_base_focus_entered)
+			menu_base_button.menu_base_focus_exited.connect(_on_menu_base_focus_exited)
 			
 			$BasesMenu.add_child(menu_base_button)
 			$BasesMenu.move_child(menu_base_button, i + 1) # +1 because there is 1 button (new bases) before
@@ -89,3 +93,9 @@ func _on_menu_base_pressed(menu_button: MenuBaseButton, base: BaseData):
 	Global.current_base = base
 	Global.last_menu_button_path = menu_button.get_path()
 	get_tree().change_scene_to_file("res://base/main.tscn")
+
+func _on_menu_base_focus_entered(menu_button: MenuBaseButton, base: BaseData):
+	menu_base_focus_entered.emit(base)
+
+func _on_menu_base_focus_exited(menu_button: MenuBaseButton, base: BaseData):
+	menu_base_focus_exited.emit(base)

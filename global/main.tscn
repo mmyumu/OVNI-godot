@@ -16,5 +16,7 @@ position = Vector2(1105, 110)
 [node name="EarthLayout" parent="." instance=ExtResource("4_pjtn1")]
 position = Vector2(551, 356)
 
+[connection signal="menu_base_focus_entered" from="GlobalMenu" to="." method="_on_global_menu_menu_base_focus_entered"]
+[connection signal="menu_base_focus_exited" from="GlobalMenu" to="." method="_on_global_menu_menu_base_focus_exited"]
 [connection signal="new_base_selected" from="GlobalMenu" to="." method="_on_global_menu_new_base_selected"]
 [connection signal="base_creation_over" from="EarthLayout" to="." method="_on_earth_layout_base_creation_over"]

@@ -8,6 +8,8 @@ var mouse_pos
 var last_mouse_pos
 var valid_base_location: bool = false
 
+var base_icons: Array[BaseIcon] = []
+
 signal base_creation_over()
 
 func _ready():
@@ -91,7 +93,19 @@ func _on_new_base_dialog_confirmed(base_name):
 func add_base(base: BaseData):
 	var base_icon = base_icon_scene.instantiate()
 	base_icon.set_base(base)
+	base_icons.append(base_icon)
 	add_child(base_icon)
+
+func highlight_base(base: BaseData):
+	for base_icon in base_icons:
+		if base_icon.base.name == base.name:
+			base_icon.hightlighted = true
+		else:
+			base_icon.hightlighted = false
+
+func unhighlight_base():
+	for base_icon in base_icons:
+		base_icon.hightlighted = false
 
 func _on_area_2d_mouse_entered():
 	$Cursor.set_valid()

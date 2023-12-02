@@ -10,3 +10,11 @@ func _on_earth_layout_base_creation_over():
 	await get_tree().create_timer(0.1).timeout
 	$GlobalMenu.build_bases_menu()
 	$GlobalMenu.enable()
+
+
+func _on_global_menu_menu_base_focus_entered(base: BaseData):
+	$EarthLayout.highlight_base(base)
+
+
+func _on_global_menu_menu_base_focus_exited(base: BaseData):
+	$EarthLayout.unhighlight_base()
