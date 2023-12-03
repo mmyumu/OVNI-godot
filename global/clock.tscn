@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwrmmci14rhu6"]
+
+[ext_resource type="Script" path="res://global/clock.gd" id="1_kp3xb"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_xct01"]
+[ext_resource type="PackedScene" uid="uid://cqkmpvwobj523" path="res://util/datetimer.tscn" id="3_qcehw"]
+
+[node name="Clock" type="Node2D"]
+script = ExtResource("1_kp3xb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(168, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DateLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(95, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xct01")
+theme_override_font_sizes/font_size = 11
+text = "2023-01-01
+"
+
+[node name="TimeLabel" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xct01")
+theme_override_font_sizes/font_size = 11
+text = "00:00:00"
+
+[node name="Datetimer" parent="." instance=ExtResource("3_qcehw")]
+time_acceleration_factor = 1.0

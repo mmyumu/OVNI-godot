@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqkmpvwobj523"]
+
+[ext_resource type="Script" path="res://util/datetimer.gd" id="1_75mvl"]
+
+[node name="Datetimer" type="Node"]
+script = ExtResource("1_75mvl")
+time_acceleration_factor = null

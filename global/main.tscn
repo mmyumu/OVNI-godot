@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0xxd1obrbyee"]
+[gd_scene load_steps=6 format=3 uid="uid://b0xxd1obrbyee"]
 
 [ext_resource type="Script" path="res://global/main.gd" id="1_2l2y7"]
 [ext_resource type="PackedScene" uid="uid://ch7s01w5lmnap" path="res://base/background.tscn" id="1_s62fp"]
 [ext_resource type="PackedScene" uid="uid://cvxq13weiv5vs" path="res://global/global_menu.tscn" id="3_a6hb2"]
 [ext_resource type="PackedScene" uid="uid://bica1ulaw40un" path="res://global/earth_layout.tscn" id="4_pjtn1"]
+[ext_resource type="PackedScene" uid="uid://bwrmmci14rhu6" path="res://global/clock.tscn" id="5_ioyox"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2l2y7")
@@ -11,10 +12,13 @@ script = ExtResource("1_2l2y7")
 [node name="Background" parent="." instance=ExtResource("1_s62fp")]
 
 [node name="GlobalMenu" parent="." instance=ExtResource("3_a6hb2")]
-position = Vector2(1105, 110)
+position = Vector2(1105, 150)
 
 [node name="EarthLayout" parent="." instance=ExtResource("4_pjtn1")]
 position = Vector2(551, 356)
+
+[node name="Clock" parent="." instance=ExtResource("5_ioyox")]
+position = Vector2(1105, 7)
 
 [connection signal="menu_base_focus_entered" from="GlobalMenu" to="." method="_on_global_menu_menu_base_focus_entered"]
 [connection signal="menu_base_focus_exited" from="GlobalMenu" to="." method="_on_global_menu_menu_base_focus_exited"]
