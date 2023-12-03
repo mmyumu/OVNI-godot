@@ -34,9 +34,10 @@ func load_data():
 func reset_data():
 	data = Data.new()
 
-func get_data(index):
+func get_data(index) -> Data:
 	if index >= 0 and index < len(slots):
 		return get_data_from_filename(slots[index])
+	return null
 
 func erase_data(index):
 	if index >= 0 and index < len(slots):

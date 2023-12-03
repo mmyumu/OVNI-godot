@@ -4,9 +4,9 @@ class_name DatetimeData extends Resource
 
 func spent(time_spent):
 	timestamp += time_spent
-	return get_date()
+	return get_datetime()
 
-func get_date() -> Datetime:
+func get_datetime() -> Datetime:
 	return Datetime.new(timestamp)
 
 class Datetime:
@@ -29,6 +29,15 @@ class Datetime:
 	func changed_day(other_date: Datetime):
 		return other_date == null or year != other_date.year or month != other_date.month or day != other_date.day
 	
+	func get_date_str():
+		return "%d-%02d-%02d" % [year, month, day]
+
+	func get_time_str():
+		return "%02d:%02d:%02d" % [hour, minute, second]
+
+	func get_datetime_str():
+		return "%s %s" % [get_date_str(), get_time_str()]
+
 	func _timestamp_to_date(current_timestamp):
 		var seconds_in_day = 86400
 		var days = current_timestamp / seconds_in_day
