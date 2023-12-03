@@ -27,7 +27,7 @@ class Datetime:
 		second = datetime[5]
 	
 	func changed_day(other_date: Datetime):
-		return other_date == null or year != other_date.year or month != other_date.month or day != other_date.day
+		return other_date != null and (year != other_date.year or month != other_date.month or day != other_date.day)
 	
 	func get_date_str():
 		return "%d-%02d-%02d" % [year, month, day]

@@ -7,12 +7,17 @@
 [node name="Clock" type="Node2D"]
 script = ExtResource("1_kp3xb")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Datetimer" parent="." instance=ExtResource("3_qcehw")]
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
 custom_minimum_size = Vector2(168, 0)
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="DateLabel" type="Label" parent="HBoxContainer"]
+[node name="TimerContainer" type="HBoxContainer" parent="VSplitContainer"]
+layout_mode = 2
+
+[node name="DateLabel" type="Label" parent="VSplitContainer/TimerContainer"]
 custom_minimum_size = Vector2(95, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_xct01")
@@ -20,12 +25,40 @@ theme_override_font_sizes/font_size = 11
 text = "2023-01-01
 "
 
-[node name="TimeLabel" type="Label" parent="HBoxContainer"]
+[node name="TimeLabel" type="Label" parent="VSplitContainer/TimerContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_xct01")
 theme_override_font_sizes/font_size = 11
 text = "00:00:00"
 
-[node name="Datetimer" parent="." instance=ExtResource("3_qcehw")]
-time_acceleration_factor = 1.0
+[node name="ButtonsContainer" type="HBoxContainer" parent="VSplitContainer"]
+layout_mode = 2
+
+[node name="x1Button" type="Button" parent="VSplitContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+focus_neighbor_right = NodePath("../x100Button")
+theme_override_fonts/font = ExtResource("1_xct01")
+theme_override_font_sizes/font_size = 10
+text = "x1"
+
+[node name="x100Button" type="Button" parent="VSplitContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+focus_neighbor_left = NodePath("../x1Button")
+focus_neighbor_right = NodePath("../x10000Button")
+theme_override_fonts/font = ExtResource("1_xct01")
+theme_override_font_sizes/font_size = 10
+text = "x100"
+
+[node name="x10000Button" type="Button" parent="VSplitContainer/ButtonsContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../x100Button")
+theme_override_fonts/font = ExtResource("1_xct01")
+theme_override_font_sizes/font_size = 10
+text = "x10000"
+
+[connection signal="pressed" from="VSplitContainer/ButtonsContainer/x1Button" to="." method="_on_x1_button_pressed"]
+[connection signal="pressed" from="VSplitContainer/ButtonsContainer/x100Button" to="." method="_on_x100_button_pressed"]
+[connection signal="pressed" from="VSplitContainer/ButtonsContainer/x10000Button" to="." method="_on_x10000_button_pressed"]

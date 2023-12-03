@@ -4,4 +4,3 @@
 
 [node name="Datetimer" type="Node"]
 script = ExtResource("1_75mvl")
-time_acceleration_factor = null
