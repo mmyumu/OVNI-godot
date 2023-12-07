@@ -3,13 +3,15 @@ class_name DatetimeData extends Resource
 @export var timestamp: float = Time.get_unix_time_from_datetime_dict(Dictionary({year=2024, month=1, day=1, hour=0, minute=0, second=0}))
 
 func spent(time_spent):
+	var previous_date: Datetime = get_datetime()
 	timestamp += time_spent
-	return get_datetime()
+	return [previous_date, get_datetime()]
 
 func get_datetime() -> Datetime:
 	return Datetime.new(timestamp)
 
 class Datetime:
+	var timestamp: float
 	var year: int
 	var month: int
 	var day: int
@@ -17,7 +19,11 @@ class Datetime:
 	var minute: int
 	var second: int
 	
-	func _init(timestamp: float):
+	func _init(timestamp_to_set: float):
+		timestamp = timestamp_to_set
+		_update()
+
+	func _update():
 		var datetime = _timestamp_to_date(timestamp)
 		year = datetime[0]
 		month = datetime[1]
@@ -25,10 +31,10 @@ class Datetime:
 		hour = datetime[3]
 		minute = datetime[4]
 		second = datetime[5]
-	
+
 	func changed_day(other_date: Datetime):
 		return other_date != null and (year != other_date.year or month != other_date.month or day != other_date.day)
-	
+
 	func get_date_str():
 		return "%d-%02d-%02d" % [year, month, day]
 

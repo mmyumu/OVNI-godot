@@ -40,9 +40,11 @@ func _on_empty_slot_pressed():
 	Saver.save_data()
 	build_game_slot()
 	get_tree().change_scene_to_file("res://global/main.tscn")
+	Datetimer.time_factor = 1.
 
 func _on_slot_pressed():
 	Saver.set_slot(slot_number)
 	Saver.load_data()
 	build_game_slot()
 	get_tree().change_scene_to_file("res://global/main.tscn")
+	Datetimer.time_factor = 1.

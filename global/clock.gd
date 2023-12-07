@@ -7,12 +7,12 @@ func _process(delta):
 
 
 func _on_x1_button_pressed():
-	$Datetimer.time_factor = 1.
+	Datetimer.time_factor = 1.
 
 
 func _on_x100_button_pressed():
-	$Datetimer.time_factor = 100.
+	Datetimer.time_factor = 100.
 
 
 func _on_x10000_button_pressed():
-	$Datetimer.time_factor = 10000.
+	Datetimer.time_factor = 10000.

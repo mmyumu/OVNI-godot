@@ -2,6 +2,7 @@ extends Node
 
 var current_base: BaseData
 var last_menu_button_path: NodePath
+var last_time_factor: float
 
 func get_current_base():
 	if current_base:

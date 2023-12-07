@@ -22,7 +22,6 @@ func _input(event):
 
 func disable():
 	for node in find_children("*", "Button", true, false):
-		print(node.name)
 		node.disabled = true
 		node.set_focus_mode(0)
 	set_process_input(false)
@@ -83,6 +82,8 @@ func _on_bases_back_pressed():
 	display_root_menu()
 
 func _on_quit_pressed():
+	Datetimer.time_factor = 0.
+	Saver.save_data()
 	get_tree().change_scene_to_file("res://menu.tscn")
 
 func _on_new_base_pressed():
@@ -92,6 +93,8 @@ func _on_new_base_pressed():
 func _on_menu_base_pressed(menu_button: MenuBaseButton, base: BaseData):
 	Global.current_base = base
 	Global.last_menu_button_path = menu_button.get_path()
+	Global.last_time_factor = Datetimer.time_factor
+	Datetimer.time_factor = 1.
 	get_tree().change_scene_to_file("res://base/main.tscn")
 
 func _on_menu_base_focus_entered(menu_button: MenuBaseButton, base: BaseData):
