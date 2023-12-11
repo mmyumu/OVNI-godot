@@ -24,6 +24,8 @@ func _process(delta):
 	velocity.x += v_x
 	velocity.y += v_y
 
+	velocity = velocity.limit_length(1.0)
+
 	if velocity.length() > 0:
 		velocity *= speed
 

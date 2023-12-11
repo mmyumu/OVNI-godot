@@ -21,5 +21,5 @@ func _on_global_menu_menu_base_focus_entered(base: BaseData):
 func _on_global_menu_menu_base_focus_exited(base: BaseData):
 	$EarthLayout.unhighlight_base()
 
-func _on_day_changed(date: DatetimeData.Datetime):
+func _on_day_changed(date: DatetimeData):
 	Saver.save_data()

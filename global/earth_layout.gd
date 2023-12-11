@@ -28,6 +28,8 @@ func _ready():
 		$Cursor.set_invalid()
 		valid_base_location = false
 	
+	$Area2D/CollisionShape2D.get_shape().size.x = Saver.data.earth.width
+	$Area2D/CollisionShape2D.get_shape().size.y = Saver.data.earth.height
 	
 
 func _input(event):
@@ -56,6 +58,8 @@ func _physics_process(delta):
 			Input.warp_mouse(mouse_pos + movement)
 		mouse_pos = get_global_mouse_position()
 		$Cursor.position = to_local(mouse_pos)
+		
+	$MothershipIcon.position = Saver.data.mastermind.location
 
 func is_active():
 	return is_creating_new_base

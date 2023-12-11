@@ -11,20 +11,20 @@ custom_minimum_size = Vector2(168, 0)
 
 [node name="Bases" type="Button" parent="RootMenu"]
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../Save")
+focus_neighbor_bottom = NodePath("../Events")
 theme_override_fonts/font = ExtResource("1_us1w5")
 text = "Bases"
 
-[node name="Save" type="Button" parent="RootMenu"]
+[node name="Events" type="Button" parent="RootMenu"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Bases")
 focus_neighbor_bottom = NodePath("../Quit")
 theme_override_fonts/font = ExtResource("1_us1w5")
-text = "Save"
+text = "Events"
 
 [node name="Quit" type="Button" parent="RootMenu"]
 layout_mode = 2
-focus_neighbor_top = NodePath("../Save")
+focus_neighbor_top = NodePath("../Events")
 theme_override_fonts/font = ExtResource("1_us1w5")
 text = "Quit"
 
@@ -44,7 +44,7 @@ theme_override_fonts/font = ExtResource("1_us1w5")
 text = "Back"
 
 [connection signal="pressed" from="RootMenu/Bases" to="." method="_on_bases_pressed"]
-[connection signal="pressed" from="RootMenu/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="RootMenu/Events" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="RootMenu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="BasesMenu/NewBase" to="." method="_on_new_base_pressed"]
 [connection signal="pressed" from="BasesMenu/Back" to="." method="_on_bases_back_pressed"]
