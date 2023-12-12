@@ -12,9 +12,10 @@ var hour: int
 var minute: int
 var second: int
 
-func _init(timestamp_to_set: float = 0):
+func _init(timestamp_to_set: float = -1):
+	if timestamp_to_set == -1:
+		timestamp_to_set = Time.get_unix_time_from_datetime_dict(Dictionary({year=2024, month=1, day=1, hour=0, minute=0, second=0}))
 	timestamp = timestamp_to_set
-#	_update()
 
 func spent(time_spent):
 	var previous_date: DatetimeData = DatetimeData.new(timestamp)

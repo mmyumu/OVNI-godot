@@ -1,6 +1,6 @@
 extends Node
 
-@export var speed: float = 0.01
+@export var speed: float = 0.02
 
 var rng = RandomNumberGenerator.new()
 
@@ -18,14 +18,28 @@ func _process(delta):
 		Saver.data.mastermind.destination = _get_random_earth_position()
 		print("New destination %s" % Saver.data.mastermind.destination)
 	
-#	var position_difference = Saver.data.mastermind.destination - Saver.data.mastermind.location
-#	var smoothed_velocity = position_difference * speed * delta
-	
-#	Vector2.to
-#
-#	Saver.data.mastermind.location += smoothed_velocity
 	var final_delta = delta * Datetimer.time_factor * speed
-	Saver.data.mastermind.location = Saver.data.mastermind.location.move_toward(Saver.data.mastermind.destination, final_delta)
+	
+	var alternate_left = Vector2(Saver.data.mastermind.destination.x - Saver.data.earth.width, Saver.data.mastermind.destination.y)
+	var alternate_left_diff = alternate_left - Saver.data.mastermind.location
+	
+	var alternate_right = Vector2(Saver.data.mastermind.destination.x + Saver.data.earth.width, Saver.data.mastermind.destination.y)
+	var alternate_right_diff = alternate_right - Saver.data.mastermind.location
+	
+	var diff = Saver.data.mastermind.destination - Saver.data.mastermind.location
+	
+	if alternate_left_diff.length() < diff.length():
+		Saver.data.mastermind.location = Saver.data.mastermind.location.move_toward(alternate_left, final_delta)
+	elif alternate_right_diff.length() < diff.length():
+		Saver.data.mastermind.location = Saver.data.mastermind.location.move_toward(alternate_right, final_delta)
+	else:
+		Saver.data.mastermind.location = Saver.data.mastermind.location.move_toward(Saver.data.mastermind.destination, final_delta)
+	
+	print("location=%s" % Saver.data.mastermind.location)
+	if Saver.data.mastermind.location.x < -(Saver.data.earth.width / 2):
+		Saver.data.mastermind.location.x = Saver.data.earth.width /  2
+	elif Saver.data.mastermind.location.x > Saver.data.earth.width / 2:
+		Saver.data.mastermind.location.x = -(Saver.data.earth.width /  2)
 
 func _on_day_changed(date: DatetimeData):
 	print("Master mind plans attacks")
