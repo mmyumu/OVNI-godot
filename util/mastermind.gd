@@ -35,7 +35,6 @@ func _process(delta):
 	else:
 		Saver.data.mastermind.location = Saver.data.mastermind.location.move_toward(Saver.data.mastermind.destination, final_delta)
 	
-	print("location=%s" % Saver.data.mastermind.location)
 	if Saver.data.mastermind.location.x < -(Saver.data.earth.width / 2):
 		Saver.data.mastermind.location.x = Saver.data.earth.width /  2
 	elif Saver.data.mastermind.location.x > Saver.data.earth.width / 2:

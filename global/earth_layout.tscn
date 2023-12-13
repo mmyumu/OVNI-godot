@@ -1,12 +1,62 @@
-[gd_scene load_steps=7 format=3 uid="uid://bica1ulaw40un"]
+[gd_scene load_steps=14 format=3 uid="uid://bica1ulaw40un"]
 
 [ext_resource type="Script" path="res://global/earth_layout.gd" id="1_ihe4c"]
 [ext_resource type="PackedScene" uid="uid://3v3wlr67l7qe" path="res://global/earth_2d.tscn" id="1_m11kq"]
 [ext_resource type="PackedScene" uid="uid://plg0a0t7y63" path="res://cursor.tscn" id="3_skjdf"]
 [ext_resource type="PackedScene" uid="uid://m0c6r8g6xxwj" path="res://global/new_base_dialog.tscn" id="4_ieeqp"]
-[ext_resource type="Texture2D" uid="uid://r01xf3nfian6" path="res://art/mothership.png" id="5_hsx5g"]
+[ext_resource type="Texture2D" uid="uid://dnaxf55r4ahre" path="res://art/mothership2-Sheet.png" id="6_7ux5h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mukj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kn7tt"]
+atlas = ExtResource("6_7ux5h")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3ig1"]
+atlas = ExtResource("6_7ux5h")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4tf5"]
+atlas = ExtResource("6_7ux5h")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2taxg"]
+atlas = ExtResource("6_7ux5h")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ocwk"]
+atlas = ExtResource("6_7ux5h")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8jox"]
+atlas = ExtResource("6_7ux5h")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o0010"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kn7tt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3ig1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4tf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2taxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ocwk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8jox")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="EarthLayout" type="Node2D"]
 script = ExtResource("1_ihe4c")
@@ -22,8 +72,8 @@ script = ExtResource("1_ihe4c")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_5mukj")
 
-[node name="MothershipIcon" type="Sprite2D" parent="."]
-texture = ExtResource("5_hsx5g")
+[node name="MothershipIcon" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o0010")
 
 [connection signal="canceled" from="NewBaseDialog" to="." method="_on_new_base_dialog_canceled"]
 [connection signal="confirmed" from="NewBaseDialog" to="." method="_on_new_base_dialog_confirmed"]

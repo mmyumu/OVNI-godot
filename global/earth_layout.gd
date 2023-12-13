@@ -31,6 +31,8 @@ func _ready():
 	$Area2D/CollisionShape2D.get_shape().size.x = Saver.data.earth.width
 	$Area2D/CollisionShape2D.get_shape().size.y = Saver.data.earth.height
 	
+	$MothershipIcon.play()
+	
 
 func _input(event):
 	if event is InputEventMouseMotion:
