@@ -1,6 +1,7 @@
 extends Node2D
 
 var base_icon_scene: PackedScene = preload("res://global/icons/base_icon.tscn")
+var attack_icon_scene: PackedScene = preload("res://global/icons/attack_icon.tscn")
 
 var mouse_sens= 500.0
 var is_creating_new_base: bool = false
@@ -14,6 +15,10 @@ var base_icons: Array[BaseIcon] = []
 signal base_creation_over()
 
 func _ready():
+	MasterMind.attack_spawned.connect(_on_attack_spawned)
+	for attack_ongoing in Saver.data.mastermind.attacks_ongoing:
+		_on_attack_spawned(attack_ongoing)
+	
 	$NewBaseDialog.close()
 	mouse_pos = to_local(get_global_mouse_position())
 	$Cursor.visible = false
@@ -32,7 +37,6 @@ func _ready():
 	$Area2D/CollisionShape2D.get_shape().size.y = Saver.data.earth.height
 	
 	$MothershipIcon.play()
-	
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -103,10 +107,6 @@ func add_base(base: BaseData):
 	base_icons.append(base_icon)
 	add_child(base_icon)
 	
-#	if Global.current_base and base.name == Global.current_base.name:
-#		base_icon.highlighted = true
-#	else:
-#		base_icon.highlighted = false
 	if highlighted_base and highlighted_base.name == base.name:
 		base_icon.highlighted = true
 	else:
@@ -132,3 +132,8 @@ func _on_area_2d_mouse_entered():
 func _on_area_2d_mouse_exited():
 	$Cursor.set_invalid()
 	valid_base_location = false
+
+func _on_attack_spawned(attack_spawned: AttackData):
+	var attack_icon = attack_icon_scene.instantiate()
+	attack_icon.set_attack(attack_spawned)
+	add_child(attack_icon)

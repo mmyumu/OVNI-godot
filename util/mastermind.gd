@@ -1,13 +1,34 @@
 extends Node
 
 @export var speed: float = 0.02
+@export var max_spawn_radius: float = 50.0
 
 var rng = RandomNumberGenerator.new()
 
+signal attack_spawned(attack_spawned: AttackData)
+
 func _ready():
+#	if not Datetimer.day_changed.is_connected(_on_day_changed):
 	Datetimer.day_changed.connect(_on_day_changed)
 
 func _process(delta):
+	start_attacks()
+	move(delta)
+
+func start_attacks():
+	var to_be_deleted = []
+	for attack_planned in Saver.data.mastermind.attacks_planned:
+		if Saver.data.datetime.timestamp > attack_planned.datetime.timestamp:
+			to_be_deleted.append(attack_planned)
+			attack_planned.location = _get_random_earth_position_around_mothership()
+			print("Attack planned at %s now spawns at %s" % [attack_planned.datetime.get_datetime_str(), attack_planned.location])
+	
+	for attack in to_be_deleted:
+		Saver.data.mastermind.attacks_planned.erase(attack)
+		Saver.data.mastermind.attacks_ongoing.append(attack)
+		attack_spawned.emit(attack)
+
+func move(delta):
 	if not Saver.data.mastermind.destination:
 		Saver.data.mastermind.destination = _get_random_earth_position()
 		print("Init destination %s" % Saver.data.mastermind.destination)
@@ -41,11 +62,16 @@ func _process(delta):
 		Saver.data.mastermind.location.x = -(Saver.data.earth.width /  2)
 
 func _on_day_changed(date: DatetimeData):
-	print("Master mind plans attacks")
 	var attack_planned: AttackData = AttackData.new()
 	attack_planned.datetime = DatetimeData.new(date.timestamp + rng.randi_range(3600, 86400))
-	attack_planned.location = _get_random_earth_position()
 	Saver.data.mastermind.attacks_planned.append(attack_planned)
+	print("Attack planned at %s" % attack_planned.datetime.get_datetime_str())
 
 func _get_random_earth_position():
 	return Vector2(randi() % Saver.data.earth.width - Saver.data.earth.width/2, randi() % Saver.data.earth.height - Saver.data.earth.height/2)
+
+func _get_random_earth_position_around_mothership():
+	var angle_rad: float = randf() * 2 * PI
+	var direction: Vector2 = Vector2(cos(angle_rad), sin(angle_rad))
+	var spawn_radius = randf() * max_spawn_radius
+	return Saver.data.mastermind.location + direction * spawn_radius

@@ -12,4 +12,5 @@ func _physics_process(delta):
 	var previous_date: DatetimeData = dates[0]
 	var new_date: DatetimeData = dates[1]
 	if new_date.changed_day(previous_date):
+		print("Changed day: %s -> %s" % [previous_date.get_datetime_str(), new_date.get_datetime_str()])
 		day_changed.emit(new_date)
