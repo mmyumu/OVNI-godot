@@ -8,7 +8,6 @@ var rng = RandomNumberGenerator.new()
 signal attack_spawned(attack_spawned: AttackData)
 
 func _ready():
-#	if not Datetimer.day_changed.is_connected(_on_day_changed):
 	Datetimer.day_changed.connect(_on_day_changed)
 
 func _process(delta):
@@ -63,6 +62,7 @@ func move(delta):
 
 func _on_day_changed(date: DatetimeData):
 	var attack_planned: AttackData = AttackData.new()
+	attack_planned.name = "Attack %s" % Saver.data.mastermind.get_attack_number()
 	attack_planned.datetime = DatetimeData.new(date.timestamp + rng.randi_range(3600, 86400))
 	Saver.data.mastermind.attacks_planned.append(attack_planned)
 	print("Attack planned at %s" % attack_planned.datetime.get_datetime_str())

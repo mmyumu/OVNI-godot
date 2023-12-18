@@ -9,15 +9,16 @@ var mouse_pos
 var last_mouse_pos
 var valid_base_location: bool = false
 var highlighted_base: BaseData
+var highlighted_attack: AttackData
 
 var base_icons: Array[BaseIcon] = []
+var attack_icons: Array[AttackIcon] = []
 
 signal base_creation_over()
+signal attack_spawned(attack: AttackData)
 
 func _ready():
 	MasterMind.attack_spawned.connect(_on_attack_spawned)
-	for attack_ongoing in Saver.data.mastermind.attacks_ongoing:
-		_on_attack_spawned(attack_ongoing)
 	
 	$NewBaseDialog.close()
 	mouse_pos = to_local(get_global_mouse_position())
@@ -25,6 +26,9 @@ func _ready():
 	
 	for base in Saver.data.bases:
 		add_base(base)
+
+	for attack in Saver.data.mastermind.attacks_ongoing:
+		add_attack(attack)
 	
 	if $Area2D.overlaps_area($Cursor/Area2D):
 		$Cursor.set_valid()
@@ -133,7 +137,29 @@ func _on_area_2d_mouse_exited():
 	$Cursor.set_invalid()
 	valid_base_location = false
 
-func _on_attack_spawned(attack_spawned: AttackData):
+func _on_attack_spawned(attack: AttackData):
+	add_attack(attack)
+	attack_spawned.emit(attack)
+
+func add_attack(attack: AttackData):
 	var attack_icon = attack_icon_scene.instantiate()
-	attack_icon.set_attack(attack_spawned)
+	attack_icon.set_attack(attack)
+	attack_icons.append(attack_icon)
 	add_child(attack_icon)
+		
+	if highlighted_attack and highlighted_attack.name == attack.name:
+		attack_icon.highlighted = true
+	else:
+		attack_icon.highlighted = false
+
+func highlight_attack(attack: AttackData):
+	highlighted_attack = attack
+	for attack_icon in attack_icons:
+		if attack_icon.attack.name == attack.name:
+			attack_icon.highlighted = true
+		else:
+			attack_icon.highlighted = false
+
+func unhighlight_attack():
+	for attack_icon in attack_icons:
+		attack_icon.highlighted = false

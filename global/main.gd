@@ -12,14 +12,23 @@ func _on_global_menu_new_base_selected():
 func _on_earth_layout_base_creation_over():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	await get_tree().create_timer(0.1).timeout
-	$GlobalMenu.build_bases_menu()
+	$GlobalMenu/BasesMenu.build()
 	$GlobalMenu.enable()
-
-func _on_global_menu_menu_base_focus_entered(base: BaseData):
-	$EarthLayout.highlight_base(base)
-
-func _on_global_menu_menu_base_focus_exited(base: BaseData):
-	$EarthLayout.unhighlight_base()
 
 func _on_day_changed(date: DatetimeData):
 	Saver.save_data()
+
+func _on_bases_menu_menu_base_focus_entered(base):
+	$EarthLayout.highlight_base(base)
+
+func _on_bases_menu_menu_base_focus_exited(base):
+	$EarthLayout.unhighlight_base()
+
+func _on_events_menu_menu_data_focus_entered(data):
+	$EarthLayout.highlight_attack(data)
+
+func _on_events_menu_menu_data_focus_exited(data):
+	$EarthLayout.unhighlight_attack()
+
+func _on_earth_layout_attack_spawned(attack: AttackData):
+	$GlobalMenu/EventsMenu.build()

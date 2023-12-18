@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dn2vx8vv4ngm6"]
+[gd_scene load_steps=7 format=3 uid="uid://dn2vx8vv4ngm6"]
 
 [ext_resource type="Texture2D" uid="uid://chvivw8032yvf" path="res://art/conflict_icon-Sheet200.png" id="1_3u6w8"]
 [ext_resource type="Script" path="res://global/icons/attack_icon.gd" id="1_t80wb"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="3_3wpuy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3r7w4"]
 atlas = ExtResource("1_3u6w8")
@@ -27,6 +28,18 @@ animations = [{
 
 [node name="AttackIcon" type="Node2D"]
 script = ExtResource("1_t80wb")
+color = Color(0.631373, 0.0862745, 0.0980392, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6xncl")
+frame_progress = 0.148967
+
+[node name="Label" type="Label" parent="."]
+offset_left = -100.0
+offset_top = -43.0
+offset_right = 100.0
+offset_bottom = -26.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_3wpuy")
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1

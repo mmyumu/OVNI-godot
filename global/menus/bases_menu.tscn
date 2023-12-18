@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqkucxvo8oncu"]
+
+[ext_resource type="Script" path="res://global/menus/bases_menu.gd" id="1_3nofl"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_5k0l2"]
+
+[sub_resource type="GDScript" id="GDScript_2eqwl"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="BasesMenu" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3nofl")
+
+[node name="NewBase" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Back")
+theme_override_fonts/font = ExtResource("1_5k0l2")
+text = "New base"
+script = SubResource("GDScript_2eqwl")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_top = NodePath("../NewBase")
+theme_override_fonts/font = ExtResource("1_5k0l2")
+text = "Back"
+
+[connection signal="pressed" from="NewBase" to="." method="_on_new_base_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
