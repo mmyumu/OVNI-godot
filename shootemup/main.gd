@@ -62,7 +62,7 @@ func _on_enemy_destroyed(enemy):
 func _on_player_game_over():
 	start_stop_game(false)
 	await get_tree().create_timer(2.0).timeout
-	get_tree().change_scene_to_file("res://menu.tscn")
+	get_tree().change_scene_to_file("res://global/main.tscn")
 
 func start_stop_game(start: bool, game_over:bool = true):
 	if start:
@@ -98,4 +98,4 @@ func stage_completed():
 		$Player.invulnerable = true
 		
 		await get_tree().create_timer(2.0).timeout
-		get_tree().change_scene_to_file("res://menu.tscn")
+		get_tree().change_scene_to_file("res://global/main.tscn")

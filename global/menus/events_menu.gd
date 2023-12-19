@@ -47,12 +47,12 @@ func build():
 		previous_menu_button.focus_neighbor_bottom = $Back.get_path()
 		$Back.focus_neighbor_top = $Back.get_path_to(previous_menu_button)
 
-func _on_menu_data_pressed(menu_button: MenuBaseButton, base: BaseData):
-	Global.current_base = base
-	Global.last_menu_button_path = menu_button.get_path()
+func _on_menu_data_pressed(menu_button: MenuDataButton, data: Resource):
+#	Global.current_base = base
+	Global.last_menu_button_path = ""
 	Global.last_time_factor = Datetimer.time_factor
 	Datetimer.time_factor = 1.
-	get_tree().change_scene_to_file("res://shootempup/main.tscn")
+	get_tree().change_scene_to_file("res://shootemup/main.tscn")
 
 func _on_menu_data_focus_entered(menu_button: MenuDataButton, data: Resource):
 	menu_data_focus_entered.emit(data)
