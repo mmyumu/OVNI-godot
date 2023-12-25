@@ -12,23 +12,29 @@ func _on_global_menu_new_base_selected():
 func _on_earth_layout_base_creation_over():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	await get_tree().create_timer(0.1).timeout
-	$GlobalMenu/BasesMenu.build()
+	$GlobalMenu/BasesSubMenu.build()
 	$GlobalMenu.enable()
 
 func _on_day_changed(date: DatetimeData):
 	Saver.save_data()
 
-func _on_bases_menu_menu_base_focus_entered(base):
+func _on_earth_layout_attack_spawned(attack: AttackData):
+	$GlobalMenu/AttacksSubMenu.build()
+
+func _on_bases_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, base: BaseData, parent_object: Object):
 	$EarthLayout.highlight_base(base)
 
-func _on_bases_menu_menu_base_focus_exited(base):
+func _on_bases_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, object: BaseData, parent_object: Object):
 	$EarthLayout.unhighlight_base()
 
-func _on_events_menu_menu_data_focus_entered(data):
-	$EarthLayout.highlight_attack(data)
-
-func _on_events_menu_menu_data_focus_exited(data):
+func _on_attacks_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, attack: AttackData, parent_object: Object):
 	$EarthLayout.unhighlight_attack()
 
-func _on_earth_layout_attack_spawned(attack: AttackData):
-	$GlobalMenu/EventsMenu.build()
+func _on_attacks_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, attack: AttackData, parent_object: Object):
+	$EarthLayout.highlight_attack(attack)
+
+func _on_event_ships_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, ship: ShipData, attack: AttackData):
+	$EarthLayout.show_event_info(ship, attack)
+
+func _on_event_ships_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, ship: ShipData, attack: AttackData):
+	$EarthLayout.hide_event_info(ship, attack)

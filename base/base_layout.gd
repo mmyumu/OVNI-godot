@@ -44,6 +44,7 @@ func _input(event):
 			construction.cancel_placing()
 			is_placing = false
 			placing_over.emit()
+			get_viewport().set_input_as_handled()
 
 func _placing_input():
 	var v_x = Input.get_axis("move_left", "move_right")

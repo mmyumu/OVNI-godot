@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl65tp7eungkb"]
+
+[ext_resource type="Script" path="res://global/event_info_panel.gd" id="1_2o3pn"]
+[ext_resource type="FontFile" uid="uid://c1mgwsb6wtd8q" path="res://fonts/shogunate/ShogunateCondensed-nRxWY.otf" id="1_puwcb"]
+
+[node name="EventInfoPanel" type="Node2D"]
+script = ExtResource("1_2o3pn")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 143.0
+offset_bottom = 57.0
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+
+[node name="AttackLabel" type="Label" parent="Panel/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_puwcb")
+text = "Attack: "
+
+[node name="AttackValueLabel" type="Label" parent="Panel/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_puwcb")
+text = "Attack name"
+
+[node name="ETALabel" type="Label" parent="Panel/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_puwcb")
+text = "ETA:"
+
+[node name="ETAValueLabel" type="Label" parent="Panel/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_puwcb")
+text = "ETA value"

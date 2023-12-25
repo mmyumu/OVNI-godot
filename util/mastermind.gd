@@ -34,9 +34,13 @@ func move(delta):
 		
 	if abs(Saver.data.mastermind.location.x - Saver.data.mastermind.destination.x) < 1 and \
 	 abs(Saver.data.mastermind.location.y - Saver.data.mastermind.destination.y) < 1:
-		print("Reached destination %s" % Saver.data.mastermind.destination)
+		print("Reached destination %s at %s" % [Saver.data.mastermind.destination, Saver.data.datetime.get_datetime_str()])
 		Saver.data.mastermind.destination = _get_random_earth_position()
-		print("New destination %s" % Saver.data.mastermind.destination)
+		
+		var distance = Saver.data.mastermind.location.distance_to(Saver.data.mastermind.destination)
+		
+		var eta = DatetimeData.new(Saver.data.datetime.timestamp + (distance / speed))
+		print("New destination %s: ETA=%s" % [Saver.data.mastermind.destination, eta.get_datetime_str()])
 	
 	var final_delta = delta * Datetimer.time_factor * speed
 	

@@ -13,6 +13,7 @@ func _input(event):
 			get_tree().change_scene_to_file("res://global/main.tscn")
 		else:
 			display_root_menu()
+		get_viewport().set_input_as_handled()
 	
 func disable():
 	for node in find_children("*", "Button", true):

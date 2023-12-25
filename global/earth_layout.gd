@@ -2,6 +2,7 @@ extends Node2D
 
 var base_icon_scene: PackedScene = preload("res://global/icons/base_icon.tscn")
 var attack_icon_scene: PackedScene = preload("res://global/icons/attack_icon.tscn")
+var event_info_panel_scene: PackedScene = preload("res://global/event_info_panel.tscn")
 
 var mouse_sens= 500.0
 var is_creating_new_base: bool = false
@@ -13,6 +14,9 @@ var highlighted_attack: AttackData
 
 var base_icons: Array[BaseIcon] = []
 var attack_icons: Array[AttackIcon] = []
+#var event_info_panels: Array[EventInfoPanel] = []
+var event_info_panel: EventInfoPanel
+
 
 signal base_creation_over()
 signal attack_spawned(attack: AttackData)
@@ -24,7 +28,8 @@ func _ready():
 	mouse_pos = to_local(get_global_mouse_position())
 	$Cursor.visible = false
 	
-	for base in Saver.data.bases:
+	for base_id in Saver.data.bases:
+		var base = Saver.data.bases[base_id]
 		add_base(base)
 
 	for attack in Saver.data.mastermind.attacks_ongoing:
@@ -53,6 +58,7 @@ func _input(event):
 			$NewBaseDialog.open()
 		elif event.is_action_pressed("cancel"):
 			creating_new_base_over()
+			get_viewport().set_input_as_handled()
 
 func _physics_process(delta):
 	if self.is_active():
@@ -94,10 +100,18 @@ func _on_new_base_dialog_canceled():
 	dialog_closed()
 
 func _on_new_base_dialog_confirmed(base_name):
+	var ship: ShipData = ShipData.new()
+	ship.name = "Raptor"
+	ship.hangared = true
+	
 	var base: BaseData = BaseData.new()
 	base.name = base_name
 	base.location = Vector2(to_local(last_mouse_pos))
-	Saver.data.bases.append(base)
+	base.ships.append(ship)
+	
+	ship.base_id = base.id
+	
+	Saver.data.add_base(base)
 	Saver.save_data()
 		
 	dialog_closed()
@@ -163,3 +177,14 @@ func highlight_attack(attack: AttackData):
 func unhighlight_attack():
 	for attack_icon in attack_icons:
 		attack_icon.highlighted = false
+
+func show_event_info(ship: ShipData, attack: AttackData):
+	event_info_panel = event_info_panel_scene.instantiate()
+	event_info_panel.set_data(ship, attack)
+	event_info_panel.position.x = attack.location.x + 25
+	event_info_panel.position.y = attack.location.y - 30
+	add_child(event_info_panel)
+
+func hide_event_info(ship: ShipData, attack: AttackData):
+	if event_info_panel:
+		event_info_panel.queue_free()

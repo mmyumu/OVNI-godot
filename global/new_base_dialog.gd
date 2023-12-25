@@ -48,7 +48,8 @@ func is_valid_base_name():
 		$CanvasLayer/VBoxContainer/ErrorLabel.text = "Please choose a base name"
 		return false
 	
-	for base in Saver.data.bases:
+	for base_id in Saver.data.bases:
+		var base = Saver.data.bases[base_id]
 		if base.name.to_lower() == $CanvasLayer/VBoxContainer/LineEdit.text.to_lower():
 			$CanvasLayer/VBoxContainer/ErrorLabel.text = "Base name already exists"
 			return false

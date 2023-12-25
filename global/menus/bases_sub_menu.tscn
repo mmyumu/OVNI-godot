@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://byiycmicju21f"]
+
+[ext_resource type="PackedScene" uid="uid://bub7i462o7af5" path="res://global/menus/sub_menu.tscn" id="1_a1eb6"]
+[ext_resource type="Script" path="res://global/menus/bases_sub_menu.gd" id="2_6wwka"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="3_lso3s"]
+
+[node name="BasesSubMenu" instance=ExtResource("1_a1eb6")]
+script = ExtResource("2_6wwka")
+menu_offset = 1
+
+[node name="NewBase" type="Button" parent="." index="0"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lso3s")
+text = "New base"

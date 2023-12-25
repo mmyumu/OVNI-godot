@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxu5q4nfbulg0"]
 
-[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_bl34d"]
-[ext_resource type="Script" path="res://util/menu_data_button.gd" id="2_co3gm"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_avcby"]
+[ext_resource type="Script" path="res://util/menu_object_button.gd" id="2_trovu"]
 
 [node name="MenuDataButton" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
-theme_override_fonts/font = ExtResource("1_bl34d")
-script = ExtResource("2_co3gm")
+theme_override_fonts/font = ExtResource("1_avcby")
+script = ExtResource("2_trovu")
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

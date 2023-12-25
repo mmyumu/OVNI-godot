@@ -33,13 +33,16 @@ focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
 focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
 
 [connection signal="new_base_selected" from="GlobalMenu" to="." method="_on_global_menu_new_base_selected"]
-[connection signal="menu_base_focus_entered" from="GlobalMenu/BasesMenu" to="." method="_on_bases_menu_menu_base_focus_entered"]
-[connection signal="menu_base_focus_exited" from="GlobalMenu/BasesMenu" to="." method="_on_bases_menu_menu_base_focus_exited"]
-[connection signal="menu_data_focus_entered" from="GlobalMenu/EventsMenu" to="." method="_on_events_menu_menu_data_focus_entered"]
-[connection signal="menu_data_focus_exited" from="GlobalMenu/EventsMenu" to="." method="_on_events_menu_menu_data_focus_exited"]
+[connection signal="menu_object_focus_entered" from="GlobalMenu/BasesSubMenu" to="." method="_on_bases_sub_menu_menu_object_focus_entered"]
+[connection signal="menu_object_focus_exited" from="GlobalMenu/BasesSubMenu" to="." method="_on_bases_sub_menu_menu_object_focus_exited"]
+[connection signal="menu_object_focus_entered" from="GlobalMenu/AttacksSubMenu" to="." method="_on_attacks_sub_menu_menu_object_focus_entered"]
+[connection signal="menu_object_focus_exited" from="GlobalMenu/AttacksSubMenu" to="." method="_on_attacks_sub_menu_menu_object_focus_exited"]
+[connection signal="menu_object_focus_entered" from="GlobalMenu/EventShipsSubMenu" to="." method="_on_event_ships_sub_menu_menu_object_focus_entered"]
+[connection signal="menu_object_focus_exited" from="GlobalMenu/EventShipsSubMenu" to="." method="_on_event_ships_sub_menu_menu_object_focus_exited"]
 [connection signal="attack_spawned" from="EarthLayout" to="." method="_on_earth_layout_attack_spawned"]
 [connection signal="base_creation_over" from="EarthLayout" to="." method="_on_earth_layout_base_creation_over"]
 
 [editable path="GlobalMenu"]
+[editable path="GlobalMenu/BasesSubMenu"]
 [editable path="EarthLayout"]
 [editable path="Clock"]

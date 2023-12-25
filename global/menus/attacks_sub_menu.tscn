@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://24u8euxexgx3"]
+
+[ext_resource type="PackedScene" uid="uid://bub7i462o7af5" path="res://global/menus/sub_menu.tscn" id="1_pqevv"]
+[ext_resource type="Script" path="res://global/menus/attacks_sub_menu.gd" id="2_q64u3"]
+
+[node name="AttacksSubMenu" instance=ExtResource("1_pqevv")]
+script = ExtResource("2_q64u3")

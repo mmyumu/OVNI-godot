@@ -13,8 +13,13 @@ func _ready():
 		Global.last_menu_button_path = ""
 
 func _input(event):
-	if event.is_action_pressed("cancel") and not $RootMenu.visible:
-		display_root_menu()
+	if event.is_action_pressed("cancel"):
+		if $BasesSubMenu.visible == true:
+			display_root_menu()
+		elif $AttacksSubMenu.visible == true:
+			display_root_menu()
+		elif $EventShipsSubMenu.visible == true:
+			display_attacks_menu()
 
 func disable():
 	for node in find_children("*", "Button", true, false):
@@ -29,38 +34,57 @@ func enable():
 	last_focus_control.grab_focus()
 	set_process_input(true)
 
-func display_root_menu():
-	$RootMenu.show()
-	$BasesMenu.hide()
-	$EventsMenu.hide()
+func hide_all_menus():
+	$RootMenu.hide()
 	
+	var sub_menus = find_children("*", "SubMenu", false, false)
+	for sub_menu in sub_menus:
+		sub_menu.hide()
+
+func display_root_menu():
+	hide_all_menus()
+	$RootMenu.show()
 	$RootMenu/Bases.grab_focus()
 
 func _on_bases_pressed():
 	display_bases_menu()
 
 func _on_events_pressed():
-	display_events_menu()
+	display_attacks_menu()
 
 func display_bases_menu():
-	$RootMenu.hide()
-	$BasesMenu.display()
+	hide_all_menus()
+	$BasesSubMenu.display()
 
-func display_events_menu():
-	$RootMenu.hide()
-	$EventsMenu.display()
+func display_attacks_menu():
+	hide_all_menus()
+	$AttacksSubMenu.display()
 
 func _on_quit_pressed():
 	Datetimer.time_factor = 0.
 	Saver.save_data()
 	get_tree().change_scene_to_file("res://menu.tscn")
 
-func _on_bases_menu_new_base_pressed(new_base_button):
-	last_focus_control = new_base_button
+func _on_bases_sub_menu_menu_object_pressed(menu_button: MenuObjectButton, base: BaseData, parent_object: Object):
+	Global.current_base = base
+	Global.last_menu_button_path = menu_button.get_path()
+	Global.last_time_factor = Datetimer.time_factor
+	Datetimer.time_factor = 1.
+	get_tree().change_scene_to_file("res://base/main.tscn")
+
+func _on_bases_sub_menu_new_base_pressed():
+	last_focus_control = $BasesSubMenu/NewBase
 	new_base_selected.emit()
 
-func _on_bases_menu_back_pressed():
+func _on_attacks_sub_menu_menu_object_pressed(menu_button, object, parent_object):
+	hide_all_menus()
+	$EventShipsSubMenu.display(object)
+
+func _on_bases_sub_menu_back_pressed():
 	display_root_menu()
 
-func _on_events_menu_back_pressed():
+func _on_attacks_sub_menu_back_pressed():
 	display_root_menu()
+
+func _on_event_ships_sub_menu_back_pressed():
+	display_attacks_menu()
