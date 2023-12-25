@@ -1,37 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl65tp7eungkb"]
+[gd_scene load_steps=4 format=3 uid="uid://cl65tp7eungkb"]
 
 [ext_resource type="Script" path="res://global/event_info_panel.gd" id="1_2o3pn"]
 [ext_resource type="FontFile" uid="uid://c1mgwsb6wtd8q" path="res://fonts/shogunate/ShogunateCondensed-nRxWY.otf" id="1_puwcb"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0kbh"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.596078, 0.596078, 0.596078, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_right = 10.0
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
 [node name="EventInfoPanel" type="Node2D"]
 script = ExtResource("1_2o3pn")
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 143.0
-offset_bottom = 57.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 139.0
+offset_bottom = 52.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d0kbh")
 
-[node name="GridContainer" type="GridContainer" parent="Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
 columns = 2
 
-[node name="AttackLabel" type="Label" parent="Panel/GridContainer"]
+[node name="AttackLabel" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_puwcb")
+theme_override_font_sizes/font_size = 20
 text = "Attack: "
 
-[node name="AttackValueLabel" type="Label" parent="Panel/GridContainer"]
+[node name="AttackValueLabel" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_puwcb")
+theme_override_font_sizes/font_size = 20
 text = "Attack name"
 
-[node name="ETALabel" type="Label" parent="Panel/GridContainer"]
+[node name="ETALabel" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_puwcb")
+theme_override_font_sizes/font_size = 20
 text = "ETA:"
 
-[node name="ETAValueLabel" type="Label" parent="Panel/GridContainer"]
+[node name="ETAValueLabel" type="Label" parent="PanelContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_puwcb")
+theme_override_font_sizes/font_size = 20
 text = "ETA value"

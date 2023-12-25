@@ -4,8 +4,8 @@ var ship: ShipData
 var event: AttackData
 
 func _ready():
-	$Panel/GridContainer/AttackValueLabel.text = event.name
-	$Panel/GridContainer/ETAValueLabel.text = ship.compute_eta(event.location).get_datetime_str()
+	$PanelContainer/GridContainer/AttackValueLabel.text = event.name
+	$PanelContainer/GridContainer/ETAValueLabel.text = ship.compute_eta(event.location).get_datetime_str()
 
 func set_data(ship_to_set: ShipData, event_to_set: AttackData):
 	event = event_to_set
