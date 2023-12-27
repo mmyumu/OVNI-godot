@@ -2,6 +2,7 @@ extends Node2D
 
 var base_icon_scene: PackedScene = preload("res://global/icons/base_icon.tscn")
 var attack_icon_scene: PackedScene = preload("res://global/icons/attack_icon.tscn")
+var ship_icon_scene: PackedScene = preload("res://global/icons/ship_icon.tscn")
 var event_info_panel_scene: PackedScene = preload("res://global/event_info_panel.tscn")
 
 var mouse_sens= 500.0
@@ -14,7 +15,6 @@ var highlighted_attack: AttackData
 
 var base_icons: Array[BaseIcon] = []
 var attack_icons: Array[AttackIcon] = []
-#var event_info_panels: Array[EventInfoPanel] = []
 var event_info_panel: EventInfoPanel
 
 
@@ -29,8 +29,11 @@ func _ready():
 	$Cursor.visible = false
 	
 	for base_id in Saver.data.bases:
-		var base = Saver.data.bases[base_id]
+		var base: BaseData = Saver.data.bases[base_id]
 		add_base(base)
+		
+		for ship in base.ships:
+			add_ship(ship)
 
 	for attack in Saver.data.mastermind.attacks_ongoing:
 		add_attack(attack)
@@ -110,6 +113,7 @@ func _on_new_base_dialog_confirmed(base_name):
 	base.ships.append(ship)
 	
 	ship.base_id = base.id
+	ship.location = base.location
 	
 	Saver.data.add_base(base)
 	Saver.save_data()
@@ -118,9 +122,11 @@ func _on_new_base_dialog_confirmed(base_name):
 	creating_new_base_over()
 	
 	add_base(base)
+	add_ship(ship)
 
 func add_base(base: BaseData):
 	var base_icon = base_icon_scene.instantiate()
+	base_icon.name = "%s_%s" % [base_icon.name, base.name]
 	base_icon.set_base(base)
 	base_icons.append(base_icon)
 	add_child(base_icon)
@@ -146,7 +152,6 @@ func _on_area_2d_mouse_entered():
 	$Cursor.set_valid()
 	valid_base_location = true
 
-
 func _on_area_2d_mouse_exited():
 	$Cursor.set_invalid()
 	valid_base_location = false
@@ -157,6 +162,7 @@ func _on_attack_spawned(attack: AttackData):
 
 func add_attack(attack: AttackData):
 	var attack_icon = attack_icon_scene.instantiate()
+	attack_icon.name = "%s_%s" % [attack_icon.name, attack.name]
 	attack_icon.set_attack(attack)
 	attack_icons.append(attack_icon)
 	add_child(attack_icon)
@@ -177,6 +183,12 @@ func highlight_attack(attack: AttackData):
 func unhighlight_attack():
 	for attack_icon in attack_icons:
 		attack_icon.highlighted = false
+
+func add_ship(ship: ShipData):
+	var ship_icon = ship_icon_scene.instantiate()
+	ship_icon.name = "%s_%s_%s" % [ship_icon.name, ship.get_base().name, ship.name]
+	ship_icon.set_ship(ship)
+	add_child(ship_icon)
 
 func show_event_info(ship: ShipData, attack: AttackData):
 	event_info_panel = event_info_panel_scene.instantiate()

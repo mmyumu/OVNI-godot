@@ -22,6 +22,7 @@ Saver="*res://saver.gd"
 Global="*res://global.gd"
 Datetimer="*res://util/datetimer.tscn"
 MasterMind="*res://util/mastermind.tscn"
+Ships="*res://util/ships.tscn"
 
 [display]
 

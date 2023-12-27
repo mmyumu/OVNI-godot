@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bor22nbnhonc2"]
+
+[ext_resource type="Texture2D" uid="uid://dxnaom81lvukk" path="res://art/ship_mini-icon.png" id="1_n18vs"]
+[ext_resource type="Script" path="res://global/icons/ship_mini_icon.gd" id="2_f6grm"]
+
+[node name="ShipMiniIcon" type="TextureRect"]
+offset_right = 14.0
+offset_bottom = 14.0
+texture = ExtResource("1_n18vs")
+script = ExtResource("2_f6grm")
+color = Color(1, 0.917647, 0, 1)

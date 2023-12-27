@@ -78,6 +78,7 @@ func _on_bases_sub_menu_new_base_pressed():
 
 func _on_attacks_sub_menu_menu_object_pressed(menu_button, object, parent_object):
 	hide_all_menus()
+	$EventShipsSubMenu.build()
 	$EventShipsSubMenu.display(object)
 
 func _on_bases_sub_menu_back_pressed():

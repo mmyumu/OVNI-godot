@@ -39,6 +39,7 @@ focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
 [connection signal="menu_object_focus_exited" from="GlobalMenu/AttacksSubMenu" to="." method="_on_attacks_sub_menu_menu_object_focus_exited"]
 [connection signal="menu_object_focus_entered" from="GlobalMenu/EventShipsSubMenu" to="." method="_on_event_ships_sub_menu_menu_object_focus_entered"]
 [connection signal="menu_object_focus_exited" from="GlobalMenu/EventShipsSubMenu" to="." method="_on_event_ships_sub_menu_menu_object_focus_exited"]
+[connection signal="menu_object_pressed" from="GlobalMenu/EventShipsSubMenu" to="." method="_on_event_ships_sub_menu_menu_object_pressed"]
 [connection signal="attack_spawned" from="EarthLayout" to="." method="_on_earth_layout_attack_spawned"]
 [connection signal="base_creation_over" from="EarthLayout" to="." method="_on_earth_layout_base_creation_over"]
 

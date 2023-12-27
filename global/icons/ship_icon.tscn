@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dafyohji6k5jb"]
+[gd_scene load_steps=7 format=3 uid="uid://dafyohji6k5jb"]
 
 [ext_resource type="Script" path="res://global/icons/ship_icon.gd" id="1_6a06v"]
 [ext_resource type="Texture2D" uid="uid://c7m4o5hmf1xtu" path="res://art/ship-Sheet.png" id="1_q1ku2"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="3_qc2ya"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8gjvp"]
 atlas = ExtResource("1_q1ku2")
@@ -26,7 +27,19 @@ animations = [{
 }]
 
 [node name="ShipIcon" type="Node2D"]
+z_index = 3000
 script = ExtResource("1_6a06v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mgstx")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -100.0
+offset_top = -29.0
+offset_right = 100.0
+offset_bottom = -12.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_qc2ya")
+theme_override_font_sizes/font_size = 10
+text = "test"
+horizontal_alignment = 1

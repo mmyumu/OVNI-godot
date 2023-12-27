@@ -20,7 +20,7 @@ func start_attacks():
 		if Saver.data.datetime.timestamp > attack_planned.datetime.timestamp:
 			to_be_deleted.append(attack_planned)
 			attack_planned.location = _get_random_earth_position_around_mothership()
-			print("Attack planned at %s now spawns at %s" % [attack_planned.datetime.get_datetime_str(), attack_planned.location])
+			print("Mothership: attack planned at %s now spawns at %s" % [attack_planned.datetime.get_datetime_str(), attack_planned.location])
 	
 	for attack in to_be_deleted:
 		Saver.data.mastermind.attacks_planned.erase(attack)
@@ -30,17 +30,17 @@ func start_attacks():
 func move(delta):
 	if not Saver.data.mastermind.destination:
 		Saver.data.mastermind.destination = _get_random_earth_position()
-		print("Init destination %s" % Saver.data.mastermind.destination)
+		print("Mothership: init destination %s" % Saver.data.mastermind.destination)
 		
 	if abs(Saver.data.mastermind.location.x - Saver.data.mastermind.destination.x) < 1 and \
 	 abs(Saver.data.mastermind.location.y - Saver.data.mastermind.destination.y) < 1:
-		print("Reached destination %s at %s" % [Saver.data.mastermind.destination, Saver.data.datetime.get_datetime_str()])
+		print("Mothership: reached destination %s at %s" % [Saver.data.mastermind.destination, Saver.data.datetime.get_datetime_str()])
 		Saver.data.mastermind.destination = _get_random_earth_position()
 		
 		var distance = Saver.data.mastermind.location.distance_to(Saver.data.mastermind.destination)
 		
 		var eta = DatetimeData.new(Saver.data.datetime.timestamp + (distance / speed))
-		print("New destination %s: ETA=%s" % [Saver.data.mastermind.destination, eta.get_datetime_str()])
+		print("Mothership: new destination %s: ETA=%s" % [Saver.data.mastermind.destination, eta.get_datetime_str()])
 	
 	var final_delta = delta * Datetimer.time_factor * speed
 	
