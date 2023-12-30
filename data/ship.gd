@@ -1,18 +1,24 @@
 class_name ShipData extends Resource
 
+const uuid_util = preload('res://addons/uuid/uuid.gd')
+
+@export var id: String
 @export var name: String = "Placeholder"
 @export var hangared: bool = true
 @export var location: Vector2 = Vector2.ZERO
 @export var attack: AttackData
 @export var rotation: float = 0.
-@export var base_id: String
+@export var base: BaseData
 @export var speed: float = 0.05
-@export var is_standing_by: bool = true
+@export var destination: Resource
+
+func _init():
+	id = uuid_util.v4()
 
 func compute_eta(destination: Vector2) -> DatetimeData:
 	var current_location = location
 	if hangared:
-		current_location = get_base().location
+		current_location = base.location
 		
 	var distance = current_location.distance_to(destination)
 	
@@ -33,22 +39,36 @@ func compute_eta(destination: Vector2) -> DatetimeData:
 	
 	return eta
 
-func get_base() -> BaseData:
-	return Saver.data.bases[base_id]
-
 func move():
 	hangared = false
-	is_standing_by = false
 
-func stands_by():
-	is_standing_by = true
+func parks():
+	print("Ship %s parks in base %s" % [name, base.name])
+	hangared = true
 
 func set_attack(attack_to_set: AttackData):
 	attack = attack_to_set
+	set_destination(attack_to_set)
+
+func get_current_destination():
+	if at_current_destination():
+		return null
+	
+	return get_destination()
+
+func set_destination(destination_to_set: Resource):
+	destination = destination_to_set
 
 func get_destination():
-	if is_standing_by:
-		return null
+	if destination and "location" in destination:
+		return destination
+	return null
 
-	if attack:
-		return attack.location
+func at_destination(destination_to_check: Resource):
+	if "location" in destination_to_check:
+		return abs(location.x - destination_to_check.location.x) < 1 and abs(location.y - destination_to_check.location.y) < 1
+	return false
+
+func at_current_destination():
+	var dest = get_destination()
+	return get_destination() and at_destination(dest)

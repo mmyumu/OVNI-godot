@@ -15,9 +15,9 @@ func build_game_slot():
 		$EmptySlot.visible = false
 		$Slot.visible = true
 		
-		$Slot/MarginContainer/VBoxContainer/Name.text = Saver.get_data(slot_number).get_data_name()
+		$Slot/MarginContainer/VBoxContainer/Name.text = data.get_data_name()
 		
-		var datetime: DatetimeData = Saver.get_data(slot_number).datetime
+		var datetime: DatetimeData = data.datetime
 		$Slot/MarginContainer/VBoxContainer/Date.text = datetime.get_datetime_str()
 	else:
 		$EmptySlot.visible = true

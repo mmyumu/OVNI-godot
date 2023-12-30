@@ -37,11 +37,12 @@ func _process(delta):
 	for mini_icon in $VBoxContainer/MiniIcons.get_children():
 		mini_icon.queue_free()
 	
-	if base and base.ships:
-		for ship in base.ships:
+	if base:
+		for ship in base.get_ships():
 			if ship.hangared:
 				var ship_mini_icon = ship_mini_icon_scene.instantiate()
 				$VBoxContainer/MiniIcons.add_child(ship_mini_icon)
+				break
 
 func _draw():
 	if highlighted:

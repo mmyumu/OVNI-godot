@@ -42,15 +42,18 @@ func get_data(index) -> Data:
 func erase_data(index):
 	if index >= 0 and index < len(slots):
 		var dir = DirAccess.open(root_folder)
+		print("Trying to remove %s" % slots[index])
 		if dir and dir.file_exists(slots[index]):
 			dir.remove(slots[index])
+			print("%s removed" % slots[index])
 
 func save_data_to_filename(data_to_save, filename):
 	var result = ResourceSaver.save(data_to_save, filename)
 	assert(result == OK)
 
 func get_data_from_filename(file_name):
-	if ResourceLoader.exists(file_name):
+	if FileAccess.file_exists(file_name) and ResourceLoader.exists(file_name):
+		print("Loading data from %s" % file_name)
 		var loaded_data = ResourceLoader.load(file_name)
 		if loaded_data is Data:
 			return loaded_data

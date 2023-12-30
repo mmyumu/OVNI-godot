@@ -16,7 +16,8 @@ func _ready():
 	var background_texture: Texture = background_textures[randi() % background_textures.size()]
 	$Level/Background.set_texture(background_texture)
 	
-	var scenario_scene: PackedScene = scenario_scenes[randi() % scenario_scenes.size()]
+	# TODO: get scenario from global infos/attack
+	var scenario_scene: PackedScene = preload("res://shootemup/levels/scenarios/scenario_debug.tscn")
 	var scenario = scenario_scene.instantiate()
 	$Level.set_scenario(scenario)
 	
@@ -94,8 +95,10 @@ func get_spawned_enemies():
 	return spawned_enemies
 
 func stage_completed():
-		$HUD/StageCompletedLabel.show()
-		$Player.invulnerable = true
-		
-		await get_tree().create_timer(2.0).timeout
-		get_tree().change_scene_to_file("res://global/main.tscn")
+	$HUD/StageCompletedLabel.show()
+	$Player.invulnerable = true
+	
+	Global.current_attack.status = AttackData.Status.OVER
+
+	await get_tree().create_timer(2.0).timeout
+	get_tree().change_scene_to_file("res://global/main.tscn")

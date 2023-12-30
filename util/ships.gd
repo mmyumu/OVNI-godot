@@ -1,27 +1,39 @@
 extends Node
 
 
+signal ship_reached_attack(attack: AttackData)
+
 func _process(delta):
+	check_destination()
 	move(delta)
 
+func check_destination():
+	for base in Saver.data.get_bases():
+		for ship in base.get_ships():
+			if ship.attack and ship.attack.status == AttackData.Status.OVER:
+				ship.attack = null
+				ship.set_destination(base)
+
 func move(delta):
-	for base_id in Saver.data.bases:
-		var base: BaseData = Saver.data.bases[base_id]
-		for ship in base.ships:
-			move_ship(ship, delta)
+	for ship in Saver.data.get_ships():
+		move_ship(ship, delta)
 
 func move_ship(ship: ShipData, delta):
-	if not ship.get_destination():
+	if not ship.get_current_destination():
 		return
-		
-	if abs(ship.location.x - ship.get_destination().x) < 1 and abs(ship.location.y - ship.get_destination().y) < 1:
-		print("Ship: reached destination %s at %s" % [ship.get_destination(), Saver.data.datetime.get_datetime_str()])
-		ship.stands_by()
-	else:
-		var final_delta = delta * Datetimer.time_factor * ship.speed
-		ship.location = ship.location.move_toward(ship.get_destination(), final_delta)
 
-		var v = ship.location - ship.get_destination()
+	var final_delta = delta * Datetimer.time_factor * ship.speed
+	ship.location = ship.location.move_toward(ship.get_current_destination().location, final_delta)
+
+	if ship.at_current_destination():
+		print("Ship: reached destination %s at %s" % [ship.destination, Saver.data.datetime.get_datetime_str()])
+		
+		if ship.destination is AttackData:
+			ship_reached_attack.emit(ship.attack)
+		elif ship.destination is BaseData:
+			ship.parks()
+	else:
+		var v = ship.location - ship.get_current_destination().location
 		var angle = v.angle() - PI/2
 
 		# We do not need to use final_delta here because the rotation does not matter on the game, it is just visual

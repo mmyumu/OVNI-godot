@@ -16,16 +16,13 @@ func _process(delta):
 
 func start_attacks():
 	var to_be_deleted = []
-	for attack_planned in Saver.data.mastermind.attacks_planned:
+	for attack_planned in Saver.data.mastermind.get_attacks_planned():
 		if Saver.data.datetime.timestamp > attack_planned.datetime.timestamp:
 			to_be_deleted.append(attack_planned)
 			attack_planned.location = _get_random_earth_position_around_mothership()
+			attack_planned.status = AttackData.Status.ON_GOING
+			attack_spawned.emit(attack_planned)
 			print("Mothership: attack planned at %s now spawns at %s" % [attack_planned.datetime.get_datetime_str(), attack_planned.location])
-	
-	for attack in to_be_deleted:
-		Saver.data.mastermind.attacks_planned.erase(attack)
-		Saver.data.mastermind.attacks_ongoing.append(attack)
-		attack_spawned.emit(attack)
 
 func move(delta):
 	if not Saver.data.mastermind.destination:
@@ -66,9 +63,10 @@ func move(delta):
 
 func _on_day_changed(date: DatetimeData):
 	var attack_planned: AttackData = AttackData.new()
+	attack_planned.status = AttackData.Status.PLANNED
 	attack_planned.name = "Attack %s" % Saver.data.mastermind.get_attack_number()
 	attack_planned.datetime = DatetimeData.new(date.timestamp + rng.randi_range(3600, 86400))
-	Saver.data.mastermind.attacks_planned.append(attack_planned)
+	Saver.data.mastermind.attacks.append(attack_planned)
 	print("Attack planned at %s" % attack_planned.datetime.get_datetime_str())
 
 func _get_random_earth_position():

@@ -28,14 +28,13 @@ func _ready():
 	mouse_pos = to_local(get_global_mouse_position())
 	$Cursor.visible = false
 	
-	for base_id in Saver.data.bases:
-		var base: BaseData = Saver.data.bases[base_id]
+	for base in Saver.data.get_bases():
 		add_base(base)
 		
-		for ship in base.ships:
+		for ship in base.get_ships():
 			add_ship(ship)
 
-	for attack in Saver.data.mastermind.attacks_ongoing:
+	for attack in Saver.data.mastermind.get_attacks_ongoing():
 		add_attack(attack)
 	
 	if $Area2D.overlaps_area($Cursor/Area2D):
@@ -104,15 +103,16 @@ func _on_new_base_dialog_canceled():
 
 func _on_new_base_dialog_confirmed(base_name):
 	var ship: ShipData = ShipData.new()
+	Saver.data.add_ship(ship)
 	ship.name = "Raptor"
 	ship.hangared = true
 	
 	var base: BaseData = BaseData.new()
 	base.name = base_name
 	base.location = Vector2(to_local(last_mouse_pos))
-	base.ships.append(ship)
+	base.add_ship(ship)
 	
-	ship.base_id = base.id
+	ship.base = base
 	ship.location = base.location
 	
 	Saver.data.add_base(base)
@@ -186,7 +186,7 @@ func unhighlight_attack():
 
 func add_ship(ship: ShipData):
 	var ship_icon = ship_icon_scene.instantiate()
-	ship_icon.name = "%s_%s_%s" % [ship_icon.name, ship.get_base().name, ship.name]
+	ship_icon.name = "%s_%s_%s" % [ship_icon.name, ship.base.name, ship.name]
 	ship_icon.set_ship(ship)
 	add_child(ship_icon)
 

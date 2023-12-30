@@ -65,7 +65,7 @@ func _on_quit_pressed():
 	Saver.save_data()
 	get_tree().change_scene_to_file("res://menu.tscn")
 
-func _on_bases_sub_menu_menu_object_pressed(menu_button: MenuObjectButton, base: BaseData, parent_object: Object):
+func _on_bases_sub_menu_menu_object_pressed(menu_button: MenuObjectButton, base: BaseData, _parent_object: Object):
 	Global.current_base = base
 	Global.last_menu_button_path = menu_button.get_path()
 	Global.last_time_factor = Datetimer.time_factor
@@ -78,8 +78,8 @@ func _on_bases_sub_menu_new_base_pressed():
 
 func _on_attacks_sub_menu_menu_object_pressed(menu_button, object, parent_object):
 	hide_all_menus()
-	$EventShipsSubMenu.build()
-	$EventShipsSubMenu.display(object)
+	$EventShipsSubMenu.build(object)
+	$EventShipsSubMenu.display()
 
 func _on_bases_sub_menu_back_pressed():
 	display_root_menu()

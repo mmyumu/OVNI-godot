@@ -15,23 +15,25 @@ signal menu_object_focus_exited(menu_button: MenuObjectButton, object: Object, p
 func _ready():
 	build()
 
-func display(parent_object_to_set: Object = null):
-	parent_object = parent_object_to_set
+func display():
 	show()
 	grab_default_focus()
 
-func get_menu_data() -> Array[MenuDatum]:
+func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 	return []
 
 func grab_default_focus():
-	first_button.grab_focus()
+	if first_button:
+		first_button.grab_focus()
 
-func build():
+func build(parent_object_to_set: Object = null):
+	parent_object = parent_object_to_set
 	var previous_menu_button: Button
 	first_button = $Back
 	
 	var i = 0
-	for datum in self.get_menu_data():
+	for datum in self.get_menu_data(parent_object):
+		var create_child = false
 		var menu_object_button = find_child(datum.button_name, true, false)
 		if not menu_object_button:
 			menu_object_button = menu_object_button_scene.instantiate()
@@ -41,7 +43,14 @@ func build():
 			menu_object_button.menu_object_pressed.connect(_on_menu_object_pressed)
 			menu_object_button.menu_object_focus_entered.connect(_on_menu_object_focus_entered)
 			menu_object_button.menu_object_focus_exited.connect(_on_menu_object_focus_exited)
-		
+			
+			create_child = true
+
+		if datum.font_color:
+			menu_object_button.set("theme_override_colors/font_color", datum.font_color)
+			menu_object_button.set("theme_override_colors/font_focus_color", datum.font_color)
+
+		if create_child:
 			add_child(menu_object_button)
 			move_child(menu_object_button, i + menu_offset)
 

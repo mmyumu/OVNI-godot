@@ -1,6 +1,4 @@
-extends Scenario
-
-var step: float = -1
+extends SteppedScenario
 
 func _ready():
 	super._ready()
@@ -29,13 +27,3 @@ func _process(delta):
 	elif step == 2.5:
 		if $FighterSpawnerTop.is_depleted() and $FighterSpawnerLeft.is_depleted() and $FighterSpawnerRight.is_depleted():
 			scenario_completed.emit()
-	
-func start():
-	set_step(0)
-
-func stop():
-	pass
-
-func set_step(step_number):
-	step = step_number
-	print("Scenario: %s -> set step to %s" % [name, step])

@@ -21,6 +21,7 @@ shadow_size = 3
 shadow_offset = Vector2(3, 3)
 
 [node name="EventInfoPanel" type="Node2D"]
+z_index = 4000
 script = ExtResource("1_2o3pn")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

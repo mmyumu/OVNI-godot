@@ -69,10 +69,9 @@ func is_depleted():
 	return is_over() and len(get_enemies()) == 0
 
 func get_enemies():
-	var valid_enemies = []
+	var valid_enemies: Array[Node] = []
 	for enemy in current_enemies:
 		if is_instance_valid(enemy):
 			valid_enemies.append(enemy)
-		else:
-			current_enemies.erase(enemy)
+	current_enemies = valid_enemies
 	return valid_enemies
