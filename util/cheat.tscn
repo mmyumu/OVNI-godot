@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://deym4jp4t15w1"]
+
+[ext_resource type="Script" path="res://util/cheat.gd" id="1_6nbu0"]
+
+[node name="Cheat" type="Node"]
+process_mode = 3
+script = ExtResource("1_6nbu0")

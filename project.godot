@@ -23,6 +23,7 @@ Global="*res://global.gd"
 Datetimer="*res://util/datetimer.tscn"
 MasterMind="*res://util/mastermind.tscn"
 Ships="*res://util/ships.tscn"
+Cheat="*res://util/cheat.tscn"
 
 [display]
 
