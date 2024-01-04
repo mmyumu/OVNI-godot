@@ -95,12 +95,20 @@ func create_east_wall():
 	$Walls/EastWallCollisionShape2D.set_shape(create_wall(wall_size, size_y))
 	$Walls/EastWallCollisionShape2D.position.x = wall_size + width * grid_step + wall_size/2 + 1
 	$Walls/EastWallCollisionShape2D.position.y = wall_size + height * grid_step / 2
+	
+	$Area2D/EastWallCollisionShape2D.set_shape(create_wall(wall_size, size_y))
+	$Area2D/EastWallCollisionShape2D.position.x = wall_size + width * grid_step + wall_size/2 + 1
+	$Area2D/EastWallCollisionShape2D.position.y = wall_size + height * grid_step / 2
 
 func create_west_wall():
 	var size_y = height * grid_step
 	$Walls/WestWallCollisionShape2D.set_shape(create_wall(wall_size, size_y))
 	$Walls/WestWallCollisionShape2D.position.x = wall_size + -wall_size/2 - 1
 	$Walls/WestWallCollisionShape2D.position.y = wall_size + height * grid_step / 2
+	
+	$Area2D/WestWallCollisionShape2D.set_shape(create_wall(wall_size, size_y))
+	$Area2D/WestWallCollisionShape2D.position.x = wall_size + -wall_size/2 - 1
+	$Area2D/WestWallCollisionShape2D.position.y = wall_size + height * grid_step / 2
 
 func create_north_wall():
 	var size_x = width * grid_step
@@ -108,12 +116,20 @@ func create_north_wall():
 	$Walls/NorthWallCollisionShape2D.position.x = wall_size + width * grid_step / 2
 	$Walls/NorthWallCollisionShape2D.position.y = wall_size + -wall_size/2 - 1
 
+	$Area2D/NorthWallCollisionShape2D.set_shape(create_wall(size_x, wall_size))
+	$Area2D/NorthWallCollisionShape2D.position.x = wall_size + width * grid_step / 2
+	$Area2D/NorthWallCollisionShape2D.position.y = wall_size + -wall_size/2 - 1
+
 func create_south_wall():
 	var size_x = width * grid_step
 	$Walls/SouthWallCollisionShape2D.set_shape(create_wall(size_x, wall_size))
 	$Walls/SouthWallCollisionShape2D.position.x = wall_size + width * grid_step / 2
 	$Walls/SouthWallCollisionShape2D.position.y = wall_size + height * grid_step + wall_size/2 + 1
 
+	$Area2D/SouthWallCollisionShape2D.set_shape(create_wall(size_x, wall_size))
+	$Area2D/SouthWallCollisionShape2D.position.x = wall_size + width * grid_step / 2
+	$Area2D/SouthWallCollisionShape2D.position.y = wall_size + height * grid_step + wall_size/2 + 1
+	
 func create_wall(size_x, size_y):
 	var wall = RectangleShape2D.new()
 	wall.size.x = size_x

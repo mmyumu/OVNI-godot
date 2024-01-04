@@ -67,6 +67,7 @@ func validate_placing(construction: Construction):
 		
 		var construction_data = ConstructionData.new()
 		construction_data.location = Vector2(construction.position.x / grid_step, construction.position.y / grid_step)
+		construction_data.rotation = construction.rotation
 		construction_data.template_type = construction.template_type
 		Global.get_current_base().base_layout.constructions.append(construction_data)
 		Saver.save_data()

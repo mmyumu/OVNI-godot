@@ -6,7 +6,6 @@
 color = Color(0.894118, 0.67451, 0, 1)
 
 [node name="DrawableCollisionPolygon2D" parent="." index="0"]
-position = Vector2(0, 32)
 polygon = PackedVector2Array(-32, -32, -96, -32, -96, -96, 32, -96, 32, -32, 32, 64, -32, 64)
 color = Color(0.894118, 0.67451, 0, 1)
 
@@ -14,5 +13,4 @@ color = Color(0.894118, 0.67451, 0, 1)
 scale = Vector2(1, 1)
 
 [node name="CollisionPolygon2D" parent="Area2D" index="0"]
-position = Vector2(0, 32)
 polygon = PackedVector2Array(-28, -36, -92, -36, -92, -92, 28, -92, 28, 60, -28, 60)

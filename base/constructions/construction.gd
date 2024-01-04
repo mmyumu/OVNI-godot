@@ -21,6 +21,7 @@ var template_type: ConstructionsTemplatesData.Type
 var original_outline_color: Color
 var can_place: bool
 var first
+var last_rotation: float
 
 func _ready():
 	can_place = true
@@ -49,38 +50,46 @@ func set_placing_mode():
 	# Blink/low opacity?
 
 func move_right(grid_step: int):
-	var collision = move_and_collide(Vector2.RIGHT * grid_step, true)
+	var collision = move_and_collide(Vector2.RIGHT * grid_step, true, 0)
 	if collision:
 		collision_highlight()
 	else:
 		position.x += grid_step
 
 func move_left(grid_step: int):
-	var collision = move_and_collide(Vector2.LEFT * grid_step, true)
+	var collision = move_and_collide(Vector2.LEFT * grid_step, true, 0)
 	if collision:
 		collision_highlight()
 	else:
 		position.x -= grid_step
 
 func move_up(grid_step: int):
-	var collision = move_and_collide(Vector2.UP * grid_step, true)
+	var collision = move_and_collide(Vector2.UP * grid_step, true, 0)
 	if collision:
 		collision_highlight()
 	else:
 		position.y -= grid_step
 
 func move_down(grid_step: int):
-	var collision = move_and_collide(Vector2.DOWN * grid_step, true)
+	var collision = move_and_collide(Vector2.DOWN * grid_step, true, 0)
 	if collision:
 		collision_highlight()
 	else:
 		position.y += grid_step
 
 func rotate_right():
-	rotation += 90
+	var initial_rotation = rotation
+	rotation += PI/2
+	var collision = move_and_collide(Vector2.ZERO, true, 0)
+	if collision:
+		rotation = initial_rotation
 
 func rotate_left():
-	rotation -= 90
+	var initial_rotation = rotation
+	rotation -= PI/2
+	var collision = move_and_collide(Vector2.ZERO, true, 0)
+	if collision:
+		rotation = initial_rotation
 
 func collision_highlight():
 	var tween = create_tween()
@@ -104,6 +113,8 @@ func cancel_placing():
 
 
 func _on_area_2d_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if area.is_in_group("wall"):
+		print("area_rid=%s, area=%s, area_shape_index=%s, local_shape_index=%s" % [area_rid, area, area_shape_index, local_shape_index])
 	check_can_place()
 
 

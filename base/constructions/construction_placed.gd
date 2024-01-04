@@ -17,6 +17,7 @@ var construction: Construction
 
 func _ready():
 	position = construction.position
+	rotation = construction.rotation
 	
 	$Area2D/DrawableCollisionPolygon2D.set_polygon(construction.get_collision_polygon().get_polygon())
 	$Area2D/DrawableCollisionPolygon2D.position = construction.get_collision_polygon().position
