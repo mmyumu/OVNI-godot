@@ -16,7 +16,7 @@ class_name Construction extends CharacterBody2D
 		color = value
 		queue_redraw()
 
-@export var construction_type : ConstructionsData.Type
+var template_type: ConstructionsTemplatesData.Type
 
 var original_outline_color: Color
 var can_place: bool
@@ -30,7 +30,7 @@ func _ready():
 	$DrawableCollisionPolygon2D.color = color
 	$DrawableCollisionPolygon2D.outline_color = outline_color
 	$DrawableCollisionPolygon2D.outline_width = outline_width
-	$Area2D/CollisionPolygon2D.set_polygon($DrawableCollisionPolygon2D.get_polygon())
+	#$Area2D/CollisionPolygon2D.set_polygon($DrawableCollisionPolygon2D.get_polygon())
 
 func check_can_place():
 	if len($Area2D.get_overlapping_areas()) > 0:
@@ -75,6 +75,12 @@ func move_down(grid_step: int):
 		collision_highlight()
 	else:
 		position.y += grid_step
+
+func rotate_right():
+	rotation += 90
+
+func rotate_left():
+	rotation -= 90
 
 func collision_highlight():
 	var tween = create_tween()

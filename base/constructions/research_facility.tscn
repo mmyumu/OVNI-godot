@@ -4,7 +4,12 @@
 
 [node name="ResearchFacility" instance=ExtResource("1_ouvbc")]
 color = Color(0.129412, 0.701961, 0.227451, 1)
-construction_type = 0
 
 [node name="DrawableCollisionPolygon2D" parent="." index="0"]
 color = Color(0.129412, 0.701961, 0.227451, 1)
+
+[node name="Area2D" parent="." index="1"]
+scale = Vector2(1, 1)
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PackedVector2Array(-28, -28, 28, -28, 28, 28, -28, 28)

@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://d38erjkct3v6a"]
+
+[ext_resource type="Script" path="res://base/menus/base_menu.gd" id="1_bxi2l"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="2_m5cil"]
+[ext_resource type="PackedScene" uid="uid://cfqdslq1fx3e3" path="res://base/menus/build_sub_menu.tscn" id="3_te5lv"]
+
+[node name="BaseMenu" type="Node2D"]
+script = ExtResource("1_bxi2l")
+
+[node name="RootMenu" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(168, 0)
+
+[node name="Build" type="Button" parent="RootMenu"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../View")
+theme_override_fonts/font = ExtResource("2_m5cil")
+text = "Build"
+
+[node name="View" type="Button" parent="RootMenu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Build")
+focus_neighbor_bottom = NodePath("../Back")
+theme_override_fonts/font = ExtResource("2_m5cil")
+text = "View
+"
+
+[node name="Back" type="Button" parent="RootMenu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../View")
+theme_override_fonts/font = ExtResource("2_m5cil")
+text = "Back"
+
+[node name="BuildSubMenu" parent="." instance=ExtResource("3_te5lv")]
+visible = false
+offset_right = 168.0
+offset_bottom = 27.0
+
+[connection signal="pressed" from="RootMenu/Build" to="." method="_on_build_pressed"]
+[connection signal="pressed" from="RootMenu/View" to="." method="_on_view_pressed"]
+[connection signal="pressed" from="RootMenu/Back" to="." method="_on_back_pressed"]
+[connection signal="back_pressed" from="BuildSubMenu" to="." method="_on_build_sub_menu_back_pressed"]
+[connection signal="menu_object_pressed" from="BuildSubMenu" to="." method="_on_build_sub_menu_menu_object_pressed"]
+
+[editable path="BuildSubMenu"]

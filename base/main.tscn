@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ch7s01w5lmnap" path="res://base/background.tscn" id="1_fhmdp"]
 [ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="4_yc5lt"]
 [ext_resource type="PackedScene" uid="uid://bmso1vmitbyk8" path="res://base/base_layout.tscn" id="5_0x8xb"]
-[ext_resource type="PackedScene" uid="uid://blpyi1fsj88sf" path="res://base/base_menu.tscn" id="5_20fy7"]
+[ext_resource type="PackedScene" uid="uid://d38erjkct3v6a" path="res://base/menus/base_menu.tscn" id="5_xfhtt"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_a23l8")
@@ -22,11 +22,14 @@ text = "Base name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BaseMenu" parent="." instance=ExtResource("5_20fy7")]
-position = Vector2(1105, 110)
-
 [node name="BaseLayout" parent="." instance=ExtResource("5_0x8xb")]
 position = Vector2(551, 360)
 
-[connection signal="construction_selected" from="BaseMenu" to="." method="_on_base_menu_construction_selected"]
+[node name="BaseMenu" parent="." instance=ExtResource("5_xfhtt")]
+position = Vector2(1105, 150)
+
 [connection signal="placing_over" from="BaseLayout" to="." method="_on_base_layout_placing_over"]
+[connection signal="menu_object_pressed" from="BaseMenu/BuildSubMenu" to="." method="_on_build_sub_menu_menu_object_pressed"]
+
+[editable path="BaseMenu"]
+[editable path="BaseMenu/BuildSubMenu"]

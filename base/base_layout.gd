@@ -40,6 +40,10 @@ func _input(event):
 	if is_placing:
 		if event.is_action_pressed("validate"):
 			validate_placing()
+		elif event.is_action_pressed("rotate_right"):
+			construction.rotate_right()
+		elif event.is_action_pressed("rotate_left"):
+			construction.rotate_left()
 		elif event.is_action_pressed("cancel"):
 			construction.cancel_placing()
 			is_placing = false

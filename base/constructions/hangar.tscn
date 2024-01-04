@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxeqhnrafqvqs"]
+
+[ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/constructions/construction.tscn" id="1_i5i3h"]
+
+[node name="Hangar" instance=ExtResource("1_i5i3h")]
+color = Color(0, 0.392157, 0.815686, 1)
+
+[node name="DrawableCollisionPolygon2D" parent="." index="0"]
+position = Vector2(-16, 16)
+polygon = PackedVector2Array(-32, -80, 64, -80, 64, 48, -32, 48)
+color = Color(0, 0.392157, 0.815686, 1)
+
+[node name="Area2D" parent="." index="1"]
+scale = Vector2(1, 1)
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+position = Vector2(-16, 16)
+polygon = PackedVector2Array(-28, -76, 60, -76, 60, 44, -28, 44)

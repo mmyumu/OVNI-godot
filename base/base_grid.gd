@@ -30,11 +30,10 @@ var construction_placed_scene: PackedScene = preload("res://base/constructions/c
 
 func _ready():
 	for construction_data in Global.get_current_base().base_layout.constructions:
-		var construction = ConstructionsData.SCENES[construction_data.type].instantiate()
+		var construction = ConstructionsTemplatesData.SCENES[construction_data.template_type].instantiate()
 		construction.position.x = construction_data.location.x * grid_step
 		construction.position.y = construction_data.location.y * grid_step
 		add_construction(construction)
-
 
 func _draw():
 	draw_grid()
@@ -68,7 +67,7 @@ func validate_placing(construction: Construction):
 		
 		var construction_data = ConstructionData.new()
 		construction_data.location = Vector2(construction.position.x / grid_step, construction.position.y / grid_step)
-		construction_data.type = construction.construction_type
+		construction_data.template_type = construction.template_type
 		Global.get_current_base().base_layout.constructions.append(construction_data)
 		Saver.save_data()
 	else:

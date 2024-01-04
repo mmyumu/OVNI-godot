@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfqdslq1fx3e3"]
+
+[ext_resource type="PackedScene" uid="uid://bub7i462o7af5" path="res://util/sub_menu.tscn" id="1_nexlj"]
+[ext_resource type="Script" path="res://base/menus/build_sub_menu.gd" id="2_1p1dn"]
+
+[node name="BuildSubMenu" instance=ExtResource("1_nexlj")]
+script = ExtResource("2_1p1dn")

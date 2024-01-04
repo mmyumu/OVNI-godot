@@ -45,6 +45,8 @@ func build(parent_object_to_set: Object = null):
 			menu_object_button.menu_object_focus_exited.connect(_on_menu_object_focus_exited)
 			
 			create_child = true
+		
+		menu_object_button.disabled = datum.disabled
 
 		if datum.font_color:
 			menu_object_button.set("theme_override_colors/font_color", datum.font_color)

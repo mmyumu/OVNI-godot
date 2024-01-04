@@ -6,6 +6,8 @@ class_name Data extends Resource
 @export var mastermind: MasterMindData = MasterMindData.new()
 @export var earth: EarthData = EarthData.new()
 @export var ships: Dictionary = {}
+@export var money: int = 500000
+@export var construction_templates: ConstructionsTemplatesData = ConstructionsTemplatesData.new()
 
 func get_data_name():
 	if len(bases) > 0:

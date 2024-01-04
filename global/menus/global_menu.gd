@@ -1,6 +1,4 @@
-extends Node2D
-
-var last_focus_control
+class_name GlobalMenu extends Menu
 
 signal new_base_selected()
 
@@ -21,29 +19,7 @@ func _input(event):
 		elif $EventShipsSubMenu.visible == true:
 			display_attacks_menu()
 
-func disable():
-	for node in find_children("*", "Button", true, false):
-		node.disabled = true
-		node.set_focus_mode(0)
-	set_process_input(false)
-
-func enable():
-	for node in find_children("*", "Button", true, false):
-		node.disabled = false
-		node.set_focus_mode(2)
-	last_focus_control.grab_focus()
-	set_process_input(true)
-
-func hide_all_menus():
-	$RootMenu.hide()
-	
-	var sub_menus = find_children("*", "SubMenu", false, false)
-	for sub_menu in sub_menus:
-		sub_menu.hide()
-
-func display_root_menu():
-	hide_all_menus()
-	$RootMenu.show()
+func grab_default_focus():
 	$RootMenu/Bases.grab_focus()
 
 func _on_bases_pressed():

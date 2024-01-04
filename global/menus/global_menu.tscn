@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_us1w5"]
 [ext_resource type="PackedScene" uid="uid://byiycmicju21f" path="res://global/menus/bases_sub_menu.tscn" id="3_w8hd1"]
 [ext_resource type="PackedScene" uid="uid://24u8euxexgx3" path="res://global/menus/attacks_sub_menu.tscn" id="5_e322b"]
-[ext_resource type="PackedScene" uid="uid://cke36s5sb1n32" path="res://global/menus/event_ships_sub_menu.tscn" id="5_p2g7d"]
+[ext_resource type="PackedScene" uid="uid://cke36s5sb1n32" path="res://global/menus/attack_ships_sub_menu.tscn" id="5_p2g7d"]
 
 [node name="GlobalMenu" type="Node2D"]
 script = ExtResource("1_20pts")
