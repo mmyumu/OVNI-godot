@@ -21,18 +21,19 @@ var event_info_panel: EventInfoPanel
 signal base_creation_over()
 signal attack_spawned(attack: AttackData)
 
+func _init():
+	for base in Saver.data.get_bases():
+		add_base(base)
+		
+		for ship in base.get_ships():
+			add_ship(ship)
+
 func _ready():
 	MasterMind.attack_spawned.connect(_on_attack_spawned)
 	
 	$NewBaseDialog.close()
 	mouse_pos = to_local(get_global_mouse_position())
 	$Cursor.visible = false
-	
-	for base in Saver.data.get_bases():
-		add_base(base)
-		
-		for ship in base.get_ships():
-			add_ship(ship)
 
 	for attack in Saver.data.mastermind.get_attacks_ongoing():
 		add_attack(attack)

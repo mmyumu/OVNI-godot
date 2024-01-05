@@ -9,7 +9,16 @@ func _ready():
 	$CanvasLayer/VBoxContainer/HBoxContainer/CancelButton.grab_focus()
 
 func _process(delta):
-	$CanvasLayer/VBoxContainer/HBoxContainer/OkButton.disabled = !is_valid()
+	var is_valid = is_valid()
+	$CanvasLayer/VBoxContainer/HBoxContainer/OkButton.disabled = !is_valid
+
+	if is_valid:
+		var construction_template: ConstructionTemplateData = Saver.data.construction_templates.templates[construction.template_type]
+		var new_money: int = Saver.data.money - construction_template.cost
+		$CanvasLayer/VBoxContainer/InfoLabel.text = "Money: %s -> %s" % [Saver.data.money, new_money]
+	else:
+		$CanvasLayer/VBoxContainer/InfoLabel.text = ""
+
 
 func _unhandled_input(event):
 	if event.is_action_pressed("confirm") and is_valid():
@@ -54,6 +63,6 @@ func is_valid():
 	if not construction.check_can_place():
 		$CanvasLayer/VBoxContainer/ErrorLabel.text = "Invalid placement"
 		return false
-				
+
 	$CanvasLayer/VBoxContainer/ErrorLabel.text = ""
 	return true

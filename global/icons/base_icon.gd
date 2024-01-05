@@ -18,6 +18,7 @@ var ship_mini_icon_scene: PackedScene = preload("res://global/icons/ship_mini_ic
 		queue_redraw()
 
 var base: BaseData
+var first_frame: bool = true
 
 var highlighted: bool:
 	set(value):
@@ -34,9 +35,14 @@ func set_base(base_to_set: BaseData):
 
 
 func _process(delta):
+	# Redraw on second frame since some info can miss on first frame (such as Sprite position)
+	if first_frame == true:
+		queue_redraw() 
+		first_frame = false
+
 	for mini_icon in $VBoxContainer/MiniIcons.get_children():
 		mini_icon.queue_free()
-	
+
 	if base:
 		for ship in base.get_ships():
 			if ship.hangared:
@@ -46,23 +52,29 @@ func _process(delta):
 
 func _draw():
 	if highlighted:
-		var width = $VBoxContainer/TextureRect.texture.get_width()
-		var height = $VBoxContainer/TextureRect.texture.get_height()
-		var sprite_position = $VBoxContainer.position + $VBoxContainer/TextureRect.position
-
-		var top_left = Vector2(sprite_position.x - padding, sprite_position.y - padding)
-		var top_right = Vector2(sprite_position.x + width + padding, sprite_position.y - padding)
-		var bottom_left = Vector2(sprite_position.x - padding, sprite_position.y + height + padding)
-		var bottom_right = Vector2(sprite_position.x + width + padding, sprite_position.y + height + padding)
-
-		draw_line(top_left, top_right, color, thickness)
-		draw_line(top_right, bottom_right, color, thickness)
-		draw_line(bottom_right, bottom_left, color, thickness)
-		draw_line(bottom_left, top_left, color, thickness)
-
-		$VBoxContainer/Label.set("theme_override_colors/font_color", color)
+		draw_highlight()
 	else:
 		$VBoxContainer/Label.set("theme_override_colors/font_color", Color.WHITE)
+
+func draw_highlight():
+	var width = $VBoxContainer/TextureRect.texture.get_width()
+	var height = $VBoxContainer/TextureRect.texture.get_height()
+	var sprite_position = $VBoxContainer.position + $VBoxContainer/TextureRect.position
+	
+	print("$VBoxContainer.position=%s, $VBoxContainer/TextureRect.position=%s" % [$VBoxContainer.position, $VBoxContainer/TextureRect.position])
+	print("global $VBoxContainer/TextureRect.position=%s" % to_global($VBoxContainer/TextureRect.position))
+
+	var top_left = Vector2(sprite_position.x - padding, sprite_position.y - padding)
+	var top_right = Vector2(sprite_position.x + width + padding, sprite_position.y - padding)
+	var bottom_left = Vector2(sprite_position.x - padding, sprite_position.y + height + padding)
+	var bottom_right = Vector2(sprite_position.x + width + padding, sprite_position.y + height + padding)
+
+	draw_line(top_left, top_right, color, thickness)
+	draw_line(top_right, bottom_right, color, thickness)
+	draw_line(bottom_right, bottom_left, color, thickness)
+	draw_line(bottom_left, top_left, color, thickness)
+
+	$VBoxContainer/Label.set("theme_override_colors/font_color", color)
 
 func blink():
 	if highlighted:

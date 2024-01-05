@@ -141,4 +141,6 @@ func _on_placing_input_timer_timeout():
 func _on_place_building_dialog_confirmed():
 	$BaseGrid.validate_placing(construction)
 	construction.validate_placing()
+	var construction_template = Saver.data.construction_templates.templates[construction.template_type]
+	Money.spend(construction_template.cost)
 	get_tree().paused = false
