@@ -14,9 +14,8 @@ func _on_base_menu_construction_selected(construction_scene):
 func _on_base_layout_placing_over():
 	$BaseMenu.enable()
 
-
 func _on_build_sub_menu_menu_object_pressed(menu_button, construction_template: ConstructionTemplateData, parent_object):
-	var construction = ConstructionsTemplatesData.SCENES[construction_template.type].instantiate()
+	var construction = Saver.data.construction_templates.scenes[construction_template.type].instantiate()
 	construction.template_type = construction_template.type
 	construction.set_placing_mode()
 	$BaseLayout.set_placing(construction)

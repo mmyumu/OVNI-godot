@@ -10,9 +10,9 @@ func _process(delta):
 	$CanvasLayer/VBoxContainer/HBoxContainer/OkButton.disabled = !is_valid_base_name()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("validate") and is_valid_base_name():
+	if event.is_action_pressed("confirm") and is_valid_base_name():
 		confirm()
-	elif event.is_action_pressed("cancel"):
+	if event.is_action_pressed("cancel"):
 		cancel()
 
 func _on_close_requested():

@@ -15,9 +15,9 @@ var templates = {
 	Type.HOSPITAL: hospital,
 }
 
-const SCENES = {
-	Type.HANGAR: preload("res://base/constructions/hangar.tscn"),
-	Type.RESEARCH: preload("res://base/constructions/research_facility.tscn"),
-	Type.ARMORY: preload("res://base/constructions/armory.tscn"),
-	Type.HOSPITAL: preload("res://base/constructions/hospital.tscn")
+var scenes = {
+	Type.HANGAR: load("res://base/constructions/hangar.tscn"),
+	Type.RESEARCH: load("res://base/constructions/research_facility.tscn"),
+	Type.ARMORY: load("res://base/constructions/armory.tscn"),
+	Type.HOSPITAL: load("res://base/constructions/hospital.tscn")
 }

@@ -1,31 +1,32 @@
-[gd_scene load_steps=12 format=3 uid="uid://bmso1vmitbyk8"]
+[gd_scene load_steps=13 format=3 uid="uid://bmso1vmitbyk8"]
 
 [ext_resource type="Texture2D" uid="uid://bk5lsgsplm1hx" path="res://art/base_background.png" id="1_iu70q"]
 [ext_resource type="Script" path="res://base/base_layout.gd" id="1_rtkc2"]
 [ext_resource type="PackedScene" uid="uid://bkkdwm35hv0vv" path="res://base/base_grid.tscn" id="2_ccvif"]
+[ext_resource type="PackedScene" uid="uid://bshbcnmdds2r2" path="res://base/place_building_dialog.tscn" id="4_rpw0b"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpetv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ur4i3"]
 size = Vector2(32, 480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1gcb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ddsa"]
 size = Vector2(32, 480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2sc6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldvrf"]
 size = Vector2(640, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5a8li"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvui6"]
 size = Vector2(640, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlysc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nsait"]
 size = Vector2(32, 480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4jbk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcb07"]
 size = Vector2(32, 480)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0snx2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ioec"]
 size = Vector2(640, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3a8w"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5xda"]
 size = Vector2(640, 32)
 
 [node name="BaseLayout" type="Sprite2D"]
@@ -44,37 +45,40 @@ position = Vector2(-352, -272)
 
 [node name="EastWallCollisionShape2D" type="CollisionShape2D" parent="Walls" groups=["wall"]]
 position = Vector2(689, 272)
-shape = SubResource("RectangleShape2D_hpetv")
+shape = SubResource("RectangleShape2D_ur4i3")
 
 [node name="WestWallCollisionShape2D" type="CollisionShape2D" parent="Walls" groups=["wall"]]
 position = Vector2(15, 272)
-shape = SubResource("RectangleShape2D_k1gcb")
+shape = SubResource("RectangleShape2D_2ddsa")
 
 [node name="NorthWallCollisionShape2D" type="CollisionShape2D" parent="Walls" groups=["wall"]]
 position = Vector2(352, 15)
-shape = SubResource("RectangleShape2D_o2sc6")
+shape = SubResource("RectangleShape2D_ldvrf")
 
 [node name="SouthWallCollisionShape2D" type="CollisionShape2D" parent="Walls" groups=["wall"]]
 position = Vector2(352, 529)
-shape = SubResource("RectangleShape2D_5a8li")
+shape = SubResource("RectangleShape2D_mvui6")
 
 [node name="Area2D" type="Area2D" parent="." groups=["wall"]]
 position = Vector2(-352, -272)
 
 [node name="EastWallCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(689, 272)
-shape = SubResource("RectangleShape2D_xlysc")
+shape = SubResource("RectangleShape2D_nsait")
 
 [node name="WestWallCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(15, 272)
-shape = SubResource("RectangleShape2D_m4jbk")
+shape = SubResource("RectangleShape2D_fcb07")
 
 [node name="NorthWallCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(352, 15)
-shape = SubResource("RectangleShape2D_0snx2")
+shape = SubResource("RectangleShape2D_3ioec")
 
 [node name="SouthWallCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(352, 529)
-shape = SubResource("RectangleShape2D_m3a8w")
+shape = SubResource("RectangleShape2D_u5xda")
+
+[node name="PlaceBuildingDialog" parent="." instance=ExtResource("4_rpw0b")]
 
 [connection signal="timeout" from="PlacingInputTimer" to="." method="_on_placing_input_timer_timeout"]
+[connection signal="confirmed" from="PlaceBuildingDialog" to="." method="_on_place_building_dialog_confirmed"]

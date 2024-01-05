@@ -17,6 +17,8 @@ signal placing_over()
 
 
 func _ready():
+	$PlaceBuildingDialog.close()
+	
 	width = $BaseGrid.width
 	height = $BaseGrid.height
 	grid_step = $BaseGrid.grid_step
@@ -71,8 +73,10 @@ func _placing_input():
 				lock_placing_input()
 
 func validate_placing():
-	$BaseGrid.validate_placing(construction)
-	construction.validate_placing()
+	if construction.check_can_place():
+		$PlaceBuildingDialog.open(construction)
+	else:
+		construction.collision_highlight()
 
 func create_map(w, h):
 	var map = []
@@ -149,3 +153,8 @@ func lock_placing_input():
 
 func _on_placing_input_timer_timeout():
 	can_use_placing_input = true
+
+func _on_place_building_dialog_confirmed():
+	$BaseGrid.validate_placing(construction)
+	construction.validate_placing()
+	get_tree().paused = false
