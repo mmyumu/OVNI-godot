@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0xxd1obrbyee"]
+[gd_scene load_steps=7 format=3 uid="uid://b0xxd1obrbyee"]
 
 [ext_resource type="Script" path="res://global/main.gd" id="1_2l2y7"]
 [ext_resource type="PackedScene" uid="uid://ch7s01w5lmnap" path="res://base/background.tscn" id="1_s62fp"]
 [ext_resource type="PackedScene" uid="uid://cvxq13weiv5vs" path="res://global/menus/global_menu.tscn" id="3_a6hb2"]
 [ext_resource type="PackedScene" uid="uid://bica1ulaw40un" path="res://global/earth_layout.tscn" id="4_pjtn1"]
 [ext_resource type="PackedScene" uid="uid://bwrmmci14rhu6" path="res://global/clock.tscn" id="5_ioyox"]
+[ext_resource type="PackedScene" uid="uid://b32brk5tr4td1" path="res://global/global_infos.tscn" id="6_jm1ub"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_2l2y7")
@@ -31,6 +32,9 @@ focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
 
 [node name="x10000Button" parent="Clock/VSplitContainer/ButtonsContainer" index="2"]
 focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
+
+[node name="GlobalInfos" parent="." instance=ExtResource("6_jm1ub")]
+position = Vector2(1105, 80)
 
 [connection signal="new_base_selected" from="GlobalMenu" to="." method="_on_global_menu_new_base_selected"]
 [connection signal="menu_object_focus_entered" from="GlobalMenu/BasesSubMenu" to="." method="_on_bases_sub_menu_menu_object_focus_entered"]

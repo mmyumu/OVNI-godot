@@ -50,6 +50,10 @@ func is_valid():
 	if Saver.data.money < construction_template.cost:
 		$CanvasLayer/VBoxContainer/ErrorLabel.text = "Not enough money: %s required" % construction_template.cost
 		return false
-		
+	
+	if not construction.check_can_place():
+		$CanvasLayer/VBoxContainer/ErrorLabel.text = "Invalid placement"
+		return false
+				
 	$CanvasLayer/VBoxContainer/ErrorLabel.text = ""
 	return true
