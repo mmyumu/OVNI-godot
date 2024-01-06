@@ -10,8 +10,8 @@ var is_creating_new_base: bool = false
 var mouse_pos
 var last_mouse_pos
 var valid_base_location: bool = false
-var highlighted_base: BaseData
-var highlighted_attack: AttackData
+var highlighted_base: Base
+var highlighted_attack: Attack
 
 var base_icons: Array[BaseIcon] = []
 var attack_icons: Array[AttackIcon] = []
@@ -19,7 +19,7 @@ var event_info_panel: EventInfoPanel
 
 
 signal base_creation_over()
-signal attack_spawned(attack: AttackData)
+signal attack_spawned(attack: Attack)
 
 func _init():
 	for base in Saver.data.get_bases():
@@ -29,7 +29,7 @@ func _init():
 			add_ship(ship)
 
 func _ready():
-	MasterMind.attack_spawned.connect(_on_attack_spawned)
+	MasterMindIntel.attack_spawned.connect(_on_attack_spawned)
 	
 	$NewBaseDialog.close()
 	mouse_pos = to_local(get_global_mouse_position())
@@ -103,12 +103,12 @@ func _on_new_base_dialog_canceled():
 	dialog_closed()
 
 func _on_new_base_dialog_confirmed(base_name):
-	var ship: ShipData = ShipData.new()
+	var ship: Ship = Ship.new()
 	Saver.data.add_ship(ship)
 	ship.name = "Raptor"
 	ship.hangared = true
 	
-	var base: BaseData = BaseData.new()
+	var base: Base = Base.new()
 	base.name = base_name
 	base.location = Vector2(to_local(last_mouse_pos))
 	base.add_ship(ship)
@@ -125,7 +125,7 @@ func _on_new_base_dialog_confirmed(base_name):
 	add_base(base)
 	add_ship(ship)
 
-func add_base(base: BaseData):
+func add_base(base: Base):
 	var base_icon = base_icon_scene.instantiate()
 	base_icon.name = "%s_%s" % [base_icon.name, base.name]
 	base_icon.set_base(base)
@@ -137,7 +137,7 @@ func add_base(base: BaseData):
 	else:
 		base_icon.highlighted = false
 
-func highlight_base(base: BaseData):
+func highlight_base(base: Base):
 	highlighted_base = base
 	for base_icon in base_icons:
 		if base_icon.base.name == base.name:
@@ -157,11 +157,11 @@ func _on_area_2d_mouse_exited():
 	$Cursor.set_invalid()
 	valid_base_location = false
 
-func _on_attack_spawned(attack: AttackData):
+func _on_attack_spawned(attack: Attack):
 	add_attack(attack)
 	attack_spawned.emit(attack)
 
-func add_attack(attack: AttackData):
+func add_attack(attack: Attack):
 	var attack_icon = attack_icon_scene.instantiate()
 	attack_icon.name = "%s_%s" % [attack_icon.name, attack.name]
 	attack_icon.set_attack(attack)
@@ -173,7 +173,7 @@ func add_attack(attack: AttackData):
 	else:
 		attack_icon.highlighted = false
 
-func highlight_attack(attack: AttackData):
+func highlight_attack(attack: Attack):
 	highlighted_attack = attack
 	for attack_icon in attack_icons:
 		if attack_icon.attack.name == attack.name:
@@ -185,19 +185,19 @@ func unhighlight_attack():
 	for attack_icon in attack_icons:
 		attack_icon.highlighted = false
 
-func add_ship(ship: ShipData):
+func add_ship(ship: Ship):
 	var ship_icon = ship_icon_scene.instantiate()
 	ship_icon.name = "%s_%s_%s" % [ship_icon.name, ship.base.name, ship.name]
 	ship_icon.set_ship(ship)
 	add_child(ship_icon)
 
-func show_event_info(ship: ShipData, attack: AttackData):
+func show_event_info(ship: Ship, attack: Attack):
 	event_info_panel = event_info_panel_scene.instantiate()
 	event_info_panel.set_data(ship, attack)
 	event_info_panel.position.x = attack.location.x + 25
 	event_info_panel.position.y = attack.location.y - 30
 	add_child(event_info_panel)
 
-func hide_event_info(ship: ShipData, attack: AttackData):
+func hide_event_info(ship: Ship, attack: Attack):
 	if event_info_panel:
 		event_info_panel.queue_free()

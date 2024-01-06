@@ -1,7 +1,7 @@
 extends Node
 
 
-signal ship_reached_attack(attack: AttackData)
+signal ship_reached_attack(attack: Attack)
 
 func _process(delta):
 	check_destination()
@@ -10,7 +10,7 @@ func _process(delta):
 func check_destination():
 	for base in Saver.data.get_bases():
 		for ship in base.get_ships():
-			if ship.attack and ship.attack.status == AttackData.Status.OVER:
+			if ship.attack and ship.attack.status == Attack.Status.OVER:
 				ship.attack = null
 				ship.set_destination(base)
 
@@ -18,7 +18,7 @@ func move(delta):
 	for ship in Saver.data.get_ships():
 		move_ship(ship, delta)
 
-func move_ship(ship: ShipData, delta):
+func move_ship(ship: Ship, delta):
 	if not ship.get_current_destination():
 		return
 
@@ -28,9 +28,9 @@ func move_ship(ship: ShipData, delta):
 	if ship.at_current_destination():
 		print("Ship: reached destination %s at %s" % [ship.destination, Saver.data.datetime.get_datetime_str()])
 		
-		if ship.destination is AttackData:
+		if ship.destination is Attack:
 			ship_reached_attack.emit(ship.attack)
-		elif ship.destination is BaseData:
+		elif ship.destination is Base:
 			ship.parks()
 	else:
 		var v = ship.location - ship.get_current_destination().location

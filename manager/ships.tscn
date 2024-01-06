@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://manager/ships.gd" id="1_x888x"]
 
-[node name="Ships" type="Node"]
+[node name="ShipsManager" type="Node"]
 script = ExtResource("1_x888x")

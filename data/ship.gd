@@ -1,4 +1,4 @@
-class_name ShipData extends Resource
+class_name Ship extends Resource
 
 const uuid_util = preload('res://addons/uuid/uuid.gd')
 
@@ -6,16 +6,16 @@ const uuid_util = preload('res://addons/uuid/uuid.gd')
 @export var name: String = "Placeholder"
 @export var hangared: bool = true
 @export var location: Vector2 = Vector2.ZERO
-@export var attack: AttackData
+@export var attack: Attack
 @export var rotation: float = 0.
-@export var base: BaseData
+@export var base: Base
 @export var speed: float = 0.05
 @export var destination: Resource
 
 func _init():
 	id = uuid_util.v4()
 
-func compute_eta(destination: Vector2) -> DatetimeData:
+func compute_eta(destination: Vector2) -> Datetime:
 	var current_location = location
 	if hangared:
 		current_location = base.location
@@ -31,11 +31,11 @@ func compute_eta(destination: Vector2) -> DatetimeData:
 	
 	var eta
 	if distance_left < distance:
-		eta = DatetimeData.new(Saver.data.datetime.timestamp + (distance_left / speed))
+		eta = Datetime.new(Saver.data.datetime.timestamp + (distance_left / speed))
 	elif distance_right < distance:
-		eta = DatetimeData.new(Saver.data.datetime.timestamp + (distance_right / speed))
+		eta = Datetime.new(Saver.data.datetime.timestamp + (distance_right / speed))
 	else:
-		eta = DatetimeData.new(Saver.data.datetime.timestamp + (distance / speed))
+		eta = Datetime.new(Saver.data.datetime.timestamp + (distance / speed))
 	
 	return eta
 
@@ -46,7 +46,7 @@ func parks():
 	print("Ship %s parks in base %s" % [name, base.name])
 	hangared = true
 
-func set_attack(attack_to_set: AttackData):
+func set_attack(attack_to_set: Attack):
 	attack = attack_to_set
 	set_destination(attack_to_set)
 

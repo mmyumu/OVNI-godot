@@ -5,7 +5,7 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
-signal attack_spawned(attack_spawned: AttackData)
+signal attack_spawned(attack_spawned: Attack)
 
 func _ready():
 	Datetimer.day_changed.connect(_on_day_changed)
@@ -20,7 +20,7 @@ func start_attacks():
 		if Saver.data.datetime.timestamp > attack_planned.datetime.timestamp:
 			to_be_deleted.append(attack_planned)
 			attack_planned.location = _get_random_earth_position_around_mothership()
-			attack_planned.status = AttackData.Status.ON_GOING
+			attack_planned.status = Attack.Status.ON_GOING
 			attack_spawned.emit(attack_planned)
 			print("Mothership: attack planned at %s now spawns at %s" % [attack_planned.datetime.get_datetime_str(), attack_planned.location])
 
@@ -36,7 +36,7 @@ func move(delta):
 		
 		var distance = Saver.data.mastermind.location.distance_to(Saver.data.mastermind.destination)
 		
-		var eta = DatetimeData.new(Saver.data.datetime.timestamp + (distance / speed))
+		var eta = Datetime.new(Saver.data.datetime.timestamp + (distance / speed))
 		print("Mothership: new destination %s: ETA=%s" % [Saver.data.mastermind.destination, eta.get_datetime_str()])
 	
 	var final_delta = delta * Datetimer.time_factor * speed
@@ -61,11 +61,11 @@ func move(delta):
 	elif Saver.data.mastermind.location.x > Saver.data.earth.width / 2:
 		Saver.data.mastermind.location.x = -(Saver.data.earth.width /  2)
 
-func _on_day_changed(date: DatetimeData):
-	var attack_planned: AttackData = AttackData.new()
-	attack_planned.status = AttackData.Status.PLANNED
+func _on_day_changed(date: Datetime):
+	var attack_planned: Attack = Attack.new()
+	attack_planned.status = Attack.Status.PLANNED
 	attack_planned.name = "Attack %s" % Saver.data.mastermind.get_attack_number()
-	attack_planned.datetime = DatetimeData.new(date.timestamp + rng.randi_range(3600, 86400))
+	attack_planned.datetime = Datetime.new(date.timestamp + rng.randi_range(3600, 86400))
 	Saver.data.mastermind.attacks.append(attack_planned)
 	print("Attack planned at %s" % attack_planned.datetime.get_datetime_str())
 

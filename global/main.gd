@@ -15,31 +15,31 @@ func _on_earth_layout_base_creation_over():
 	$GlobalMenu/BasesSubMenu.build()
 	$GlobalMenu.enable()
 
-func _on_day_changed(date: DatetimeData):
+func _on_day_changed(date: Datetime):
 	Saver.save_data()
 
-func _on_earth_layout_attack_spawned(attack: AttackData):
+func _on_earth_layout_attack_spawned(attack: Attack):
 	$GlobalMenu/AttacksSubMenu.build()
 
-func _on_bases_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, base: BaseData, parent_object: Object):
+func _on_bases_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, base: Base, parent_object: Object):
 	$EarthLayout.highlight_base(base)
 
-func _on_bases_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, object: BaseData, parent_object: Object):
+func _on_bases_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, object: Base, parent_object: Object):
 	$EarthLayout.unhighlight_base()
 
-func _on_attacks_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, attack: AttackData, parent_object: Object):
+func _on_attacks_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, attack: Attack, parent_object: Object):
 	$EarthLayout.unhighlight_attack()
 
-func _on_attacks_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, attack: AttackData, parent_object: Object):
+func _on_attacks_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, attack: Attack, parent_object: Object):
 	$EarthLayout.highlight_attack(attack)
 
-func _on_event_ships_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, ship: ShipData, attack: AttackData):
+func _on_event_ships_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, ship: Ship, attack: Attack):
 	$EarthLayout.show_event_info(ship, attack)
 
-func _on_event_ships_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, ship: ShipData, attack: AttackData):
+func _on_event_ships_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, ship: Ship, attack: Attack):
 	$EarthLayout.hide_event_info(ship, attack)
 
-func _on_event_ships_sub_menu_menu_object_pressed(menu_button, ship: ShipData, attack: AttackData):
+func _on_event_ships_sub_menu_menu_object_pressed(menu_button, ship: Ship, attack: Attack):
 	if ship.at_destination(attack):
 		Global.last_time_factor = Datetimer.time_factor
 		Datetimer.time_factor = 1.

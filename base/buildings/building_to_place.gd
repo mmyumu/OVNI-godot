@@ -1,5 +1,5 @@
 @tool
-class_name Building extends CharacterBody2D
+class_name BuildingToPlace extends CharacterBody2D
 
 @export var outline_color: Color = Color("db996a"):
 	set(value):
@@ -16,11 +16,11 @@ class_name Building extends CharacterBody2D
 		color = value
 		queue_redraw()
 
-var template_type: BuildingTemplatesData.Type
+var template_type: BuildingTemplates.Type
 
 var original_outline_color: Color
 var can_place: bool
-var first
+var first: bool
 var last_rotation: float
 
 func _ready():

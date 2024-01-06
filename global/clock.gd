@@ -1,7 +1,7 @@
 extends Node2D
 
 func _process(delta):
-	var datetime: DatetimeData = Saver.data.datetime
+	var datetime: Datetime = Saver.data.datetime
 	$VSplitContainer/TimerContainer/DateLabel.text = datetime.get_date_str()
 	$VSplitContainer/TimerContainer/TimeLabel.text = datetime.get_time_str()
 

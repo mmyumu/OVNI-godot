@@ -1,4 +1,4 @@
-class_name DatetimeData extends Resource
+class_name Datetime extends Resource
 
 @export var timestamp: float = Time.get_unix_time_from_datetime_dict(Dictionary({year=2024, month=1, day=1, hour=0, minute=0, second=0})):
 	set(value):
@@ -18,9 +18,9 @@ func _init(timestamp_to_set: float = -1):
 	timestamp = timestamp_to_set
 
 func spent(time_spent):
-	var previous_date: DatetimeData = DatetimeData.new(timestamp)
+	var previous_date: Datetime = Datetime.new(timestamp)
 	timestamp += time_spent
-	return [previous_date, DatetimeData.new(timestamp)]
+	return [previous_date, Datetime.new(timestamp)]
 
 func _update():
 	var datetime = _timestamp_to_date(timestamp)
@@ -31,7 +31,7 @@ func _update():
 	minute = datetime[4]
 	second = datetime[5]
 
-func changed_day(other_date: DatetimeData):
+func changed_day(other_date: Datetime):
 	return other_date != null and (year != other_date.year or month != other_date.month or day != other_date.day)
 
 func get_date_str():

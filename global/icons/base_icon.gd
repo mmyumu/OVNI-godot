@@ -17,7 +17,7 @@ var ship_mini_icon_scene: PackedScene = preload("res://global/icons/ship_mini_ic
 		padding = value
 		queue_redraw()
 
-var base: BaseData
+var base: Base
 var first_frame: bool = true
 
 var highlighted: bool:
@@ -28,7 +28,7 @@ var highlighted: bool:
 
 var tween: Tween
 
-func set_base(base_to_set: BaseData):
+func set_base(base_to_set: Base):
 	base = base_to_set
 	$VBoxContainer/Label.text = base.name
 	position = base.location
@@ -61,9 +61,6 @@ func draw_highlight():
 	var height = $VBoxContainer/TextureRect.texture.get_height()
 	var sprite_position = $VBoxContainer.position + $VBoxContainer/TextureRect.position
 	
-	print("$VBoxContainer.position=%s, $VBoxContainer/TextureRect.position=%s" % [$VBoxContainer.position, $VBoxContainer/TextureRect.position])
-	print("global $VBoxContainer/TextureRect.position=%s" % to_global($VBoxContainer/TextureRect.position))
-
 	var top_left = Vector2(sprite_position.x - padding, sprite_position.y - padding)
 	var top_right = Vector2(sprite_position.x + width + padding, sprite_position.y - padding)
 	var bottom_left = Vector2(sprite_position.x - padding, sprite_position.y + height + padding)

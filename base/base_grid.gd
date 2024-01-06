@@ -29,12 +29,12 @@ extends Node2D
 var building_placed_scene: PackedScene = preload("res://base/buildings/building_placed.tscn")
 
 func _ready():
-	for building_data in Global.get_current_base().base_layout.buildings:
-		var building = Saver.data.building_templates.scenes[building_data.template_type].instantiate()
-		building.position.x = building_data.location.x * grid_step
-		building.position.y = building_data.location.y * grid_step
-		building.rotation = building_data.rotation
-		add_building(building)
+	for building in Global.get_current_base().base_layout.buildings:
+		var building_to_place = Saver.data.building_templates.scenes[building.template_type].instantiate()
+		building_to_place.position.x = building.location.x * grid_step
+		building_to_place.position.y = building.location.y * grid_step
+		building_to_place.rotation = building.rotation
+		add_building(building_to_place)
 
 func _draw():
 	draw_grid()
@@ -57,23 +57,24 @@ func get_width():
 func get_height():
 	return height * grid_step
 
-func set_placing(building_to_place: Building):
+func set_placing(building_to_place: BuildingToPlace):
 	building_to_place.position.x = int(width / 2) * grid_step
 	building_to_place.position.y = int(height / 2) * grid_step
 	add_child(building_to_place)
 
-func validate_placing(building: Building):
-	add_building(building)
+func validate_placing(building_to_place: BuildingToPlace):
+	add_building(building_to_place)
 	
-	var building_data = BuildingData.new()
-	building_data.location = Vector2(building.position.x / grid_step, building.position.y / grid_step)
-	building_data.rotation = building.rotation
-	building_data.template_type = building.template_type
-	Global.get_current_base().base_layout.buildings.append(building_data)
+	var building = Building.new()
+	building.location = Vector2(building_to_place.position.x / grid_step, building_to_place.position.y / grid_step)
+	building.rotation = building_to_place.rotation
+	building.template_type = building_to_place.template_type
+	
+	Global.get_current_base().base_layout.buildings.append(building)
 	Saver.save_data()
 
 
-func add_building(building: Building):
+func add_building(building_to_place: BuildingToPlace):
 	var building_placed = building_placed_scene.instantiate()
-	building_placed.building = building
+	building_placed.building_to_place = building_to_place
 	add_child(building_placed)

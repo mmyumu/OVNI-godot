@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://manager/datetimer.gd" id="1_75mvl"]
 
-[node name="Datetimer" type="Node"]
+[node name="DatetimerManager" type="Node"]
 script = ExtResource("1_75mvl")

@@ -1,4 +1,4 @@
-class_name MoneyManager extends Node
+extends Node
 
 func spend(amount: int):
 	Saver.data.money -= amount

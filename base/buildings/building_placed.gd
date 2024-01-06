@@ -12,16 +12,16 @@ class_name BulidingPlaced extends Node2D
 
 
 var color: Color
-var building: Building
+var building_to_place: BuildingToPlace
 
 
 func _ready():
-	position = building.position
-	rotation = building.rotation
+	position = building_to_place.position
+	rotation = building_to_place.rotation
 	
-	$Area2D/DrawableCollisionPolygon2D.set_polygon(building.get_collision_polygon().get_polygon())
-	$Area2D/DrawableCollisionPolygon2D.position = building.get_collision_polygon().position
-	$Area2D/DrawableCollisionPolygon2D.color = building.color
+	$Area2D/DrawableCollisionPolygon2D.set_polygon(building_to_place.get_collision_polygon().get_polygon())
+	$Area2D/DrawableCollisionPolygon2D.position = building_to_place.get_collision_polygon().position
+	$Area2D/DrawableCollisionPolygon2D.color = building_to_place.color
 	$Area2D/DrawableCollisionPolygon2D.color.a = 1
 	$Area2D/DrawableCollisionPolygon2D.outline_color = outline_color
 	$Area2D/DrawableCollisionPolygon2D.outline_width = outline_width

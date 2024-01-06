@@ -1,4 +1,4 @@
-class_name BaseLayoutData extends Resource
+class_name BaseLayout extends Resource
 
 
-@export var buildings: Array[BuildingData] = []
+@export var buildings: Array[Building] = []

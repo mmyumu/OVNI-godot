@@ -16,7 +16,7 @@ class_name AttackIcon extends Node2D
 		padding = value
 		queue_redraw()
 
-var attack: AttackData
+var attack: Attack
 
 var highlighted: bool:
 	set(value):
@@ -29,7 +29,7 @@ var tween: Tween
 func _ready():
 	$AnimatedSprite2D.play()
 
-func set_attack(attack_to_set: AttackData):
+func set_attack(attack_to_set: Attack):
 	attack = attack_to_set
 	position = attack_to_set.location
 	$Label.text = attack.name

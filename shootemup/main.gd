@@ -98,7 +98,7 @@ func stage_completed():
 	$HUD/StageCompletedLabel.show()
 	$Player.invulnerable = true
 	
-	Global.current_attack.status = AttackData.Status.OVER
+	Global.current_attack.status = Attack.Status.OVER
 
 	await get_tree().create_timer(2.0).timeout
 	get_tree().change_scene_to_file("res://global/main.tscn")

@@ -1,9 +1,9 @@
 extends Node2D
 
-var ship: ShipData
+var ship: Ship
 var previous_hangared: bool
 
-func set_ship(ship_to_set: ShipData):
+func set_ship(ship_to_set: Ship):
 	ship = ship_to_set
 	$Label.text = ship.name
 	position = ship.location
