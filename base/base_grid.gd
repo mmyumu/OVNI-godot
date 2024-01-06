@@ -26,15 +26,15 @@ extends Node2D
 		thickness = value
 		queue_redraw()
 
-var construction_placed_scene: PackedScene = preload("res://base/constructions/construction_placed.tscn")
+var building_placed_scene: PackedScene = preload("res://base/buildings/building_placed.tscn")
 
 func _ready():
-	for construction_data in Global.get_current_base().base_layout.constructions:
-		var construction = Saver.data.construction_templates.scenes[construction_data.template_type].instantiate()
-		construction.position.x = construction_data.location.x * grid_step
-		construction.position.y = construction_data.location.y * grid_step
-		construction.rotation = construction_data.rotation
-		add_construction(construction)
+	for building_data in Global.get_current_base().base_layout.buildings:
+		var building = Saver.data.building_templates.scenes[building_data.template_type].instantiate()
+		building.position.x = building_data.location.x * grid_step
+		building.position.y = building_data.location.y * grid_step
+		building.rotation = building_data.rotation
+		add_building(building)
 
 func _draw():
 	draw_grid()
@@ -57,23 +57,23 @@ func get_width():
 func get_height():
 	return height * grid_step
 
-func set_placing(construction_to_place: Construction):
-	construction_to_place.position.x = int(width / 2) * grid_step
-	construction_to_place.position.y = int(height / 2) * grid_step
-	add_child(construction_to_place)
+func set_placing(building_to_place: Building):
+	building_to_place.position.x = int(width / 2) * grid_step
+	building_to_place.position.y = int(height / 2) * grid_step
+	add_child(building_to_place)
 
-func validate_placing(construction: Construction):
-	add_construction(construction)
+func validate_placing(building: Building):
+	add_building(building)
 	
-	var construction_data = ConstructionData.new()
-	construction_data.location = Vector2(construction.position.x / grid_step, construction.position.y / grid_step)
-	construction_data.rotation = construction.rotation
-	construction_data.template_type = construction.template_type
-	Global.get_current_base().base_layout.constructions.append(construction_data)
+	var building_data = BuildingData.new()
+	building_data.location = Vector2(building.position.x / grid_step, building.position.y / grid_step)
+	building_data.rotation = building.rotation
+	building_data.template_type = building.template_type
+	Global.get_current_base().base_layout.buildings.append(building_data)
 	Saver.save_data()
 
 
-func add_construction(construction: Construction):
-	var construction_placed = construction_placed_scene.instantiate()
-	construction_placed.construction = construction
-	add_child(construction_placed)
+func add_building(building: Building):
+	var building_placed = building_placed_scene.instantiate()
+	building_placed.building = building
+	add_child(building_placed)

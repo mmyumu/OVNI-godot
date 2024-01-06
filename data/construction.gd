@@ -1,6 +1,6 @@
-class_name ConstructionData extends Resource
+class_name BuildingData extends Resource
 
 
-@export var template_type: ConstructionsTemplatesData.Type
+@export var template_type: BuildingTemplatesData.Type
 @export var location: Vector2
 @export var rotation: float

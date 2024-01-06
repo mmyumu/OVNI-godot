@@ -1,4 +1,4 @@
-class_name ConstructionPlaced extends Node2D
+class_name BulidingPlaced extends Node2D
 
 @export var outline_color: Color = Color("331d0c"):
 	set(value):
@@ -12,16 +12,16 @@ class_name ConstructionPlaced extends Node2D
 
 
 var color: Color
-var construction: Construction
+var building: Building
 
 
 func _ready():
-	position = construction.position
-	rotation = construction.rotation
+	position = building.position
+	rotation = building.rotation
 	
-	$Area2D/DrawableCollisionPolygon2D.set_polygon(construction.get_collision_polygon().get_polygon())
-	$Area2D/DrawableCollisionPolygon2D.position = construction.get_collision_polygon().position
-	$Area2D/DrawableCollisionPolygon2D.color = construction.color
+	$Area2D/DrawableCollisionPolygon2D.set_polygon(building.get_collision_polygon().get_polygon())
+	$Area2D/DrawableCollisionPolygon2D.position = building.get_collision_polygon().position
+	$Area2D/DrawableCollisionPolygon2D.color = building.color
 	$Area2D/DrawableCollisionPolygon2D.color.a = 1
 	$Area2D/DrawableCollisionPolygon2D.outline_color = outline_color
 	$Area2D/DrawableCollisionPolygon2D.outline_width = outline_width

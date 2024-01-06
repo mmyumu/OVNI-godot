@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dxeqhnrafqvqs"]
 
-[ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/constructions/construction.tscn" id="1_i5i3h"]
+[ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/buildings/building_to_place.tscn" id="1_i5i3h"]
 
 [node name="Hangar" instance=ExtResource("1_i5i3h")]
 color = Color(0, 0.392157, 0.815686, 1)

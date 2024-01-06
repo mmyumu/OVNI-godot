@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dydb6avb5oqcr"]
 
-[ext_resource type="Script" path="res://base/constructions/construction_placed.gd" id="1_ctb1v"]
+[ext_resource type="Script" path="res://base/buildings/building_placed.gd" id="1_ctb1v"]
 [ext_resource type="Script" path="res://util/drawable_collision_polygon_2d.gd" id="2_77d1y"]
 
 [node name="ConstructionPlaced" type="Node2D"]

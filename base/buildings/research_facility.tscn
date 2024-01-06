@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dc5n08f2igol6"]
 
-[ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/constructions/construction.tscn" id="1_ouvbc"]
+[ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/buildings/building_to_place.tscn" id="1_ouvbc"]
 
 [node name="ResearchFacility" instance=ExtResource("1_ouvbc")]
 color = Color(0.129412, 0.701961, 0.227451, 1)

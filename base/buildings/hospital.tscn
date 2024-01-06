@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bf14bgl3b1i4m"]
 
-[ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/constructions/construction.tscn" id="1_5c3q5"]
+[ext_resource type="PackedScene" uid="uid://c4c0sjdu705b5" path="res://base/buildings/building_to_place.tscn" id="1_5c3q5"]
 
 [node name="Hospital" instance=ExtResource("1_5c3q5")]
 color = Color(0.705882, 0.0666667, 0.141176, 1)

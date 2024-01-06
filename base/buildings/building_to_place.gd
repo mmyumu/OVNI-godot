@@ -1,5 +1,5 @@
 @tool
-class_name Construction extends CharacterBody2D
+class_name Building extends CharacterBody2D
 
 @export var outline_color: Color = Color("db996a"):
 	set(value):
@@ -16,7 +16,7 @@ class_name Construction extends CharacterBody2D
 		color = value
 		queue_redraw()
 
-var template_type: ConstructionsTemplatesData.Type
+var template_type: BuildingTemplatesData.Type
 
 var original_outline_color: Color
 var can_place: bool

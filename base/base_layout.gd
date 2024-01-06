@@ -7,7 +7,7 @@ var base_layout
 var deadzone: float = 0.5
 var is_placing: bool = false
 var can_use_placing_input: bool = true
-var construction: Construction
+var building: Building
 var width
 var height
 var grid_step
@@ -43,11 +43,11 @@ func _input(event):
 		if event.is_action_pressed("validate"):
 			validate_placing()
 		elif event.is_action_pressed("rotate_right"):
-			construction.rotate_right()
+			building.rotate_right()
 		elif event.is_action_pressed("rotate_left"):
-			construction.rotate_left()
+			building.rotate_left()
 		elif event.is_action_pressed("cancel"):
-			construction.cancel_placing()
+			building.cancel_placing()
 			is_placing = false
 			placing_over.emit()
 			get_viewport().set_input_as_handled()
@@ -59,24 +59,24 @@ func _placing_input():
 	if abs(v_x) or abs(v_y) > deadzone:
 		if abs(v_x) > abs(v_y):
 			if v_x > 0:
-				construction.move_right(grid_step)
+				building.move_right(grid_step)
 				lock_placing_input()
 			elif v_x < 0:
-				construction.move_left(grid_step)
+				building.move_left(grid_step)
 				lock_placing_input()
 		elif abs(v_y) > abs(v_x):
 			if v_y > 0:
-				construction.move_down(grid_step)				
+				building.move_down(grid_step)				
 				lock_placing_input()
 			elif v_y < 0:
-				construction.move_up(grid_step)
+				building.move_up(grid_step)
 				lock_placing_input()
 
 func validate_placing():
-	if construction.check_can_place():
-		$PlaceBuildingDialog.open(construction)
+	if building.check_can_place():
+		$PlaceBuildingDialog.open(building)
 	else:
-		construction.collision_highlight()
+		building.collision_highlight()
 
 func create_map(w, h):
 	var map = []
@@ -124,11 +124,11 @@ func create_wall(size_x, size_y):
 	wall.size.y = size_y
 	return wall
 
-func set_placing(construction_to_place: Construction):
-	if construction and is_instance_valid(construction):
-		construction.cancel_placing()
-	$BaseGrid.set_placing(construction_to_place)
-	construction = construction_to_place
+func set_placing(building_to_place: Building):
+	if building and is_instance_valid(building):
+		building.cancel_placing()
+	$BaseGrid.set_placing(building_to_place)
+	building = building_to_place
 	is_placing = true
 
 func lock_placing_input():
@@ -139,8 +139,8 @@ func _on_placing_input_timer_timeout():
 	can_use_placing_input = true
 
 func _on_place_building_dialog_confirmed():
-	$BaseGrid.validate_placing(construction)
-	construction.validate_placing()
-	var construction_template = Saver.data.construction_templates.templates[construction.template_type]
-	Money.spend(construction_template.cost)
+	$BaseGrid.validate_placing(building)
+	building.validate_placing()
+	var building_template = Saver.data.building_templates.templates[building.template_type]
+	Money.spend(building_template.cost)
 	get_tree().paused = false

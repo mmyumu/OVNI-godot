@@ -7,9 +7,9 @@ func _ready():
 func _on_base_layout_placing_over():
 	$BaseMenu.enable()
 
-func _on_build_sub_menu_menu_object_pressed(menu_button, construction_template: ConstructionTemplateData, parent_object):
-	var construction = Saver.data.construction_templates.scenes[construction_template.type].instantiate()
-	construction.template_type = construction_template.type
-	construction.set_placing_mode()
-	$BaseLayout.set_placing(construction)
+func _on_build_sub_menu_menu_object_pressed(menu_button, building_template: BuildingTemplateData, parent_object):
+	var building = Saver.data.building_templates.scenes[building_template.type].instantiate()
+	building.template_type = building_template.type
+	building.set_placing_mode()
+	$BaseLayout.set_placing(building)
 	$BaseMenu.disable()
