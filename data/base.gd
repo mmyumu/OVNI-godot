@@ -7,6 +7,8 @@ const uuid_util = preload('res://addons/uuid/uuid.gd')
 @export var location: Vector2
 @export var base_layout: BaseLayoutData = BaseLayoutData.new()
 @export var ships: Array[String] = []
+@export var construction_date: DatetimeData
+@export var construction_status: ConstructionStatus
 
 func _init():
 	id = uuid_util.v4()
