@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://c486n4h63xkna"]
+[gd_scene load_steps=8 format=3 uid="uid://c486n4h63xkna"]
 
 [ext_resource type="Script" path="res://base/main.gd" id="1_a23l8"]
 [ext_resource type="PackedScene" uid="uid://ch7s01w5lmnap" path="res://base/background.tscn" id="1_fhmdp"]
 [ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="4_yc5lt"]
 [ext_resource type="PackedScene" uid="uid://bmso1vmitbyk8" path="res://base/base_layout.tscn" id="5_0x8xb"]
 [ext_resource type="PackedScene" uid="uid://d38erjkct3v6a" path="res://base/menus/base_menu.tscn" id="5_xfhtt"]
+[ext_resource type="PackedScene" uid="uid://bwrmmci14rhu6" path="res://util/clock.tscn" id="6_ljq5c"]
+[ext_resource type="PackedScene" uid="uid://b32brk5tr4td1" path="res://util/global_infos.tscn" id="7_wu5if"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_a23l8")
@@ -14,9 +16,9 @@ script = ExtResource("1_a23l8")
 [node name="BaseNameLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(168, 0)
 offset_left = 1105.0
-offset_top = 7.0
+offset_top = 110.0
 offset_right = 1273.0
-offset_bottom = 30.0
+offset_bottom = 133.0
 theme_override_fonts/font = ExtResource("4_yc5lt")
 text = "Base name"
 horizontal_alignment = 1
@@ -27,6 +29,13 @@ position = Vector2(551, 360)
 
 [node name="BaseMenu" parent="." instance=ExtResource("5_xfhtt")]
 position = Vector2(1105, 150)
+
+[node name="Clock" parent="." instance=ExtResource("6_ljq5c")]
+position = Vector2(1105, 7)
+controls = false
+
+[node name="GlobalInfos" parent="." instance=ExtResource("7_wu5if")]
+position = Vector2(1105, 40)
 
 [connection signal="placing_over" from="BaseLayout" to="." method="_on_base_layout_placing_over"]
 [connection signal="menu_object_pressed" from="BaseMenu/BuildSubMenu" to="." method="_on_build_sub_menu_menu_object_pressed"]

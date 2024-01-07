@@ -1,21 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwrmmci14rhu6"]
 
-[ext_resource type="Script" path="res://global/clock.gd" id="1_kp3xb"]
+[ext_resource type="Script" path="res://util/clock.gd" id="1_kp3xb"]
 [ext_resource type="FontFile" uid="uid://chqqcvfcsa8fu" path="res://fonts/shogunate/ShogunateAcademy-vm3lZ.otf" id="3_g2qh6"]
 [ext_resource type="FontFile" uid="uid://c1mgwsb6wtd8q" path="res://fonts/shogunate/ShogunateCondensed-nRxWY.otf" id="4_lf8e6"]
 
 [node name="Clock" type="Node2D"]
 script = ExtResource("1_kp3xb")
+controls = true
 
-[node name="VSplitContainer" type="VSplitContainer" parent="."]
-custom_minimum_size = Vector2(168, 0)
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 168.0
+offset_bottom = 54.0
 
-[node name="TimerContainer" type="HBoxContainer" parent="VSplitContainer"]
+[node name="TimerContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 
-[node name="DateLabel" type="Label" parent="VSplitContainer/TimerContainer"]
+[node name="DateLabel" type="Label" parent="VBoxContainer/TimerContainer"]
 custom_minimum_size = Vector2(85, 0)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -24,7 +25,7 @@ theme_override_font_sizes/font_size = 22
 text = "2023-01-01
 "
 
-[node name="TimeLabel" type="Label" parent="VSplitContainer/TimerContainer"]
+[node name="TimeLabel" type="Label" parent="VBoxContainer/TimerContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -33,10 +34,10 @@ theme_override_font_sizes/font_size = 22
 text = "00:00:00"
 horizontal_alignment = 1
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="VSplitContainer"]
+[node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="x1Button" type="Button" parent="VSplitContainer/ButtonsContainer"]
+[node name="x1Button" type="Button" parent="VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_right = NodePath("../x100Button")
@@ -44,7 +45,7 @@ theme_override_fonts/font = ExtResource("4_lf8e6")
 theme_override_font_sizes/font_size = 18
 text = "x1"
 
-[node name="x100Button" type="Button" parent="VSplitContainer/ButtonsContainer"]
+[node name="x100Button" type="Button" parent="VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath("../x1Button")
@@ -53,7 +54,7 @@ theme_override_fonts/font = ExtResource("4_lf8e6")
 theme_override_font_sizes/font_size = 18
 text = "x100"
 
-[node name="x10000Button" type="Button" parent="VSplitContainer/ButtonsContainer"]
+[node name="x10000Button" type="Button" parent="VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath("../x100Button")
@@ -61,6 +62,6 @@ theme_override_fonts/font = ExtResource("4_lf8e6")
 theme_override_font_sizes/font_size = 18
 text = "x10000"
 
-[connection signal="pressed" from="VSplitContainer/ButtonsContainer/x1Button" to="." method="_on_x1_button_pressed"]
-[connection signal="pressed" from="VSplitContainer/ButtonsContainer/x100Button" to="." method="_on_x100_button_pressed"]
-[connection signal="pressed" from="VSplitContainer/ButtonsContainer/x10000Button" to="." method="_on_x10000_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x1Button" to="." method="_on_x1_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x100Button" to="." method="_on_x100_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x10000Button" to="." method="_on_x10000_button_pressed"]

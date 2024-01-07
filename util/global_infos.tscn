@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b32brk5tr4td1"]
 
-[ext_resource type="Script" path="res://global/global_infos.gd" id="1_1mvjf"]
+[ext_resource type="Script" path="res://util/global_infos.gd" id="1_1mvjf"]
 [ext_resource type="FontFile" uid="uid://coj3rdtalnn11" path="res://fonts/shogunate/Shogunate-MVYep.otf" id="2_fpg5y"]
 [ext_resource type="FontFile" uid="uid://dbxxuojgvk3fc" path="res://fonts/shogunate/ShogunateExpanded-RpKZ3.otf" id="3_8wsce"]
 
