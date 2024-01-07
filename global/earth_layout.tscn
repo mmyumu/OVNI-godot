@@ -74,6 +74,7 @@ visible = false
 shape = SubResource("RectangleShape2D_5mukj")
 
 [node name="MothershipIcon" type="AnimatedSprite2D" parent="."]
+z_index = 1000
 sprite_frames = SubResource("SpriteFrames_o0010")
 
 [node name="Continents" type="Node2D" parent="."]

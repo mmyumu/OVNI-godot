@@ -22,6 +22,12 @@ func _input(event):
 			current_word += "s"
 		elif event.pressed and event.keycode == KEY_O:
 			current_word += "o"
+		
+		if enabled:
+			if event.pressed:
+				print(event.keycode)
+			if event.pressed and event.keycode == KEY_SEMICOLON:
+				Saver.data.money += 100000
 			
 	if current_word == "makeitso":
 		current_word = ""

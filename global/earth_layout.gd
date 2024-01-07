@@ -103,18 +103,19 @@ func _on_new_base_dialog_canceled():
 	dialog_closed()
 
 func _on_new_base_dialog_confirmed(base_name):
-	var ship: Ship = Ship.new()
-	Saver.data.add_ship(ship)
-	ship.name = "Raptor"
-	ship.hangared = true
+	#var ship: Ship = Ship.new()
+	#Saver.data.add_ship(ship)
+	#ship.name = "Raptor"
+	#ship.hangared = true
 	
 	var base: Base = Base.new()
+	base.start_construction()
 	base.name = base_name
 	base.location = Vector2(to_local(last_mouse_pos))
-	base.add_ship(ship)
+	#base.add_ship(ship)
 	
-	ship.base = base
-	ship.location = base.location
+	#ship.base = base
+	#ship.location = base.location
 	
 	Saver.data.add_base(base)
 	Saver.save_data()
@@ -123,7 +124,7 @@ func _on_new_base_dialog_confirmed(base_name):
 	creating_new_base_over()
 	
 	add_base(base)
-	add_ship(ship)
+	#add_ship(ship)
 
 func add_base(base: Base):
 	var base_icon = base_icon_scene.instantiate()

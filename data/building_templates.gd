@@ -3,10 +3,10 @@ class_name BuildingTemplates extends Resource
 
 enum Type {HANGAR, RESEARCH, ARMORY, HOSPITAL}
 
-@export var hangar = BuildingTemplate.new(Type.HANGAR, "Hangar", 400000)
-@export var research = BuildingTemplate.new(Type.RESEARCH, "Research", 100000)
-@export var armory = BuildingTemplate.new(Type.ARMORY, "Armory",100000)
-@export var hospital = BuildingTemplate.new(Type.HOSPITAL, "Hospital", 100000)
+@export var hangar = BuildingTemplate.new(Type.HANGAR, "Hangar", 400000, 8 * 60 * 60)
+@export var research = BuildingTemplate.new(Type.RESEARCH, "Research", 100000, 8 * 60 * 60)
+@export var armory = BuildingTemplate.new(Type.ARMORY, "Armory",100000, 8 * 60 * 60)
+@export var hospital = BuildingTemplate.new(Type.HOSPITAL, "Hospital", 100000, 8 * 60 * 60)
 
 var templates = {
 	Type.HANGAR: hangar,

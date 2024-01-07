@@ -139,8 +139,13 @@ func _on_placing_input_timer_timeout():
 	can_use_placing_input = true
 
 func _on_place_building_dialog_confirmed():
-	$BaseGrid.validate_placing(building_to_place)
+	var building = Building.new()
+	building.location = $BaseGrid.get_location(building_to_place)
+	building.rotation = building_to_place.rotation
+	building.template_type = building_to_place.template_type
+
+	Headquarters.start_building_construction(Global.get_current_base(), building)
+
+	$BaseGrid.add_building(building_to_place)
 	building_to_place.validate_placing()
-	var building_template = Saver.data.building_templates.templates[building_to_place.template_type]
-	Money.spend(building_template.cost)
 	get_tree().paused = false

@@ -15,7 +15,7 @@ func _process(delta):
 	if is_valid:
 		var building_template: BuildingTemplate = Saver.data.building_templates.templates[building_to_place.template_type]
 		var new_money: int = Saver.data.money - building_template.cost
-		$CanvasLayer/VBoxContainer/InfoLabel.text = "Money: %s -> %s" % [Saver.data.money, new_money]
+		$CanvasLayer/VBoxContainer/InfoLabel.text = "Money: %s - %s -> %s" % [Saver.data.money, building_template.cost, new_money]
 	else:
 		$CanvasLayer/VBoxContainer/InfoLabel.text = ""
 

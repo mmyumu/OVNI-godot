@@ -9,6 +9,8 @@ class_name Data extends Resource
 @export var money: int = 500000
 @export var building_templates: BuildingTemplates = BuildingTemplates.new()
 
+@export var base_construction_duration: int = 12 * 60 * 60
+
 func get_data_name():
 	if len(bases) > 0:
 		return bases[bases.keys()[0]].name
@@ -27,6 +29,14 @@ func get_bases():
 		var base: Base = bases[base_id]
 		bases_to_get.append(base)
 	return bases_to_get
+
+#func get_base_in_construction():
+	#var bases_to_get: Array[Base] = []
+	#for base_id in bases:
+		#var base: Base = bases[base_id]
+		#if base.construction_status == Construction.Status.IN_PROGRESS:
+			#bases_to_get.append(base)
+	#return bases_to_get	
 
 func get_ships():
 	var ships_to_get: Array[Ship] = []

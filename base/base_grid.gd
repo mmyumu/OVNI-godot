@@ -62,17 +62,8 @@ func set_placing(building_to_place: BuildingToPlace):
 	building_to_place.position.y = int(height / 2) * grid_step
 	add_child(building_to_place)
 
-func validate_placing(building_to_place: BuildingToPlace):
-	add_building(building_to_place)
-	
-	var building = Building.new()
-	building.location = Vector2(building_to_place.position.x / grid_step, building_to_place.position.y / grid_step)
-	building.rotation = building_to_place.rotation
-	building.template_type = building_to_place.template_type
-	
-	Global.get_current_base().base_layout.buildings.append(building)
-	Saver.save_data()
-
+func get_location(building_to_place: BuildingToPlace):
+	return Vector2(building_to_place.position.x / grid_step, building_to_place.position.y / grid_step)
 
 func add_building(building_to_place: BuildingToPlace):
 	var building_placed = building_placed_scene.instantiate()

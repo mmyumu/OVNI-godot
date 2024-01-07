@@ -7,9 +7,15 @@ const uuid_util = preload('res://addons/uuid/uuid.gd')
 @export var location: Vector2
 @export var base_layout: BaseLayout = BaseLayout.new()
 @export var ships: Array[String] = []
+@export var construction_date: Datetime
+@export var construction_status: Construction.Status
 
 func _init():
 	id = uuid_util.v4()
+
+func start_construction():
+	construction_date = Datetime.new(Saver.data.datetime.timestamp)
+	construction_status = Construction.Status.IN_PROGRESS
 
 func get_ships():
 	var ships_to_get: Array[Ship] = []
