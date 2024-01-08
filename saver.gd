@@ -48,6 +48,7 @@ func erase_data(index):
 			print("%s removed" % slots[index])
 
 func save_data_to_filename(data_to_save, filename):
+	print("Savving data to %s" % filename)
 	var result = ResourceSaver.save(data_to_save, filename)
 	assert(result == OK)
 

@@ -26,6 +26,7 @@ MastermindIntel="*res://manager/mastermind_intel.gd"
 Ships="*res://manager/ships.gd"
 Headquarters="*res://manager/headquarters.gd"
 Cheat="*res://manager/cheat.gd"
+Quit="*res://quit.gd"
 
 [display]
 
