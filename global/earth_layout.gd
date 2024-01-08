@@ -3,7 +3,8 @@ extends Node2D
 var base_icon_scene: PackedScene = preload("res://global/icons/base_icon.tscn")
 var attack_icon_scene: PackedScene = preload("res://global/icons/attack_icon.tscn")
 var ship_icon_scene: PackedScene = preload("res://global/icons/ship_icon.tscn")
-var event_info_panel_scene: PackedScene = preload("res://global/event_info_panel.tscn")
+var attack_info_panel_scene: PackedScene = preload("res://global/panels/attack_info_panel.tscn")
+var base_info_panel_scene: PackedScene = preload("res://global/panels/base_info_panel.tscn")
 
 var mouse_sens= 500.0
 var is_creating_new_base: bool = false
@@ -15,7 +16,8 @@ var highlighted_attack: Attack
 
 var base_icons: Array[BaseIcon] = []
 var attack_icons: Array[AttackIcon] = []
-var event_info_panel: EventInfoPanel
+var attack_info_panel: AttackInfoPanel
+var base_info_panel: BaseInfoPanel
 
 
 signal base_creation_over()
@@ -103,28 +105,16 @@ func _on_new_base_dialog_canceled():
 	dialog_closed()
 
 func _on_new_base_dialog_confirmed(base_name):
-	#var ship: Ship = Ship.new()
-	#Saver.data.add_ship(ship)
-	#ship.name = "Raptor"
-	#ship.hangared = true
-	
 	var base: Base = Base.new()
-	base.start_construction()
 	base.name = base_name
 	base.location = Vector2(to_local(last_mouse_pos))
-	#base.add_ship(ship)
 	
-	#ship.base = base
-	#ship.location = base.location
-	
-	Saver.data.add_base(base)
-	Saver.save_data()
-		
+	Headquarters.start_base_construction(base)
+
 	dialog_closed()
 	creating_new_base_over()
 	
 	add_base(base)
-	#add_ship(ship)
 
 func add_base(base: Base):
 	var base_icon = base_icon_scene.instantiate()
@@ -192,13 +182,24 @@ func add_ship(ship: Ship):
 	ship_icon.set_ship(ship)
 	add_child(ship_icon)
 
-func show_event_info(ship: Ship, attack: Attack):
-	event_info_panel = event_info_panel_scene.instantiate()
-	event_info_panel.set_data(ship, attack)
-	event_info_panel.position.x = attack.location.x + 25
-	event_info_panel.position.y = attack.location.y - 30
-	add_child(event_info_panel)
+func show_attack_info(ship: Ship, attack: Attack):
+	attack_info_panel = attack_info_panel_scene.instantiate()
+	attack_info_panel.set_data(ship, attack)
+	attack_info_panel.position.x = attack.location.x + 25
+	attack_info_panel.position.y = attack.location.y - 30
+	add_child(attack_info_panel)
 
-func hide_event_info(ship: Ship, attack: Attack):
-	if event_info_panel:
-		event_info_panel.queue_free()
+func hide_attack_info(ship: Ship, attack: Attack):
+	if attack_info_panel:
+		attack_info_panel.queue_free()
+
+func show_base_info(base: Base):
+	base_info_panel = base_info_panel_scene.instantiate()
+	base_info_panel.set_data(base)
+	#base_info_panel.position.x = base.location.x + 25
+	#base_info_panel.position.y = base.location.y - 30
+	add_child(base_info_panel)
+
+func hide_base_info(base: Base):
+	if base_info_panel:
+		base_info_panel.queue_free()

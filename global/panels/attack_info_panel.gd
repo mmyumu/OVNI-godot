@@ -1,4 +1,4 @@
-class_name EventInfoPanel extends Node2D
+class_name AttackInfoPanel extends InfoPanel
 
 var ship: Ship
 var event: Attack

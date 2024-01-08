@@ -6,6 +6,7 @@ var menu_object_button_scene: PackedScene = preload("res://util/menu_object_butt
 
 var parent_object: Object
 var first_button: Button
+var last_focus: Button
 
 signal back_pressed()
 signal menu_object_pressed(menu_button: MenuObjectButton, object: Object, parent_object: Object)
@@ -13,9 +14,14 @@ signal menu_object_focus_entered(menu_button: MenuObjectButton, object: Object, 
 signal menu_object_focus_exited(menu_button: MenuObjectButton, object: Object, parent_object: Object)
 
 func _ready():
+	custom_connect()
 	build()
 
+func custom_connect():
+	pass
+
 func display():
+	last_focus = null
 	show()
 	grab_default_focus()
 
@@ -24,6 +30,7 @@ func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 
 func grab_default_focus():
 	if first_button:
+		last_focus = first_button
 		first_button.grab_focus()
 
 func build(parent_object_to_set: Object = null):
@@ -45,8 +52,6 @@ func build(parent_object_to_set: Object = null):
 			menu_object_button.menu_object_focus_exited.connect(_on_menu_object_focus_exited)
 			
 			create_child = true
-		
-		menu_object_button.disabled = datum.disabled
 
 		if datum.font_color:
 			menu_object_button.set("theme_override_colors/font_color", datum.font_color)
@@ -55,6 +60,8 @@ func build(parent_object_to_set: Object = null):
 		if create_child:
 			add_child(menu_object_button)
 			move_child(menu_object_button, i + menu_offset)
+			
+		menu_object_button.disabled = datum.disabled
 
 		if previous_menu_button:
 			previous_menu_button.focus_neighbor_bottom = previous_menu_button.get_path_to(menu_object_button)
@@ -69,6 +76,12 @@ func build(parent_object_to_set: Object = null):
 		previous_menu_button.focus_neighbor_bottom = $Back.get_path()
 		$Back.focus_neighbor_top = $Back.get_path_to(previous_menu_button)
 
+	if visible == true:
+		if is_instance_valid(last_focus) and last_focus.disabled == false:
+			last_focus.grab_focus()
+		else:
+			grab_default_focus()
+
 func _on_back_pressed():
 	back_pressed.emit()
 
@@ -76,6 +89,7 @@ func _on_menu_object_pressed(menu_button: MenuObjectButton, object: Object):
 	menu_object_pressed.emit(menu_button, object, parent_object)
 
 func _on_menu_object_focus_entered(menu_button: MenuObjectButton, object: Object):
+	last_focus = menu_button
 	menu_object_focus_entered.emit(menu_button, object, parent_object)
 
 func _on_menu_object_focus_exited(menu_button: MenuObjectButton, object: Object):

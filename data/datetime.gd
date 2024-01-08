@@ -17,10 +17,10 @@ func _init(timestamp_to_set: float = -1):
 		timestamp_to_set = Time.get_unix_time_from_datetime_dict(Dictionary({year=2024, month=1, day=1, hour=0, minute=0, second=0}))
 	timestamp = timestamp_to_set
 
-func spent(time_spent):
-	var previous_date: Datetime = Datetime.new(timestamp)
-	timestamp += time_spent
-	return [previous_date, Datetime.new(timestamp)]
+func spend(time_to_spend):
+	#var previous_date: Datetime = Datetime.new(timestamp)
+	timestamp += time_to_spend
+	return self
 
 func _update():
 	var datetime = _timestamp_to_date(timestamp)

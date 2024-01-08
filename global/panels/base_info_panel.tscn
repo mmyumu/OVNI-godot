@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://4o6p8t26hjqo"]
+
+[ext_resource type="PackedScene" uid="uid://cl65tp7eungkb" path="res://global/panels/info_panel.tscn" id="1_r40va"]
+[ext_resource type="Script" path="res://global/panels/base_info_panel.gd" id="2_yvrhv"]
+[ext_resource type="FontFile" uid="uid://c1mgwsb6wtd8q" path="res://fonts/shogunate/ShogunateCondensed-nRxWY.otf" id="3_l4dac"]
+
+[node name="BaseInfoPanel" instance=ExtResource("1_r40va")]
+script = ExtResource("2_yvrhv")
+
+[node name="NameLabel" type="Label" parent="PanelContainer/GridContainer" index="0"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_l4dac")
+theme_override_font_sizes/font_size = 20
+text = "Name:"
+
+[node name="NameValueLabel" type="Label" parent="PanelContainer/GridContainer" index="1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_l4dac")
+theme_override_font_sizes/font_size = 20
+text = "Attack name"
+
+[node name="ConstructionStartLabel" type="Label" parent="PanelContainer/GridContainer" index="2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_l4dac")
+theme_override_font_sizes/font_size = 20
+text = "Construction start:"
+
+[node name="ConstructionStartValueLabel" type="Label" parent="PanelContainer/GridContainer" index="3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_l4dac")
+theme_override_font_sizes/font_size = 20
+text = "Start value"
+
+[node name="ConstructionETALabel" type="Label" parent="PanelContainer/GridContainer" index="4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_l4dac")
+theme_override_font_sizes/font_size = 20
+text = "Construction ETA:"
+
+[node name="ConstructionETAValueLabel" type="Label" parent="PanelContainer/GridContainer" index="5"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_l4dac")
+theme_override_font_sizes/font_size = 20
+text = "ETA value"

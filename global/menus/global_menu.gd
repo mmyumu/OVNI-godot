@@ -30,6 +30,7 @@ func _on_events_pressed():
 
 func display_bases_menu():
 	hide_all_menus()
+	$BasesSubMenu.build()
 	$BasesSubMenu.display()
 
 func display_attacks_menu():

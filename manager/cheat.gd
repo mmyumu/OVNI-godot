@@ -26,6 +26,8 @@ func _input(event):
 		if enabled:
 			if event.keycode == KEY_SEMICOLON:
 				Saver.data.money += 100000
+			elif event.keycode == KEY_F:
+				forward_time()
 			
 	if current_word == "makeitso":
 		current_word = ""
@@ -34,3 +36,6 @@ func _input(event):
 	
 	if not "makeitso".begins_with(current_word):
 		current_word = ""
+
+func forward_time():
+	Datetimer.spend(3600)

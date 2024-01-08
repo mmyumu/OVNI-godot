@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl65tp7eungkb"]
+
+[ext_resource type="Script" path="res://global/panels/info_panel.gd" id="1_rrnd5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0kbh"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.596078, 0.596078, 0.596078, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_right = 10.0
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[node name="InfoPanel" type="Node2D"]
+z_index = 4000
+script = ExtResource("1_rrnd5")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 139.0
+offset_bottom = 52.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_d0kbh")
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+columns = 2
