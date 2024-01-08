@@ -31,7 +31,7 @@ func _init():
 			add_ship(ship)
 
 func _ready():
-	MasterMindIntel.attack_spawned.connect(_on_attack_spawned)
+	MastermindIntel.attack_spawned.connect(_on_attack_spawned)
 	
 	$NewBaseDialog.close()
 	mouse_pos = to_local(get_global_mouse_position())
