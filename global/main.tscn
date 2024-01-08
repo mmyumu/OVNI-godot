@@ -16,13 +16,22 @@ script = ExtResource("1_2l2y7")
 position = Vector2(1105, 150)
 
 [node name="Bases" parent="GlobalMenu/RootMenu" index="0"]
-focus_neighbor_top = NodePath("../../../Clock/VSplitContainer/ButtonsContainer/x1Button")
+focus_neighbor_top = NodePath("../../../Clock/VBoxContainer/ButtonsContainer/x1Button")
 
 [node name="EarthLayout" parent="." instance=ExtResource("4_pjtn1")]
 position = Vector2(551, 356)
 
 [node name="Clock" parent="." instance=ExtResource("5_ioyox")]
 position = Vector2(1105, 7)
+
+[node name="x1Button" parent="Clock/VBoxContainer/ButtonsContainer" index="0"]
+focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
+
+[node name="x100Button" parent="Clock/VBoxContainer/ButtonsContainer" index="1"]
+focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
+
+[node name="x10000Button" parent="Clock/VBoxContainer/ButtonsContainer" index="2"]
+focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
 
 [node name="GlobalInfos" parent="." instance=ExtResource("6_jm1ub")]
 position = Vector2(1105, 80)
