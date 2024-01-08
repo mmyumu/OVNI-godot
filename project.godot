@@ -20,12 +20,12 @@ config/icon="res://icon.svg"
 GlobalVariables="*res://shootemup/global_variables.tscn"
 Saver="*res://saver.gd"
 Global="*res://global.gd"
-Money="*res://manager/money.tscn"
-Datetimer="*res://manager/datetimer.tscn"
-MasterMindIntel="*res://manager/mastermind_intel.tscn"
-Ships="*res://manager/ships.tscn"
+Money="*res://manager/money.gd"
+Datetimer="*res://manager/datetimer.gd"
+MastermindIntel="*res://manager/mastermind_intel.gd"
+Ships="*res://manager/ships.gd"
 Headquarters="*res://manager/headquarters.gd"
-Cheat="*res://manager/cheat.tscn"
+Cheat="*res://manager/cheat.gd"
 
 [display]
 
