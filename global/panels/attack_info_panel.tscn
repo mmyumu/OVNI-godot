@@ -19,13 +19,25 @@ theme_override_fonts/font = ExtResource("3_wr8um")
 theme_override_font_sizes/font_size = 20
 text = "Attack name"
 
-[node name="ETALabel" type="Label" parent="PanelContainer/GridContainer" index="2"]
+[node name="DateLabel" type="Label" parent="PanelContainer/GridContainer" index="2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wr8um")
+theme_override_font_sizes/font_size = 20
+text = "Date:"
+
+[node name="DateValueLabel" type="Label" parent="PanelContainer/GridContainer" index="3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_wr8um")
+theme_override_font_sizes/font_size = 20
+text = "ETA value"
+
+[node name="ETALabel" type="Label" parent="PanelContainer/GridContainer" index="4"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wr8um")
 theme_override_font_sizes/font_size = 20
 text = "ETA:"
 
-[node name="ETAValueLabel" type="Label" parent="PanelContainer/GridContainer" index="3"]
+[node name="ETAValueLabel" type="Label" parent="PanelContainer/GridContainer" index="5"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_wr8um")
 theme_override_font_sizes/font_size = 20

@@ -32,7 +32,7 @@ offset_bottom = 27.0
 [node name="AttacksSubMenu" parent="." instance=ExtResource("5_e322b")]
 custom_minimum_size = Vector2(168, 0)
 
-[node name="EventShipsSubMenu" parent="." instance=ExtResource("5_p2g7d")]
+[node name="AttackShipsSubMenu" parent="." instance=ExtResource("5_p2g7d")]
 custom_minimum_size = Vector2(168, 0)
 offset_right = 168.0
 offset_bottom = 27.0
@@ -45,6 +45,6 @@ offset_bottom = 27.0
 [connection signal="pressed" from="BasesSubMenu/NewBase" to="." method="_on_bases_sub_menu_new_base_pressed"]
 [connection signal="back_pressed" from="AttacksSubMenu" to="." method="_on_attacks_sub_menu_back_pressed"]
 [connection signal="menu_object_pressed" from="AttacksSubMenu" to="." method="_on_attacks_sub_menu_menu_object_pressed"]
-[connection signal="back_pressed" from="EventShipsSubMenu" to="." method="_on_event_ships_sub_menu_back_pressed"]
+[connection signal="back_pressed" from="AttackShipsSubMenu" to="." method="_on_event_ships_sub_menu_back_pressed"]
 
 [editable path="BasesSubMenu"]

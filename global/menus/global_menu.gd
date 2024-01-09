@@ -16,7 +16,7 @@ func _input(event):
 			display_root_menu()
 		elif $AttacksSubMenu.visible == true:
 			display_root_menu()
-		elif $EventShipsSubMenu.visible == true:
+		elif $AttackShipsSubMenu.visible == true:
 			display_attacks_menu()
 
 func grab_default_focus():
@@ -56,8 +56,8 @@ func _on_bases_sub_menu_new_base_pressed():
 
 func _on_attacks_sub_menu_menu_object_pressed(menu_button, object, parent_object):
 	hide_all_menus()
-	$EventShipsSubMenu.build(object)
-	$EventShipsSubMenu.display()
+	$AttackShipsSubMenu.build(object)
+	$AttackShipsSubMenu.display()
 
 func _on_bases_sub_menu_back_pressed():
 	display_root_menu()

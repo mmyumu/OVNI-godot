@@ -184,7 +184,7 @@ func add_ship(ship: Ship):
 
 func show_attack_info(ship: Ship, attack: Attack):
 	attack_info_panel = attack_info_panel_scene.instantiate()
-	attack_info_panel.set_data(ship, attack)
+	attack_info_panel.set_data(attack, ship)
 	attack_info_panel.position.x = attack.location.x + 25
 	attack_info_panel.position.y = attack.location.y - 30
 	add_child(attack_info_panel)

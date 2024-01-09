@@ -30,14 +30,16 @@ func _on_bases_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, 
 
 func _on_attacks_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, attack: Attack, parent_object: Object):
 	$EarthLayout.unhighlight_attack()
+	$EarthLayout.hide_attack_info(null, attack)
 
 func _on_attacks_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, attack: Attack, parent_object: Object):
 	$EarthLayout.highlight_attack(attack)
+	$EarthLayout.show_attack_info(null, attack)
 
-func _on_event_ships_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, ship: Ship, attack: Attack):
+func _on_attack_ships_sub_menu_menu_object_focus_entered(menu_button: MenuObjectButton, ship: Ship, attack: Attack):
 	$EarthLayout.show_attack_info(ship, attack)
 
-func _on_event_ships_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, ship: Ship, attack: Attack):
+func _on_attack_ships_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, ship: Ship, attack: Attack):
 	$EarthLayout.hide_attack_info(ship, attack)
 
 func _on_event_ships_sub_menu_menu_object_pressed(menu_button, ship: Ship, attack: Attack):
