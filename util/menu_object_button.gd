@@ -1,4 +1,4 @@
-class_name MenuObjectButton extends Button
+class_name MenuObjectButton extends RightMenuButton
 
 var object: Object
 

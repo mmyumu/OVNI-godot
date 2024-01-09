@@ -36,6 +36,7 @@ func check_building_constructions(base: Base):
 
 func start_base_construction(base: Base):
 	base.start_construction()
+	Money.spend(base.cost)
 	Saver.data.add_base(base)
 	Saver.save_data()
 	bases_changed.emit()

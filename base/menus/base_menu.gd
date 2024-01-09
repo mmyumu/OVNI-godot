@@ -23,6 +23,7 @@ func _on_view_pressed():
 
 func display_build_menu():
 	hide_all_menus()
+	$BuildSubMenu.build()
 	$BuildSubMenu.display()
 
 func display_view_menu():

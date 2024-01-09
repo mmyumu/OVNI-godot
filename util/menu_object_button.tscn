@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxu5q4nfbulg0"]
+[gd_scene load_steps=3 format=3 uid="uid://bfn2y8x8gyoas"]
 
-[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="1_avcby"]
+[ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/right_menu_button.tscn" id="1_1blx4"]
 [ext_resource type="Script" path="res://util/menu_object_button.gd" id="2_trovu"]
 
-[node name="MenuDataButton" type="Button"]
-offset_right = 8.0
-offset_bottom = 8.0
-theme_override_fonts/font = ExtResource("1_avcby")
+[node name="MenuObjectButton" instance=ExtResource("1_1blx4")]
+text = "Placeholder"
 script = ExtResource("2_trovu")
 
 [connection signal="focus_entered" from="." to="." method="_on_focus_entered"]

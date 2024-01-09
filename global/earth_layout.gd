@@ -196,8 +196,6 @@ func hide_attack_info(ship: Ship, attack: Attack):
 func show_base_info(base: Base):
 	base_info_panel = base_info_panel_scene.instantiate()
 	base_info_panel.set_data(base)
-	#base_info_panel.position.x = base.location.x + 25
-	#base_info_panel.position.y = base.location.y - 30
 	add_child(base_info_panel)
 
 func hide_base_info(base: Base):

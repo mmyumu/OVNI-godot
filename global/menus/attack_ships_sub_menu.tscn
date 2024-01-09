@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://bub7i462o7af5" path="res://util/sub_menu.tscn" id="1_45wuk"]
 [ext_resource type="Script" path="res://global/menus/attack_ships_sub_menu.gd" id="2_ttot1"]
 
-[node name="EventShipsSubMenu" instance=ExtResource("1_45wuk")]
+[node name="AttackShipsSubMenu" instance=ExtResource("1_45wuk")]
 script = ExtResource("2_ttot1")

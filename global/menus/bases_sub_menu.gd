@@ -2,7 +2,6 @@ extends SubMenu
 
 func custom_connect():
 	super.custom_connect()
-	
 	Headquarters.bases_changed.connect(_on_bases_changed)
 
 func grab_default_focus():

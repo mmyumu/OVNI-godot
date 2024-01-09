@@ -35,6 +35,7 @@ func display_bases_menu():
 
 func display_attacks_menu():
 	hide_all_menus()
+	$AttacksSubMenu.build()
 	$AttacksSubMenu.display()
 
 func _on_quit_pressed():

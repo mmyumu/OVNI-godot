@@ -6,7 +6,7 @@ class_name Data extends Resource
 @export var mastermind: MasterMind = MasterMind.new()
 @export var earth: Earth = Earth.new()
 @export var ships: Dictionary = {}
-@export var money: int = 500000
+@export var money: int = 1000000
 @export var building_templates: BuildingTemplates = BuildingTemplates.new()
 
 @export var base_construction_duration: int = 12 * 60 * 60
