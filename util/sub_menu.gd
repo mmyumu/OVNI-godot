@@ -15,7 +15,6 @@ signal menu_object_focus_exited(menu_button: MenuObjectButton, object: Object, p
 
 func _ready():
 	custom_connect()
-	#build()
 
 func custom_connect():
 	pass

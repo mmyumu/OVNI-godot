@@ -29,6 +29,7 @@ func check_building_constructions(base: Base):
 			var building_template = Saver.data.building_templates.templates[building.template_type]
 			if Saver.data.datetime.timestamp >= building.construction_date.timestamp + building_template.construction_duration:
 				building.construction_status = Construction.Status.DONE
+				finish_building_construction(base, building)
 				has_buildings_changed = true
 				print("Construction of building %s in base %s is finished" % [building.template_type, base.name])
 	if has_buildings_changed:
@@ -48,3 +49,13 @@ func start_building_construction(base: Base, building: Building):
 	Money.spend(building_template.cost)
 	Saver.save_data()
 	buildings_changed.emit()
+
+func finish_building_construction(base: Base, building: Building):
+	if building.template_type == BuildingTemplates.Type.HANGAR:
+		var ship = Ship.new()
+		ship.name = "Raptor v2"
+		ship.base = base
+		ship.location = base.location
+		base.add_ship(ship)
+		Saver.data.add_ship(ship)
+		Saver.save_data()

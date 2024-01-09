@@ -12,10 +12,14 @@ class_name BulidingPlaced extends Node2D
 
 
 var color: Color
+var building: Building
 var building_to_place: BuildingToPlace
 
 
 func _ready():
+	Headquarters.buildings_changed.connect(_on_buildings_changed)
+	$BuildingConstructionSprite2D.visible = building.construction_status == Construction.Status.IN_PROGRESS
+	
 	position = building_to_place.position
 	rotation = building_to_place.rotation
 	
@@ -25,3 +29,6 @@ func _ready():
 	$Area2D/DrawableCollisionPolygon2D.color.a = 1
 	$Area2D/DrawableCollisionPolygon2D.outline_color = outline_color
 	$Area2D/DrawableCollisionPolygon2D.outline_width = outline_width
+
+func _on_buildings_changed():
+	$BuildingConstructionSprite2D.visible = building.construction_status == Construction.Status.IN_PROGRESS

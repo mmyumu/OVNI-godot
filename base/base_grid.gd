@@ -34,7 +34,7 @@ func _ready():
 		building_to_place.position.x = building.location.x * grid_step
 		building_to_place.position.y = building.location.y * grid_step
 		building_to_place.rotation = building.rotation
-		add_building(building_to_place)
+		add_building(building, building_to_place)
 
 func _draw():
 	draw_grid()
@@ -65,7 +65,8 @@ func set_placing(building_to_place: BuildingToPlace):
 func get_location(building_to_place: BuildingToPlace):
 	return Vector2(building_to_place.position.x / grid_step, building_to_place.position.y / grid_step)
 
-func add_building(building_to_place: BuildingToPlace):
+func add_building(building: Building, building_to_place: BuildingToPlace):
 	var building_placed = building_placed_scene.instantiate()
+	building_placed.building = building
 	building_placed.building_to_place = building_to_place
 	add_child(building_placed)

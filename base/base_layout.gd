@@ -146,6 +146,6 @@ func _on_place_building_dialog_confirmed():
 
 	Headquarters.start_building_construction(Global.get_current_base(), building)
 
-	$BaseGrid.add_building(building_to_place)
+	$BaseGrid.add_building(building, building_to_place)
 	building_to_place.validate_placing()
 	get_tree().paused = false
