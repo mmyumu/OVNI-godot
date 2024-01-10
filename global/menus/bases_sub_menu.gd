@@ -20,5 +20,5 @@ func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 
 	return menu_data
 
-func _on_bases_changed():
+func _on_bases_changed(changed_bases: Array[Base]):
 	build()

@@ -31,14 +31,14 @@ theme_override_fonts/font = ExtResource("3_l4dac")
 theme_override_font_sizes/font_size = 20
 text = "Start value"
 
-[node name="ConstructionETALabel" type="Label" parent="PanelContainer/GridContainer" index="4"]
+[node name="ConstructionEndLabel" type="Label" parent="PanelContainer/GridContainer" index="4"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_l4dac")
 theme_override_font_sizes/font_size = 20
 text = "Construction ETA:"
 
-[node name="ConstructionETAValueLabel" type="Label" parent="PanelContainer/GridContainer" index="5"]
+[node name="ConstructionEndValueLabel" type="Label" parent="PanelContainer/GridContainer" index="5"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_l4dac")
 theme_override_font_sizes/font_size = 20
-text = "ETA value"
+text = "End value"

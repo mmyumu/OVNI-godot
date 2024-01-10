@@ -30,5 +30,5 @@ func _ready():
 	$Area2D/DrawableCollisionPolygon2D.outline_color = outline_color
 	$Area2D/DrawableCollisionPolygon2D.outline_width = outline_width
 
-func _on_buildings_changed():
+func _on_buildings_changed(changed_buildings: Array[Building]):
 	$BuildingConstructionSprite2D.visible = building.construction_status == Construction.Status.IN_PROGRESS

@@ -8,6 +8,7 @@ const uuid_util = preload('res://addons/uuid/uuid.gd')
 @export var base_layout: BaseLayout = BaseLayout.new()
 @export var ships: Array[String] = []
 @export var construction_date: Datetime
+@export var construction_end: Datetime
 @export var construction_status: Construction.Status
 @export var cost =  500000
 

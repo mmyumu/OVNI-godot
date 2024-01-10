@@ -1,28 +1,31 @@
 extends Node
 
 
-signal bases_changed()
-signal buildings_changed()
+signal bases_changed(bases: Array[Base])
+signal buildings_changed(buildings: Array[Building])
+signal ships_changed(ships: Array[Ship])
 
 func _process(delta):
 	check_constructions()
 
 func check_constructions():
-	var has_bases_changed: bool = false
+	var changed_bases: Array[Base] = []
 	
 	for base in Saver.data.get_bases():
 		if base.construction_status == Construction.Status.IN_PROGRESS:
 			if Saver.data.datetime.timestamp >= base.construction_date.timestamp + Saver.data.base_construction_duration:
 				base.construction_status = Construction.Status.DONE
-				has_bases_changed = true
+				base.construction_end = Datetime.new(Saver.data.datetime.timestamp)
+				changed_bases.append(base)
 				print("Construction of base %s is finished" % base.name)
 		else:
 			check_building_constructions(base)
-	if has_bases_changed:
-		bases_changed.emit()
+
+	if len(changed_bases):
+		bases_changed.emit(changed_bases)
 
 func check_building_constructions(base: Base):
-	var has_buildings_changed: bool = false
+	var changed_buildings: Array[Building] = []
 	
 	for building in base.base_layout.buildings:
 		if building.construction_status == Construction.Status.IN_PROGRESS:
@@ -30,17 +33,20 @@ func check_building_constructions(base: Base):
 			if Saver.data.datetime.timestamp >= building.construction_date.timestamp + building_template.construction_duration:
 				building.construction_status = Construction.Status.DONE
 				finish_building_construction(base, building)
-				has_buildings_changed = true
+				changed_buildings.append(building)
 				print("Construction of building %s in base %s is finished" % [building.template_type, base.name])
-	if has_buildings_changed:
-		buildings_changed.emit()
+
+	if len(changed_buildings):
+		buildings_changed.emit(changed_buildings)
 
 func start_base_construction(base: Base):
 	base.start_construction()
 	Money.spend(base.cost)
 	Saver.data.add_base(base)
 	Saver.save_data()
-	bases_changed.emit()
+	
+	var changed_bases: Array[Base] = [base]
+	bases_changed.emit(changed_bases)
 
 func start_building_construction(base: Base, building: Building):
 	building.start_construction()
@@ -48,7 +54,9 @@ func start_building_construction(base: Base, building: Building):
 	var building_template = Saver.data.building_templates.templates[building.template_type]
 	Money.spend(building_template.cost)
 	Saver.save_data()
-	buildings_changed.emit()
+	
+	var changed_buildings: Array[Building] = [building]
+	buildings_changed.emit(changed_buildings)
 
 func finish_building_construction(base: Base, building: Building):
 	if building.template_type == BuildingTemplates.Type.HANGAR:
@@ -59,3 +67,6 @@ func finish_building_construction(base: Base, building: Building):
 		base.add_ship(ship)
 		Saver.data.add_ship(ship)
 		Saver.save_data()
+		
+		var changed_ships: Array[Ship] = [ship]
+		ships_changed.emit(changed_ships)
