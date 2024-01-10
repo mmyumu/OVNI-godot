@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo1mxhj1ucajh"]
+
+[ext_resource type="PackedScene" uid="uid://bub7i462o7af5" path="res://util/sub_menu.tscn" id="1_v2m6l"]
+[ext_resource type="Script" path="res://global/menus/ships_sub_menu.gd" id="2_gx01d"]
+
+[node name="ShipsSubMenu" instance=ExtResource("1_v2m6l")]
+script = ExtResource("2_gx01d")

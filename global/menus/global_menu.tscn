@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvxq13weiv5vs"]
+[gd_scene load_steps=8 format=3 uid="uid://cvxq13weiv5vs"]
 
 [ext_resource type="Script" path="res://global/menus/global_menu.gd" id="1_20pts"]
 [ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/right_menu_button.tscn" id="3_hnsy0"]
 [ext_resource type="PackedScene" uid="uid://byiycmicju21f" path="res://global/menus/bases_sub_menu.tscn" id="3_w8hd1"]
 [ext_resource type="PackedScene" uid="uid://24u8euxexgx3" path="res://global/menus/attacks_sub_menu.tscn" id="5_e322b"]
 [ext_resource type="PackedScene" uid="uid://cke36s5sb1n32" path="res://global/menus/attack_ships_sub_menu.tscn" id="5_p2g7d"]
+[ext_resource type="PackedScene" uid="uid://bo1mxhj1ucajh" path="res://global/menus/ships_sub_menu.tscn" id="6_jsiuf"]
+[ext_resource type="PackedScene" uid="uid://o3ilvn02o00m" path="res://global/menus/ship_sub_menu.tscn" id="7_qgpvs"]
 
 [node name="GlobalMenu" type="Node2D"]
 script = ExtResource("1_20pts")
@@ -16,9 +18,13 @@ custom_minimum_size = Vector2(168, 0)
 layout_mode = 2
 text = "Bases"
 
-[node name="Events" parent="RootMenu" instance=ExtResource("3_hnsy0")]
+[node name="Attacks" parent="RootMenu" instance=ExtResource("3_hnsy0")]
 layout_mode = 2
-text = "Events"
+text = "Attacks"
+
+[node name="Ships" parent="RootMenu" instance=ExtResource("3_hnsy0")]
+layout_mode = 2
+text = "Ships"
 
 [node name="Quit" parent="RootMenu" instance=ExtResource("3_hnsy0")]
 layout_mode = 2
@@ -37,8 +43,16 @@ custom_minimum_size = Vector2(168, 0)
 offset_right = 168.0
 offset_bottom = 27.0
 
+[node name="ShipsSubMenu" parent="." instance=ExtResource("6_jsiuf")]
+offset_top = 30.0
+offset_right = 168.0
+offset_bottom = 56.0
+
+[node name="ShipSubMenu" parent="." instance=ExtResource("7_qgpvs")]
+
 [connection signal="pressed" from="RootMenu/Bases" to="." method="_on_bases_pressed"]
-[connection signal="pressed" from="RootMenu/Events" to="." method="_on_events_pressed"]
+[connection signal="pressed" from="RootMenu/Attacks" to="." method="_on_events_pressed"]
+[connection signal="pressed" from="RootMenu/Ships" to="." method="_on_ships_pressed"]
 [connection signal="pressed" from="RootMenu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="back_pressed" from="BasesSubMenu" to="." method="_on_bases_sub_menu_back_pressed"]
 [connection signal="menu_object_pressed" from="BasesSubMenu" to="." method="_on_bases_sub_menu_menu_object_pressed"]
@@ -46,5 +60,7 @@ offset_bottom = 27.0
 [connection signal="back_pressed" from="AttacksSubMenu" to="." method="_on_attacks_sub_menu_back_pressed"]
 [connection signal="menu_object_pressed" from="AttacksSubMenu" to="." method="_on_attacks_sub_menu_menu_object_pressed"]
 [connection signal="back_pressed" from="AttackShipsSubMenu" to="." method="_on_event_ships_sub_menu_back_pressed"]
+[connection signal="back_pressed" from="ShipsSubMenu" to="." method="_on_ships_sub_menu_back_pressed"]
+[connection signal="menu_object_pressed" from="ShipsSubMenu" to="." method="_on_ships_sub_menu_menu_object_pressed"]
 
 [editable path="BasesSubMenu"]

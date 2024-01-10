@@ -18,6 +18,8 @@ func _input(event):
 			display_root_menu()
 		elif $AttackShipsSubMenu.visible == true:
 			display_attacks_menu()
+		elif $ShipsSubMenu.visible == true:
+			display_root_menu()
 
 func grab_default_focus():
 	$RootMenu/Bases.grab_focus()
@@ -37,6 +39,11 @@ func display_attacks_menu():
 	hide_all_menus()
 	$AttacksSubMenu.build()
 	$AttacksSubMenu.display()
+
+func _on_ships_pressed():
+	hide_all_menus()
+	$ShipsSubMenu.build()
+	$ShipsSubMenu.display()
 
 func _on_quit_pressed():
 	Datetimer.time_factor = 0.
@@ -67,3 +74,12 @@ func _on_attacks_sub_menu_back_pressed():
 
 func _on_event_ships_sub_menu_back_pressed():
 	display_attacks_menu()
+
+func _on_ships_sub_menu_back_pressed():
+	display_root_menu()
+
+func _on_ships_sub_menu_menu_object_pressed(menu_button, ship: Ship, parent_object):
+	hide_all_menus()
+	#$ShipSubMenu.build(object)
+	$ShipSubMenu.ship = ship
+	$ShipSubMenu.show()

@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://o3ilvn02o00m"]
+
+[ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/right_menu_button.tscn" id="1_dkgo0"]
+[ext_resource type="Script" path="res://global/menus/ship_sub_menu.gd" id="1_fmx7g"]
+
+[node name="ShipSubMenu" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_fmx7g")
+
+[node name="Deploy" parent="." instance=ExtResource("1_dkgo0")]
+layout_mode = 2
+text = "Deploy"
+
+[node name="Return" parent="." instance=ExtResource("1_dkgo0")]
+layout_mode = 2
+text = "Return to base"
+
+[node name="GoTo" parent="." instance=ExtResource("1_dkgo0")]
+layout_mode = 2
+text = "Go to"
+
+[node name="Back" parent="." instance=ExtResource("1_dkgo0")]
+layout_mode = 2
+
+[connection signal="pressed" from="Deploy" to="." method="_on_deploy_pressed"]
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="GoTo" to="." method="_on_go_to_pressed"]
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
