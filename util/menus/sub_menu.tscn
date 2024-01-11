@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfel5yvvb6bgd"]
+
+[ext_resource type="Script" path="res://util/menus/sub_menu.gd" id="1_sr26k"]
+
+[node name="SubMenu" type="VBoxContainer"]
+offset_right = 43.0
+offset_bottom = 26.0
+script = ExtResource("1_sr26k")

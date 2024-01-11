@@ -1,4 +1,4 @@
-extends SubMenu
+extends ObjectSubMenu
 
 func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 	var menu_data: Array[MenuDatum] = []

@@ -1,4 +1,4 @@
-extends SubMenu
+extends ObjectSubMenu
 
 func custom_connect():
 	super.custom_connect()
@@ -10,7 +10,7 @@ func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 	for base in Saver.data.get_bases():
 		for ship in base.get_ships():
 			var menu_datum: MenuDatum = MenuDatum.new()
-			menu_datum.object = base
+			menu_datum.object = ship
 			menu_datum.button_name = "%s_%s" % [base.name, ship.name]
 			menu_datum.button_text = "%s: %s" % [base.name, ship.name]
 			menu_data.append(menu_datum)

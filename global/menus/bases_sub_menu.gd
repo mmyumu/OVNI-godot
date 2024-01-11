@@ -1,4 +1,4 @@
-extends SubMenu
+extends ObjectSubMenu
 
 func custom_connect():
 	super.custom_connect()

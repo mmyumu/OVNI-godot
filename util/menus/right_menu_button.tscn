@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://btabol7j5s3xa"]
 
 [ext_resource type="FontFile" uid="uid://dbxxuojgvk3fc" path="res://fonts/shogunate/ShogunateExpanded-RpKZ3.otf" id="1_8clbk"]
-[ext_resource type="Script" path="res://util/right_menu_button.gd" id="2_u3b07"]
+[ext_resource type="Script" path="res://util/menus/right_menu_button.gd" id="2_u3b07"]
 
 [node name="RightMenuButton" type="Button"]
 offset_right = 8.0

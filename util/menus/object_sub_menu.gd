@@ -1,12 +1,10 @@
-class_name SubMenu extends VBoxContainer
+class_name ObjectSubMenu extends SubMenu
 
 @export var menu_offset: int = 0
 
-var menu_object_button_scene: PackedScene = preload("res://util/menu_object_button.tscn")
+var menu_object_button_scene: PackedScene = preload("res://util/menus/menu_object_button.tscn")
 
 var parent_object: Object
-var first_button: Button
-var last_focus: Button
 
 signal back_pressed()
 signal menu_object_pressed(menu_button: MenuObjectButton, object: Object, parent_object: Object)
@@ -19,18 +17,8 @@ func _ready():
 func custom_connect():
 	pass
 
-func display():
-	last_focus = null
-	show()
-	grab_default_focus()
-
 func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 	return []
-
-func grab_default_focus():
-	if first_button:
-		last_focus = first_button
-		first_button.grab_focus()
 
 func build(parent_object_to_set: Object = null):
 	parent_object = parent_object_to_set

@@ -20,6 +20,8 @@ func _input(event):
 			display_attacks_menu()
 		elif $ShipsSubMenu.visible == true:
 			display_root_menu()
+		elif $ShipSubMenu.visible == true:
+			display_ships_menu()
 
 func grab_default_focus():
 	$RootMenu/Bases.grab_focus()
@@ -29,6 +31,9 @@ func _on_bases_pressed():
 
 func _on_events_pressed():
 	display_attacks_menu()
+
+func _on_ships_pressed():
+	display_ships_menu()
 
 func display_bases_menu():
 	hide_all_menus()
@@ -40,10 +45,20 @@ func display_attacks_menu():
 	$AttacksSubMenu.build()
 	$AttacksSubMenu.display()
 
-func _on_ships_pressed():
+func display_attack_menu(attack: Attack):
+	hide_all_menus()
+	$AttackShipsSubMenu.build(attack)
+	$AttackShipsSubMenu.display()
+
+func display_ships_menu():
 	hide_all_menus()
 	$ShipsSubMenu.build()
 	$ShipsSubMenu.display()
+
+func display_ship_menu(ship: Ship):
+	hide_all_menus()
+	$ShipSubMenu.ship = ship
+	$ShipSubMenu.display()
 
 func _on_quit_pressed():
 	Datetimer.time_factor = 0.
@@ -61,10 +76,8 @@ func _on_bases_sub_menu_new_base_pressed():
 	last_focus_control = $BasesSubMenu/NewBase
 	new_base_selected.emit()
 
-func _on_attacks_sub_menu_menu_object_pressed(menu_button, object, parent_object):
-	hide_all_menus()
-	$AttackShipsSubMenu.build(object)
-	$AttackShipsSubMenu.display()
+func _on_attacks_sub_menu_menu_object_pressed(menu_button, attack: Attack, parent_object):
+	display_attack_menu(attack)
 
 func _on_bases_sub_menu_back_pressed():
 	display_root_menu()
@@ -72,14 +85,24 @@ func _on_bases_sub_menu_back_pressed():
 func _on_attacks_sub_menu_back_pressed():
 	display_root_menu()
 
-func _on_event_ships_sub_menu_back_pressed():
-	display_attacks_menu()
-
 func _on_ships_sub_menu_back_pressed():
 	display_root_menu()
 
 func _on_ships_sub_menu_menu_object_pressed(menu_button, ship: Ship, parent_object):
-	hide_all_menus()
-	#$ShipSubMenu.build(object)
-	$ShipSubMenu.ship = ship
-	$ShipSubMenu.show()
+	display_ship_menu(ship)
+
+func _on_ship_sub_menu_back_pressed():
+	display_ships_menu()
+
+func _on_attack_ships_sub_menu_back_pressed():
+	display_attacks_menu()
+
+func _on_ship_sub_menu_deploy_pressed(ship):
+	pass # Replace with function body.
+
+func _on_ship_sub_menu_goto_pressed(ship):
+	pass # Replace with function body.
+
+func _on_ship_sub_menu_return_pressed(ship):
+	if not ship.hangared:
+		ship.set_destination(ship.base)

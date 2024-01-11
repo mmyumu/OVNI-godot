@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://d38erjkct3v6a"]
 
 [ext_resource type="Script" path="res://base/menus/base_menu.gd" id="1_bxi2l"]
-[ext_resource type="PackedScene" uid="uid://cfqdslq1fx3e3" path="res://base/menus/build_sub_menu.tscn" id="3_te5lv"]
-[ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/right_menu_button.tscn" id="4_yr51v"]
+[ext_resource type="PackedScene" uid="uid://b5pp2l51wdxsk" path="res://base/menus/build_sub_menu.tscn" id="4_pmwej"]
+[ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/menus/right_menu_button.tscn" id="4_yr51v"]
 
 [node name="BaseMenu" type="Node2D"]
 script = ExtResource("1_bxi2l")
@@ -22,15 +22,12 @@ text = "View"
 layout_mode = 2
 text = "Back"
 
-[node name="BuildSubMenu" parent="." instance=ExtResource("3_te5lv")]
-visible = false
+[node name="BuildSubMenu" parent="." instance=ExtResource("4_pmwej")]
 offset_right = 168.0
-offset_bottom = 27.0
+offset_bottom = 26.0
 
 [connection signal="pressed" from="RootMenu/Build" to="." method="_on_build_pressed"]
 [connection signal="pressed" from="RootMenu/View" to="." method="_on_view_pressed"]
 [connection signal="pressed" from="RootMenu/Back" to="." method="_on_back_pressed"]
 [connection signal="back_pressed" from="BuildSubMenu" to="." method="_on_build_sub_menu_back_pressed"]
 [connection signal="menu_object_pressed" from="BuildSubMenu" to="." method="_on_build_sub_menu_menu_object_pressed"]
-
-[editable path="BuildSubMenu"]

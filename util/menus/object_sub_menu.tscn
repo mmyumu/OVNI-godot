@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bub7i462o7af5"]
+
+[ext_resource type="Script" path="res://util/menus/object_sub_menu.gd" id="1_7n4lh"]
+[ext_resource type="FontFile" uid="uid://dbxxuojgvk3fc" path="res://fonts/shogunate/ShogunateExpanded-RpKZ3.otf" id="2_koq5x"]
+[ext_resource type="Script" path="res://util/menus/right_menu_button.gd" id="3_j48o8"]
+
+[node name="ObjectSubMenu" type="VBoxContainer"]
+script = ExtResource("1_7n4lh")
+menu_offset = null
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_top = NodePath("../NewBase")
+theme_override_fonts/font = ExtResource("2_koq5x")
+text = "Back"
+script = ExtResource("3_j48o8")
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

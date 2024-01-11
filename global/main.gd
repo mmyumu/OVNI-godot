@@ -42,7 +42,7 @@ func _on_attack_ships_sub_menu_menu_object_focus_entered(menu_button: MenuObject
 func _on_attack_ships_sub_menu_menu_object_focus_exited(menu_button: MenuObjectButton, ship: Ship, attack: Attack):
 	$EarthLayout.hide_attack_info(ship, attack)
 
-func _on_event_ships_sub_menu_menu_object_pressed(menu_button, ship: Ship, attack: Attack):
+func _on_attack_ships_sub_menu_menu_object_pressed(menu_button, ship: Ship, attack: Attack):
 	if ship.at_destination(attack):
 		Global.last_time_factor = Datetimer.time_factor
 		Datetimer.time_factor = 1.

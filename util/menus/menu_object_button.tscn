@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bfn2y8x8gyoas"]
 
-[ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/right_menu_button.tscn" id="1_1blx4"]
-[ext_resource type="Script" path="res://util/menu_object_button.gd" id="2_trovu"]
+[ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/menus/right_menu_button.tscn" id="1_1blx4"]
+[ext_resource type="Script" path="res://util/menus/menu_object_button.gd" id="2_trovu"]
 
 [node name="MenuObjectButton" instance=ExtResource("1_1blx4")]
 text = "Placeholder"
