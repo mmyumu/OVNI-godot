@@ -12,6 +12,9 @@ func _ready():
 		if i == 0:
 			game_slot.set_focus()
 
+func _input(event):
+	if event.is_action_pressed("cancel"):
+		_on_back_button_pressed()
 
 func _on_back_button_pressed():
 	get_tree().change_scene_to_file("res://menu.tscn")
