@@ -1,7 +1,8 @@
 extends Node
 
 
-signal ship_reached_attack(attack: Attack)
+signal ship_reached_attack(ship:Ship, attack: Attack)
+signal ship_hangared(ship: Ship)
 
 func _process(delta):
 	check_destination()
@@ -29,9 +30,12 @@ func move_ship(ship: Ship, delta):
 		print("Ship: reached destination %s at %s" % [ship.destination, Saver.data.datetime.get_datetime_str()])
 		
 		if ship.destination is Attack:
-			ship_reached_attack.emit(ship.attack)
+			ship_reached_attack.emit(ship, ship.attack)
 		elif ship.destination is Base:
+			var previous_hangared = ship.hangared
 			ship.parks()
+			if previous_hangared != ship.hangared:
+				ship_hangared.emit(ship)
 	else:
 		var v = ship.location - ship.get_current_destination().location
 		var angle = v.angle() - PI/2
@@ -40,3 +44,10 @@ func move_ship(ship: Ship, delta):
 		# Since the rotation goes crazy using final_delta when timer is accelerated (it rotates too much),
 		# then we use either final_delta or delta
 		ship.rotation = lerp_angle(ship.rotation, angle, min(final_delta, delta))
+
+func move_and_attack(ship: Ship, attack: Attack):
+	var previous_hangared = ship.hangared
+	ship.set_attack(attack)
+	ship.move()
+	if previous_hangared != ship.hangared:
+		ship_hangared.emit(ship)

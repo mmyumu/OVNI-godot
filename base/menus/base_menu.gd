@@ -34,7 +34,7 @@ func display_view_menu():
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://global/main.tscn")
 
-func _on_build_sub_menu_back_pressed():
+func _on_build_sub_menu_back_pressed(parent_object: Object):
 	display_root_menu()
 
 

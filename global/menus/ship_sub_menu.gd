@@ -11,7 +11,7 @@ func _ready():
 	first_button = $Deploy
 
 func _on_back_pressed():
-	back_pressed.emit()
+	back_pressed.emit(ship)
 
 func _on_deploy_pressed():
 	deploy_pressed.emit(ship)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvxq13weiv5vs"]
+[gd_scene load_steps=9 format=3 uid="uid://cvxq13weiv5vs"]
 
 [ext_resource type="Script" path="res://global/menus/global_menu.gd" id="1_20pts"]
 [ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/menus/right_menu_button.tscn" id="3_hnsy0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://wetmjqcyqhka" path="res://global/menus/attack_ships_sub_menu.tscn" id="5_p2g7d"]
 [ext_resource type="PackedScene" uid="uid://btc3cmo6raont" path="res://global/menus/ships_sub_menu.tscn" id="6_jsiuf"]
 [ext_resource type="PackedScene" uid="uid://o3ilvn02o00m" path="res://global/menus/ship_sub_menu.tscn" id="7_qgpvs"]
+[ext_resource type="PackedScene" uid="uid://td6a7ykkqntk" path="res://global/menus/ship_deploy_attacks_sub_menu.tscn" id="8_a8riw"]
 [ext_resource type="PackedScene" uid="uid://cccmgmtdxi6qe" path="res://global/menus/attacks_sub_menu.tscn" id="8_j0x7q"]
 
 [node name="GlobalMenu" type="Node2D"]
@@ -40,13 +41,11 @@ menu_offset = 1
 visible = false
 offset_right = 168.0
 offset_bottom = 26.0
-menu_offset = 0
 
 [node name="AttackShipsSubMenu" parent="." instance=ExtResource("5_p2g7d")]
 visible = false
 offset_right = 168.0
 offset_bottom = 26.0
-menu_offset = 0
 
 [node name="ShipsSubMenu" parent="." instance=ExtResource("6_jsiuf")]
 visible = false
@@ -58,6 +57,10 @@ offset_bottom = 56.0
 visible = false
 offset_right = 168.0
 offset_bottom = 116.0
+
+[node name="ShipDeployAttacksSubMenu" parent="." instance=ExtResource("8_a8riw")]
+offset_right = 168.0
+offset_bottom = 26.0
 
 [connection signal="pressed" from="RootMenu/Bases" to="." method="_on_bases_pressed"]
 [connection signal="pressed" from="RootMenu/Attacks" to="." method="_on_events_pressed"]
@@ -75,5 +78,6 @@ offset_bottom = 116.0
 [connection signal="deploy_pressed" from="ShipSubMenu" to="." method="_on_ship_sub_menu_deploy_pressed"]
 [connection signal="goto_pressed" from="ShipSubMenu" to="." method="_on_ship_sub_menu_goto_pressed"]
 [connection signal="return_pressed" from="ShipSubMenu" to="." method="_on_ship_sub_menu_return_pressed"]
+[connection signal="back_pressed" from="ShipDeployAttacksSubMenu" to="." method="_on_ship_deploy_attacks_sub_menu_back_pressed"]
 
 [editable path="BasesSubMenu"]

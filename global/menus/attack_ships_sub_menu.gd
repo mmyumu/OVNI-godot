@@ -2,10 +2,13 @@ extends ObjectSubMenu
 
 func custom_connect():
 	super.custom_connect()
-	MastermindIntel.attack_spawned.connect(_on_attack_spawned)
+	#MastermindIntel.attack_spawned.connect(_on_attack_spawned)
 	Ships.ship_reached_attack.connect(_on_ship_reached_attack)
 
 func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
+	if not parent_object:
+		return []
+
 	var menu_data: Array[MenuDatum] = []
 	for base in Saver.data.get_bases():
 		for ship in base.get_ships():
@@ -21,8 +24,8 @@ func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 			menu_data.append(menu_datum)
 	return menu_data
 
-func _on_attack_spawned():
-	build()
+#func _on_attack_spawned(attack: Attack):
+	#build()
 
-func _on_ship_reached_attack():
+func _on_ship_reached_attack(ship: Ship, attack: Attack):
 	build()

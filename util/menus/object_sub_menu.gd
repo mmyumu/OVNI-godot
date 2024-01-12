@@ -6,7 +6,7 @@ var menu_object_button_scene: PackedScene = preload("res://util/menus/menu_objec
 
 var parent_object: Object
 
-signal back_pressed()
+signal back_pressed(parent_object: Object)
 signal menu_object_pressed(menu_button: MenuObjectButton, object: Object, parent_object: Object)
 signal menu_object_focus_entered(menu_button: MenuObjectButton, object: Object, parent_object: Object)
 signal menu_object_focus_exited(menu_button: MenuObjectButton, object: Object, parent_object: Object)
@@ -21,7 +21,9 @@ func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 	return []
 
 func build(parent_object_to_set: Object = null):
-	parent_object = parent_object_to_set
+	if parent_object_to_set:
+		parent_object = parent_object_to_set
+
 	var previous_menu_button: Button
 	first_button = $Back
 	
@@ -70,7 +72,7 @@ func build(parent_object_to_set: Object = null):
 			grab_default_focus()
 
 func _on_back_pressed():
-	back_pressed.emit()
+	back_pressed.emit(parent_object)
 
 func _on_menu_object_pressed(menu_button: MenuObjectButton, object: Object):
 	menu_object_pressed.emit(menu_button, object, parent_object)

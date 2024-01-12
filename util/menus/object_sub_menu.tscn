@@ -6,7 +6,6 @@
 
 [node name="ObjectSubMenu" type="VBoxContainer"]
 script = ExtResource("1_7n4lh")
-menu_offset = null
 
 [node name="Back" type="Button" parent="."]
 layout_mode = 2

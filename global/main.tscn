@@ -44,7 +44,9 @@ position = Vector2(1105, 80)
 [connection signal="menu_object_focus_entered" from="GlobalMenu/AttackShipsSubMenu" to="." method="_on_attack_ships_sub_menu_menu_object_focus_entered"]
 [connection signal="menu_object_focus_exited" from="GlobalMenu/AttackShipsSubMenu" to="." method="_on_attack_ships_sub_menu_menu_object_focus_exited"]
 [connection signal="menu_object_pressed" from="GlobalMenu/AttackShipsSubMenu" to="." method="_on_attack_ships_sub_menu_menu_object_pressed"]
-[connection signal="attack_spawned" from="EarthLayout" to="." method="_on_earth_layout_attack_spawned"]
+[connection signal="menu_object_focus_entered" from="GlobalMenu/ShipDeployAttacksSubMenu" to="." method="_on_ship_deploy_attacks_sub_menu_menu_object_focus_entered"]
+[connection signal="menu_object_focus_exited" from="GlobalMenu/ShipDeployAttacksSubMenu" to="." method="_on_ship_deploy_attacks_sub_menu_menu_object_focus_exited"]
+[connection signal="menu_object_pressed" from="GlobalMenu/ShipDeployAttacksSubMenu" to="." method="_on_ship_deploy_attacks_sub_menu_menu_object_pressed"]
 [connection signal="base_creation_over" from="EarthLayout" to="." method="_on_earth_layout_base_creation_over"]
 
 [editable path="GlobalMenu"]
