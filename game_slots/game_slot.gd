@@ -14,6 +14,7 @@ func build_game_slot():
 	if data:
 		$EmptySlot.visible = false
 		$Slot.visible = true
+		$CenterContainer/Erase.disabled = false
 		
 		$Slot/MarginContainer/VBoxContainer/Name.text = data.get_data_name()
 		
@@ -22,6 +23,7 @@ func build_game_slot():
 	else:
 		$EmptySlot.visible = true
 		$Slot.visible = false
+		$CenterContainer/Erase.disabled = true
 
 func set_focus():
 	if data:
@@ -30,9 +32,7 @@ func set_focus():
 		$EmptySlot.grab_focus()
 
 func _on_erase_pressed():
-	Saver.erase_data(slot_number)
-	data = null
-	build_game_slot()
+	$ConfirmDialog.open()
 
 func _on_empty_slot_pressed():
 	Saver.set_slot(slot_number)
@@ -48,3 +48,13 @@ func _on_slot_pressed():
 	build_game_slot()
 	get_tree().change_scene_to_file("res://global/main.tscn")
 	Datetimer.time_factor = 1.
+
+
+func _on_confirm_dialog_confirmed():
+	$ConfirmDialog.close()
+	Saver.erase_data(slot_number)
+	data = null
+	build_game_slot()
+
+func _on_confirm_dialog_canceled():
+	$ConfirmDialog.close()
