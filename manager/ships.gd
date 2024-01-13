@@ -4,10 +4,11 @@ extends Node
 signal ship_reached_attack(ship:Ship, attack: Attack)
 signal ship_hangared(ship: Ship)
 signal ship_new_destination(ship: Ship)
+signal ship_reached_destination(ship: Ship)
 
 func _process(delta):
 	check_destination()
-	move(delta)
+	_move(delta)
 
 func check_destination():
 	for base in Saver.data.get_bases():
@@ -16,11 +17,11 @@ func check_destination():
 				ship.attack = null
 				ship.set_destination(base)
 
-func move(delta):
+func _move(delta):
 	for ship in Saver.data.get_ships():
-		move_ship(ship, delta)
+		_move_ship(ship, delta)
 
-func move_ship(ship: Ship, delta):
+func _move_ship(ship: Ship, delta):
 	if not ship.get_current_destination():
 		return
 
@@ -32,11 +33,16 @@ func move_ship(ship: Ship, delta):
 		
 		if ship.destination is Attack:
 			ship_reached_attack.emit(ship, ship.attack)
+			ship_reached_destination.emit(ship)
 		elif ship.destination is Base:
 			var previous_hangared = ship.hangared
 			ship.parks()
 			if previous_hangared != ship.hangared:
 				ship_hangared.emit(ship)
+			ship_reached_destination.emit(ship)
+		elif ship.destination is EarthMarker:
+			ship_reached_destination.emit(ship)
+			
 	else:
 		var v = ship.location - ship.get_current_destination().location
 		var angle = v.angle() - PI/2
@@ -55,4 +61,7 @@ func move_and_attack(ship: Ship, attack: Attack):
 		ship_hangared.emit(ship)
 	if previous_destination != ship.destination:
 		ship_new_destination.emit(ship)
-	
+
+func move_to(ship: Ship, destination: Vector2):
+	var earth_marker = EarthMarker.new(destination)
+	ship.set_destination(earth_marker)

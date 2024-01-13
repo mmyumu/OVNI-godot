@@ -42,6 +42,7 @@ theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 [node name="GlobalInfos" parent="." instance=ExtResource("6_jm1ub")]
 position = Vector2(1105, 80)
 
+[connection signal="goto_pressed" from="GlobalMenu" to="." method="_on_global_menu_goto_pressed"]
 [connection signal="new_base_selected" from="GlobalMenu" to="." method="_on_global_menu_new_base_selected"]
 [connection signal="menu_object_focus_entered" from="GlobalMenu/BasesSubMenu" to="." method="_on_bases_sub_menu_menu_object_focus_entered"]
 [connection signal="menu_object_focus_exited" from="GlobalMenu/BasesSubMenu" to="." method="_on_bases_sub_menu_menu_object_focus_exited"]
@@ -54,8 +55,10 @@ position = Vector2(1105, 80)
 [connection signal="menu_object_focus_exited" from="GlobalMenu/ShipDeployAttacksSubMenu" to="." method="_on_ship_deploy_attacks_sub_menu_menu_object_focus_exited"]
 [connection signal="menu_object_pressed" from="GlobalMenu/ShipDeployAttacksSubMenu" to="." method="_on_ship_deploy_attacks_sub_menu_menu_object_pressed"]
 [connection signal="base_creation_over" from="EarthLayout" to="." method="_on_earth_layout_base_creation_over"]
+[connection signal="goto_selection_over" from="EarthLayout" to="." method="_on_earth_layout_goto_selection_over"]
 
 [editable path="GlobalMenu"]
 [editable path="GlobalMenu/BasesSubMenu"]
+[editable path="GlobalMenu/ShipSubMenu"]
 [editable path="EarthLayout"]
 [editable path="Clock"]

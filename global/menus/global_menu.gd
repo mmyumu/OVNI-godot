@@ -1,6 +1,7 @@
 class_name GlobalMenu extends Menu
 
 signal new_base_selected()
+signal goto_pressed(ship: Ship)
 
 func _ready():
 	display_root_menu()
@@ -107,12 +108,13 @@ func _on_attack_ships_sub_menu_back_pressed(parent_object: Object):
 func _on_ship_sub_menu_deploy_pressed(ship):
 	display_ship_deploy_attacks_menu(ship)
 
-func _on_ship_sub_menu_goto_pressed(ship):
-	pass # Replace with function body.
-
 func _on_ship_sub_menu_return_pressed(ship):
 	if not ship.hangared:
 		ship.set_destination(ship.base)
 
 func _on_ship_deploy_attacks_sub_menu_back_pressed(ship: Ship):
 	display_ship_menu(ship)
+
+func _on_ship_sub_menu_goto_pressed(ship):
+	last_focus_control = $ShipSubMenu/GoTo
+	goto_pressed.emit(ship)

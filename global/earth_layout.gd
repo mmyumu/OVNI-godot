@@ -6,11 +6,6 @@ var ship_icon_scene: PackedScene = preload("res://global/icons/ship_icon.tscn")
 var attack_info_panel_scene: PackedScene = preload("res://global/panels/attack_info_panel.tscn")
 var base_info_panel_scene: PackedScene = preload("res://global/panels/base_info_panel.tscn")
 
-var mouse_sens= 500.0
-var is_creating_new_base: bool = false
-var mouse_pos
-var last_mouse_pos
-var valid_base_location: bool = false
 var highlighted_base: Base
 var highlighted_attack: Attack
 
@@ -21,6 +16,7 @@ var base_info_panel: BaseInfoPanel
 
 
 signal base_creation_over()
+signal goto_selection_over()
 signal attack_spawned(attack: Attack)
 
 func _init():
@@ -34,70 +30,46 @@ func _ready():
 	MastermindIntel.attack_spawned.connect(_on_attack_spawned)
 	
 	$NewBaseDialog.close()
-	mouse_pos = to_local(get_global_mouse_position())
-	$Cursor.visible = false
+	$NewBaseCursor.visible = false
+	$GoToCursor.visible = false
 
 	for attack in Saver.data.mastermind.get_attacks_ongoing():
 		add_attack(attack)
 	
-	if $Area2D.overlaps_area($Cursor/Area2D):
-		$Cursor.set_valid()
-		valid_base_location = true
+	if $Area2D.overlaps_area($NewBaseCursor/Area2D):
+		$NewBaseCursor.set_valid()
 	else:
-		$Cursor.set_invalid()
-		valid_base_location = false
+		$NewBaseCursor.set_invalid()
+
+	if $Area2D.overlaps_area($GoToCursor/Area2D):
+		$GoToCursor.set_valid()
+	else:
+		$GoToCursor.set_invalid()
 	
 	$Area2D/CollisionShape2D.get_shape().size.x = Saver.data.earth.width
 	$Area2D/CollisionShape2D.get_shape().size.y = Saver.data.earth.height
 	
 	$MothershipIcon.play()
 
-func _input(event):
-	if event is InputEventMouseMotion:
-		mouse_pos = event.position
-		
-	if self.is_active():
-		if event.is_action_pressed("validate") and valid_base_location:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			last_mouse_pos = get_global_mouse_position()
-			$NewBaseDialog.open()
-		elif event.is_action_pressed("cancel"):
-			creating_new_base_over()
-			get_viewport().set_input_as_handled()
-
 func _physics_process(delta):
-	if self.is_active():
-		var direction: Vector2
-		direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-		direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-
-		if abs(direction.x) == 1 and abs(direction.y) == 1:
-			direction = direction.normalized()
-
-		var movement = mouse_sens * direction * delta
-		if (movement):  
-			Input.warp_mouse(mouse_pos + movement)
-		mouse_pos = get_global_mouse_position()
-		$Cursor.position = to_local(mouse_pos)
-		
 	$MothershipIcon.position = Saver.data.mastermind.location
 
-func is_active():
-	return is_creating_new_base
-
 func set_creating_new_base():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
-	$Cursor.visible = true
-	is_creating_new_base = true
+	$NewBaseCursor.activate()
 
 func creating_new_base_over():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$Cursor.visible = false
-	is_creating_new_base = false
+	$NewBaseCursor.deactivate()
 	base_creation_over.emit()
 
+func set_selecting_goto(ship: Ship):
+	$GoToCursor.ship = ship
+	$GoToCursor.activate()
+
+func selecting_goto_over():
+	$GoToCursor.deactivate()
+	goto_selection_over.emit()
+
 func dialog_closed():
-	Input.warp_mouse(last_mouse_pos)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 	get_tree().paused = false
 
@@ -107,7 +79,7 @@ func _on_new_base_dialog_canceled():
 func _on_new_base_dialog_confirmed(base_name):
 	var base: Base = Base.new()
 	base.name = base_name
-	base.location = Vector2(to_local(last_mouse_pos))
+	base.location = Vector2(to_local($NewBaseCursor.last_mouse_pos))
 	
 	Headquarters.start_base_construction(base)
 
@@ -141,12 +113,12 @@ func unhighlight_base():
 		base_icon.highlighted = false
 
 func _on_area_2d_mouse_entered():
-	$Cursor.set_valid()
-	valid_base_location = true
+	$NewBaseCursor.set_valid()
+	$GoToCursor.set_valid()
 
 func _on_area_2d_mouse_exited():
-	$Cursor.set_invalid()
-	valid_base_location = false
+	$NewBaseCursor.set_invalid()
+	$GoToCursor.set_invalid()
 
 func _on_attack_spawned(attack: Attack):
 	add_attack(attack)
@@ -200,3 +172,21 @@ func show_base_info(base: Base):
 func hide_base_info(base: Base):
 	if base_info_panel:
 		base_info_panel.queue_free()
+
+func _on_new_base_cursor_canceled():
+	creating_new_base_over()
+
+func _on_new_base_cursor_validated():
+	$NewBaseDialog.open()
+
+func _on_go_to_cursor_validated():
+	#var base: Base = Base.new()
+	#base.name = base_name
+	#base.location = Vector2(to_local($NewBaseCursor.last_mouse_pos))
+	#
+	#Headquarters.start_base_construction(base)
+	Ships.move_to($GoToCursor.ship, Vector2(to_local($GoToCursor.last_mouse_pos)))
+	selecting_goto_over()
+
+func _on_go_to_cursor_canceled():
+	selecting_goto_over()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bica1ulaw40un"]
+[gd_scene load_steps=15 format=3 uid="uid://bica1ulaw40un"]
 
 [ext_resource type="Script" path="res://global/earth_layout.gd" id="1_ihe4c"]
 [ext_resource type="PackedScene" uid="uid://3v3wlr67l7qe" path="res://global/earth_2d.tscn" id="1_m11kq"]
 [ext_resource type="PackedScene" uid="uid://plg0a0t7y63" path="res://cursor.tscn" id="3_skjdf"]
+[ext_resource type="PackedScene" uid="uid://bvihayb548sbl" path="res://global/cursors/go_to_cursor.tscn" id="4_b5fmo"]
 [ext_resource type="PackedScene" uid="uid://m0c6r8g6xxwj" path="res://global/new_base_dialog.tscn" id="4_ieeqp"]
 [ext_resource type="Texture2D" uid="uid://dnaxf55r4ahre" path="res://art/mothership2-Sheet.png" id="6_7ux5h"]
 
@@ -63,7 +64,9 @@ script = ExtResource("1_ihe4c")
 
 [node name="Earth2D" parent="." instance=ExtResource("1_m11kq")]
 
-[node name="Cursor" parent="." instance=ExtResource("3_skjdf")]
+[node name="NewBaseCursor" parent="." instance=ExtResource("3_skjdf")]
+
+[node name="GoToCursor" parent="." instance=ExtResource("4_b5fmo")]
 
 [node name="NewBaseDialog" parent="." instance=ExtResource("4_ieeqp")]
 visible = false
@@ -158,6 +161,10 @@ polygon = PackedVector2Array(-547, 274, -547, 273, 547, 274, 547, 237, 530, 234,
 [node name="Artic" type="CollisionPolygon2D" parent="Continents/Artic"]
 polygon = PackedVector2Array(-390, -225, -339, -246, -224, -252, -172, -250, -99, -254, -54, -254, 14, -250, 177, -252, 202, -251, 208, -246, 276, -249, 303, -247, 307, -246, 327, -245, 356, -237, 460, -234, 465, -228, 479, -223, 536, -221, 547, -218, 547, -274, -547, -274, -547, -221)
 
+[connection signal="canceled" from="NewBaseCursor" to="." method="_on_new_base_cursor_canceled"]
+[connection signal="validated" from="NewBaseCursor" to="." method="_on_new_base_cursor_validated"]
+[connection signal="canceled" from="GoToCursor" to="." method="_on_go_to_cursor_canceled"]
+[connection signal="validated" from="GoToCursor" to="." method="_on_go_to_cursor_validated"]
 [connection signal="canceled" from="NewBaseDialog" to="." method="_on_new_base_dialog_canceled"]
 [connection signal="confirmed" from="NewBaseDialog" to="." method="_on_new_base_dialog_confirmed"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

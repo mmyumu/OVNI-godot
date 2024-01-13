@@ -14,6 +14,11 @@ func _on_earth_layout_base_creation_over():
 	await get_tree().create_timer(0.1).timeout
 	$GlobalMenu.reenable()
 
+func _on_earth_layout_goto_selection_over():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	await get_tree().create_timer(0.1).timeout
+	$GlobalMenu.reenable()
+
 func _on_day_changed(date: Datetime):
 	Saver.save_data()
 
@@ -62,3 +67,10 @@ func ship_attack(ship: Ship, attack: Attack):
 		get_tree().change_scene_to_file("res://shootemup/main.tscn")
 	else:
 		Ships.move_and_attack(ship, attack)
+
+
+func _on_global_menu_goto_pressed(ship: Ship):
+	Global.last_time_factor = Datetimer.time_factor
+	Datetimer.time_factor = 1.
+	$GlobalMenu.disable()
+	$EarthLayout.set_selecting_goto(ship)

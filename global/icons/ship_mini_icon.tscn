@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://global/icons/ship_mini_icon.gd" id="2_f6grm"]
 
 [node name="ShipMiniIcon" type="TextureRect"]
+z_index = 1000
 offset_right = 14.0
 offset_bottom = 14.0
 texture = ExtResource("1_n18vs")

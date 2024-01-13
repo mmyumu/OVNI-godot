@@ -6,7 +6,7 @@
 size = Vector2(2, 2)
 
 [node name="Cursor" type="Sprite2D"]
-z_index = 1000
+z_index = 3000
 script = ExtResource("1_pj5ox")
 
 [node name="Area2D" type="Area2D" parent="."]

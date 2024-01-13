@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvihayb548sbl"]
+
+[ext_resource type="PackedScene" uid="uid://plg0a0t7y63" path="res://cursor.tscn" id="1_lto23"]
+[ext_resource type="Script" path="res://global/cursors/go_to_cursor.gd" id="2_v17y7"]
+
+[node name="GoToCursor" instance=ExtResource("1_lto23")]
+script = ExtResource("2_v17y7")
