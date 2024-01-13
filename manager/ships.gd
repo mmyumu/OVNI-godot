@@ -3,6 +3,7 @@ extends Node
 
 signal ship_reached_attack(ship:Ship, attack: Attack)
 signal ship_hangared(ship: Ship)
+signal ship_new_destination(ship: Ship)
 
 func _process(delta):
 	check_destination()
@@ -43,11 +44,15 @@ func move_ship(ship: Ship, delta):
 		# We do not need to use final_delta here because the rotation does not matter on the game, it is just visual
 		# Since the rotation goes crazy using final_delta when timer is accelerated (it rotates too much),
 		# then we use either final_delta or delta
-		ship.rotation = lerp_angle(ship.rotation, angle, min(final_delta, delta))
+		ship.rotation = lerp_angle(ship.rotation, angle, min(final_delta, delta * 10))
 
 func move_and_attack(ship: Ship, attack: Attack):
 	var previous_hangared = ship.hangared
+	var previous_destination = ship.destination
 	ship.set_attack(attack)
 	ship.move()
 	if previous_hangared != ship.hangared:
 		ship_hangared.emit(ship)
+	if previous_destination != ship.destination:
+		ship_new_destination.emit(ship)
+	

@@ -26,12 +26,18 @@ position = Vector2(1105, 7)
 
 [node name="x1Button" parent="Clock/VBoxContainer/ButtonsContainer" index="0"]
 focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
+theme_override_colors/font_color = Color(0.545098, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.545098, 0, 0, 1)
 
 [node name="x100Button" parent="Clock/VBoxContainer/ButtonsContainer" index="1"]
 focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 
 [node name="x10000Button" parent="Clock/VBoxContainer/ButtonsContainer" index="2"]
 focus_neighbor_bottom = NodePath("../../../../GlobalMenu/RootMenu/Bases")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 
 [node name="GlobalInfos" parent="." instance=ExtResource("6_jm1ub")]
 position = Vector2(1105, 80)

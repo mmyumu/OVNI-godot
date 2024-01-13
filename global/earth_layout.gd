@@ -150,7 +150,6 @@ func _on_area_2d_mouse_exited():
 
 func _on_attack_spawned(attack: Attack):
 	add_attack(attack)
-	#attack_spawned.emit(attack)
 
 func add_attack(attack: Attack):
 	var attack_icon = attack_icon_scene.instantiate()

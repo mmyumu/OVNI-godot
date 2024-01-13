@@ -43,16 +43,18 @@ func _on_attack_ships_sub_menu_menu_object_pressed(menu_button, ship: Ship, atta
 	ship_attack(ship, attack)
 
 func _on_ship_deploy_attacks_sub_menu_menu_object_focus_entered(menu_button, attack: Attack, ship: Ship):
+	$EarthLayout.highlight_attack(attack)
 	$EarthLayout.show_attack_info(ship, attack)
 
 func _on_ship_deploy_attacks_sub_menu_menu_object_focus_exited(menu_button, attack: Attack, ship: Ship):
+	$EarthLayout.unhighlight_attack()
 	$EarthLayout.hide_attack_info(ship, attack)
 
 func _on_ship_deploy_attacks_sub_menu_menu_object_pressed(menu_button, attack: Attack, ship: Ship):
 	ship_attack(ship, attack)
 
 func ship_attack(ship: Ship, attack: Attack):
-	if ship.at_destination(attack):
+	if ship.attack == attack and ship.at_destination(attack):
 		Global.last_time_factor = Datetimer.time_factor
 		Datetimer.time_factor = 1.
 		Global.current_attack = attack
