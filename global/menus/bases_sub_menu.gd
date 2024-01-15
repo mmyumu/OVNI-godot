@@ -7,10 +7,6 @@ func custom_connect():
 func grab_default_focus():
 	$NewBase.grab_focus()
 
-func build(parent_object_to_set: Object = null):
-	super.build(parent_object_to_set)
-	#$NewBase.disabled == Bank.can_spend()
-
 func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 	var menu_data: Array[MenuDatum] = []
 	

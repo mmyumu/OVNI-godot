@@ -7,10 +7,10 @@ func _ready():
 	$CanvasLayer/VBoxContainer/LineEdit.grab_focus()
 
 func _process(delta):
-	$CanvasLayer/VBoxContainer/HBoxContainer/OkButton.disabled = !is_valid_base_name()
+	$CanvasLayer/VBoxContainer/HBoxContainer/OkButton.disabled = !is_valid()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("confirm") and is_valid_base_name():
+	if event.is_action_pressed("confirm") and is_valid():
 		confirm()
 	if event.is_action_pressed("cancel"):
 		cancel()
@@ -42,6 +42,13 @@ func confirm():
 func cancel():
 	close()
 	canceled.emit()
+
+func is_valid():
+	return is_valid_money() and is_valid_base_name()
+
+func is_valid_money():
+	if not Bank.can_spend(Saver.data.base_cost):
+		$CanvasLayer/VBoxContainer/ErrorLabel.text = "%s$ required, only %s$ in bank"% [Saver.data.base_cost, Saver.data.money]
 
 func is_valid_base_name():
 	if len($CanvasLayer/VBoxContainer/LineEdit.text) == 0:
