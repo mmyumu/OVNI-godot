@@ -3,6 +3,9 @@ extends Sprite2D
 
 @export var placing_input_timeout: float = 0.1
 
+var building_base_info_panel_scene: PackedScene = preload("res://base/panels/building_base_info_panel.tscn")
+var building_base_info_panel
+
 var base_layout
 var deadzone: float = 0.5
 var is_placing: bool = false
@@ -150,3 +153,12 @@ func _on_place_building_dialog_confirmed():
 		$BaseGrid.add_building(building, building_to_place)
 		building_to_place.validate_placing()
 	get_tree().paused = false
+
+func show_building_info(building: Building, base: Base):
+	building_base_info_panel = building_base_info_panel_scene.instantiate()
+	building_base_info_panel.building = building
+	add_child(building_base_info_panel)
+
+func hide_building_info(building: Building, base: Base):
+	if building_base_info_panel:
+		building_base_info_panel.queue_free()

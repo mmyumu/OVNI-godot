@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl65tp7eungkb"]
+[gd_scene load_steps=3 format=3 uid="uid://cupn6xgafkyc4"]
 
-[ext_resource type="Script" path="res://global/panels/info_panel.gd" id="1_rrnd5"]
+[ext_resource type="Script" path="res://util/info_panel.gd" id="1_odoeo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0kbh"]
 content_margin_left = 10.0
@@ -21,7 +21,7 @@ shadow_offset = Vector2(3, 3)
 
 [node name="InfoPanel" type="Node2D"]
 z_index = 4000
-script = ExtResource("1_rrnd5")
+script = ExtResource("1_odoeo")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 offset_right = 139.0

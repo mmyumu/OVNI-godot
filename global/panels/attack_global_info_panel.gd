@@ -1,4 +1,4 @@
-class_name AttackInfoPanel extends InfoPanel
+class_name AttackGlobalInfoPanel extends GlobalInfoPanel
 
 var attack: Attack
 var ship: Ship

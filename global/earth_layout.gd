@@ -3,16 +3,16 @@ extends Node2D
 var base_icon_scene: PackedScene = preload("res://global/icons/base_icon.tscn")
 var attack_icon_scene: PackedScene = preload("res://global/icons/attack_icon.tscn")
 var ship_icon_scene: PackedScene = preload("res://global/icons/ship_icon.tscn")
-var attack_info_panel_scene: PackedScene = preload("res://global/panels/attack_info_panel.tscn")
-var base_info_panel_scene: PackedScene = preload("res://global/panels/base_info_panel.tscn")
+var attack_info_panel_scene: PackedScene = preload("res://global/panels/attack_global_info_panel.tscn")
+var base_info_panel_scene: PackedScene = preload("res://global/panels/base_global_info_panel.tscn")
 
 var highlighted_base: Base
 var highlighted_attack: Attack
 
 var base_icons: Array[BaseIcon] = []
 var attack_icons: Array[AttackIcon] = []
-var attack_info_panel: AttackInfoPanel
-var base_info_panel: BaseInfoPanel
+var attack_info_panel: AttackGlobalInfoPanel
+var base_info_panel: BaseGlobalInfoPanel
 
 
 signal base_creation_over()

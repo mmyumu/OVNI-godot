@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv01wsrrw1qvh"]
+
+[ext_resource type="PackedScene" uid="uid://cupn6xgafkyc4" path="res://util/info_panel.tscn" id="1_ejg2t"]
+[ext_resource type="Script" path="res://global/panels/global_info_panel.gd" id="1_yg2u2"]
+
+[node name="GlobalInfoPanel" instance=ExtResource("1_ejg2t")]
+script = ExtResource("1_yg2u2")

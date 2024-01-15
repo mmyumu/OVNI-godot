@@ -1,4 +1,4 @@
-class_name ShipInfoPanel extends InfoPanel
+class_name ShipGlobalInfoPanel extends GlobalInfoPanel
 
 var ship: Ship
 

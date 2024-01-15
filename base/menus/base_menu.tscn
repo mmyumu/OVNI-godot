@@ -36,3 +36,4 @@ offset_bottom = 26.0
 [connection signal="pressed" from="RootMenu/Back" to="." method="_on_back_pressed"]
 [connection signal="back_pressed" from="BuildSubMenu" to="." method="_on_build_sub_menu_back_pressed"]
 [connection signal="menu_object_pressed" from="BuildSubMenu" to="." method="_on_build_sub_menu_menu_object_pressed"]
+[connection signal="back_pressed" from="ViewSubMenu" to="." method="_on_view_sub_menu_back_pressed"]

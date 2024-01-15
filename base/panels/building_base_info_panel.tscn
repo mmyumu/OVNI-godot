@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdoqtbxjcj5jl"]
+
+[ext_resource type="PackedScene" uid="uid://cdee63ok2nm8a" path="res://base/panels/base_info_panel.tscn" id="1_61bgs"]
+[ext_resource type="Script" path="res://base/panels/building_base_info_panel.gd" id="2_8c5qq"]
+[ext_resource type="FontFile" uid="uid://c1mgwsb6wtd8q" path="res://fonts/shogunate/ShogunateCondensed-nRxWY.otf" id="3_qtnuh"]
+
+[node name="BuildingBaseInfoPanel" instance=ExtResource("1_61bgs")]
+script = ExtResource("2_8c5qq")
+
+[node name="NameLabel" type="Label" parent="PanelContainer/GridContainer" index="0"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_qtnuh")
+theme_override_font_sizes/font_size = 20
+text = "Name:"
+
+[node name="NameValueLabel" type="Label" parent="PanelContainer/GridContainer" index="1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_qtnuh")
+theme_override_font_sizes/font_size = 20

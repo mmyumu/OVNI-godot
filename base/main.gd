@@ -13,3 +13,9 @@ func _on_build_sub_menu_menu_object_pressed(menu_button, building_template: Buil
 	building_to_place.set_placing_mode()
 	$BaseLayout.set_placing(building_to_place)
 	$BaseMenu.disable()
+
+func _on_view_sub_menu_menu_object_focus_entered(menu_button, building: Building, base: Base):
+	$BaseLayout.show_building_info(building, base)
+
+func _on_view_sub_menu_menu_object_focus_exited(menu_button, building: Building, base: Base):
+	$BaseLayout.hide_building_info(building, base)

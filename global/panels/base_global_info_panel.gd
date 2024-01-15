@@ -1,4 +1,4 @@
-class_name BaseInfoPanel extends InfoPanel
+class_name BaseGlobalInfoPanel extends GlobalInfoPanel
 
 var base: Base
 

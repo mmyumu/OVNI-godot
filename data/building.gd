@@ -11,3 +11,9 @@ class_name Building extends Resource
 func start_construction():
 	construction_date = Datetime.new(Saver.data.datetime.timestamp)
 	construction_status = Construction.Status.IN_PROGRESS
+
+func get_scene():
+	return Saver.data.building_templates.scenes[template_type]
+
+func get_template():
+	return Saver.data.building_templates.templates[template_type]

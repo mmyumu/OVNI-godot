@@ -1,16 +1,5 @@
-class_name InfoPanel extends Node2D
+class_name GlobalInfoPanel extends InfoPanel
 
-func _ready():
-	custom_connect()
-	build()
-
-func custom_connect():
-	# Abstract
-	pass
-
-func build():
-	# Abstract
-	pass
 
 func swap_left_right(object):
 	if "location" in object:

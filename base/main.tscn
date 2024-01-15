@@ -39,6 +39,8 @@ position = Vector2(1105, 40)
 
 [connection signal="placing_over" from="BaseLayout" to="." method="_on_base_layout_placing_over"]
 [connection signal="menu_object_pressed" from="BaseMenu/BuildSubMenu" to="." method="_on_build_sub_menu_menu_object_pressed"]
+[connection signal="menu_object_focus_entered" from="BaseMenu/ViewSubMenu" to="." method="_on_view_sub_menu_menu_object_focus_entered"]
+[connection signal="menu_object_focus_exited" from="BaseMenu/ViewSubMenu" to="." method="_on_view_sub_menu_menu_object_focus_exited"]
 
 [editable path="BaseMenu"]
 [editable path="BaseMenu/BuildSubMenu"]

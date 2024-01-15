@@ -30,7 +30,7 @@ var building_placed_scene: PackedScene = preload("res://base/buildings/building_
 
 func _ready():
 	for building in Global.get_current_base().base_layout.buildings:
-		var building_to_place = Saver.data.building_templates.scenes[building.template_type].instantiate()
+		var building_to_place = building.get_scene().instantiate()
 		building_to_place.position.x = building.location.x * grid_step
 		building_to_place.position.y = building.location.y * grid_step
 		building_to_place.rotation = building.rotation

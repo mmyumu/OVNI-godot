@@ -29,8 +29,7 @@ func check_building_constructions(base: Base):
 	
 	for building in base.base_layout.buildings:
 		if building.construction_status == Construction.Status.IN_PROGRESS:
-			var building_template = Saver.data.building_templates.templates[building.template_type]
-			if Saver.data.datetime.timestamp >= building.construction_date.timestamp + building_template.construction_duration:
+			if Saver.data.datetime.timestamp >= building.construction_date.timestamp + building.get_template().construction_duration:
 				building.construction_status = Construction.Status.DONE
 				finish_building_construction(base, building)
 				changed_buildings.append(building)
@@ -53,8 +52,7 @@ func start_base_construction(base: Base):
 	return result
 
 func start_building_construction(base: Base, building: Building):
-	var building_template = Saver.data.building_templates.templates[building.template_type]
-	var result = Bank.spend(building_template.cost)
+	var result = Bank.spend(building.get_template().cost)
 	
 	if result:
 		building.start_construction()

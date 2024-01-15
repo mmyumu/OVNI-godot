@@ -49,6 +49,8 @@ func is_valid():
 func is_valid_money():
 	if not Bank.can_spend(Saver.data.base_cost):
 		$CanvasLayer/VBoxContainer/ErrorLabel.text = "%s$ required, only %s$ in bank"% [Saver.data.base_cost, Saver.data.money]
+		return false
+	return true
 
 func is_valid_base_name():
 	if len($CanvasLayer/VBoxContainer/LineEdit.text) == 0:

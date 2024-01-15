@@ -37,6 +37,8 @@ func _on_back_pressed():
 func _on_build_sub_menu_back_pressed(parent_object: Object):
 	display_root_menu()
 
-
 func _on_build_sub_menu_menu_object_pressed(menu_button, object, parent_object):
 	last_focus_control = menu_button
+
+func _on_view_sub_menu_back_pressed(parent_object):
+	display_root_menu()

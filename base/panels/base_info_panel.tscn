@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdee63ok2nm8a"]
+
+[ext_resource type="Script" path="res://base/panels/base_info_panel.gd" id="1_mk4qy"]
+[ext_resource type="PackedScene" uid="uid://cupn6xgafkyc4" path="res://util/info_panel.tscn" id="1_ug4gd"]
+
+[node name="BaseInfoPanel" instance=ExtResource("1_ug4gd")]
+script = ExtResource("1_mk4qy")
+
+[node name="PanelContainer" parent="." index="0"]
+custom_minimum_size = Vector2(170, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_right = 0.0
+offset_bottom = 4.0
+grow_horizontal = 0
