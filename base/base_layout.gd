@@ -144,8 +144,9 @@ func _on_place_building_dialog_confirmed():
 	building.rotation = building_to_place.rotation
 	building.template_type = building_to_place.template_type
 
-	Headquarters.start_building_construction(Global.get_current_base(), building)
+	var result = Headquarters.start_building_construction(Global.get_current_base(), building)
 
-	$BaseGrid.add_building(building, building_to_place)
-	building_to_place.validate_placing()
+	if result:
+		$BaseGrid.add_building(building, building_to_place)
+		building_to_place.validate_placing()
 	get_tree().paused = false

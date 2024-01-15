@@ -10,7 +10,7 @@ const uuid_util = preload('res://addons/uuid/uuid.gd')
 @export var construction_date: Datetime
 @export var construction_end: Datetime
 @export var construction_status: Construction.Status
-@export var cost =  500000
+#@export var cost =  500000
 
 func _init():
 	id = uuid_util.v4()

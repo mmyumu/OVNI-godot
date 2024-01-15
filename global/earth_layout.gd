@@ -81,12 +81,13 @@ func _on_new_base_dialog_confirmed(base_name):
 	base.name = base_name
 	base.location = Vector2(to_local($NewBaseCursor.last_mouse_pos))
 	
-	Headquarters.start_base_construction(base)
+	var result = Headquarters.start_base_construction(base)
 
 	dialog_closed()
 	creating_new_base_over()
 	
-	add_base(base)
+	if result:	
+		add_base(base)
 
 func add_base(base: Base):
 	var base_icon = base_icon_scene.instantiate()

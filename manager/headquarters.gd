@@ -40,7 +40,7 @@ func check_building_constructions(base: Base):
 		buildings_changed.emit(changed_buildings)
 
 func start_base_construction(base: Base):
-	var result = Bank.spend(base.cost)
+	var result = Bank.spend(Saver.data.base_cost)
 	
 	if result:
 		base.start_construction()
@@ -49,6 +49,8 @@ func start_base_construction(base: Base):
 		
 		var changed_bases: Array[Base] = [base]
 		bases_changed.emit(changed_bases)
+		
+	return result
 
 func start_building_construction(base: Base, building: Building):
 	var building_template = Saver.data.building_templates.templates[building.template_type]
@@ -61,6 +63,8 @@ func start_building_construction(base: Base, building: Building):
 		
 		var changed_buildings: Array[Building] = [building]
 		buildings_changed.emit(changed_buildings)
+		
+	return result
 
 func finish_building_construction(base: Base, building: Building):
 	if building.template_type == BuildingTemplates.Type.HANGAR:

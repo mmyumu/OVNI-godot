@@ -10,6 +10,7 @@ class_name Data extends Resource
 @export var building_templates: BuildingTemplates = BuildingTemplates.new()
 
 @export var base_construction_duration: int = 12 * 60 * 60
+@export var base_cost =  500000
 
 func get_data_name():
 	if len(bases) > 0:
