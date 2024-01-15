@@ -63,5 +63,13 @@ func move_and_attack(ship: Ship, attack: Attack):
 		ship_new_destination.emit(ship)
 
 func move_to(ship: Ship, destination: Vector2):
+	var previous_hangared = ship.hangared
+	var previous_destination = ship.destination
 	var earth_marker = EarthMarker.new(destination)
+	ship.attack = null
 	ship.set_destination(earth_marker)
+	ship.move()
+	if previous_hangared != ship.hangared:
+		ship_hangared.emit(ship)
+	if previous_destination != ship.destination:
+		ship_new_destination.emit(ship)
