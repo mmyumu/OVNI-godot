@@ -21,10 +21,11 @@ func _process(delta):
 		$VBoxContainer/TimerContainer/TimeLabel.text = datetime.get_time_str()
 
 func _input(event):
-	if event.is_action_pressed("faster"):
-		faster()
-	elif event.is_action_pressed("slower"):
-		slower()
+	if controls:
+		if event.is_action_pressed("faster"):
+			faster()
+		elif event.is_action_pressed("slower"):
+			slower()
 
 func faster():
 	if Datetimer.time_factor == 1:
