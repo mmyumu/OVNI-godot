@@ -7,8 +7,8 @@ func _input(event):
 	if event.is_action_pressed("cancel"):
 		if $BuildSubMenu.visible == true:
 			display_root_menu()
-		#elif $ViewSubMenu.visible == true:
-			#display_root_menu()
+		elif $ViewSubMenu.visible == true:
+			display_root_menu()
 		elif $RootMenu.visible == true:
 			_on_back_pressed()
 
@@ -27,9 +27,9 @@ func display_build_menu():
 	$BuildSubMenu.display()
 
 func display_view_menu():
-	#hide_all_menus()
-	#$ViewSubMenu.display()
-	pass
+	hide_all_menus()
+	$ViewSubMenu.build(Global.get_current_base())
+	$ViewSubMenu.display()
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://global/main.tscn")

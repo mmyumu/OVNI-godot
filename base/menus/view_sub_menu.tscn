@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbvb0ldgm05ut"]
+
+[ext_resource type="PackedScene" uid="uid://bub7i462o7af5" path="res://util/menus/object_sub_menu.tscn" id="1_pgnvv"]
+[ext_resource type="Script" path="res://base/menus/view_sub_menu.gd" id="2_mdqmi"]
+
+[node name="ViewSubMenu" instance=ExtResource("1_pgnvv")]
+script = ExtResource("2_mdqmi")

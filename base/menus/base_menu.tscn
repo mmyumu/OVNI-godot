@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d38erjkct3v6a"]
+[gd_scene load_steps=5 format=3 uid="uid://d38erjkct3v6a"]
 
 [ext_resource type="Script" path="res://base/menus/base_menu.gd" id="1_bxi2l"]
+[ext_resource type="PackedScene" uid="uid://bbvb0ldgm05ut" path="res://base/menus/view_sub_menu.tscn" id="4_ih05j"]
 [ext_resource type="PackedScene" uid="uid://b5pp2l51wdxsk" path="res://base/menus/build_sub_menu.tscn" id="4_pmwej"]
 [ext_resource type="PackedScene" uid="uid://btabol7j5s3xa" path="res://util/menus/right_menu_button.tscn" id="4_yr51v"]
 
@@ -23,6 +24,10 @@ layout_mode = 2
 text = "Back"
 
 [node name="BuildSubMenu" parent="." instance=ExtResource("4_pmwej")]
+offset_right = 168.0
+offset_bottom = 26.0
+
+[node name="ViewSubMenu" parent="." instance=ExtResource("4_ih05j")]
 offset_right = 168.0
 offset_bottom = 26.0
 
