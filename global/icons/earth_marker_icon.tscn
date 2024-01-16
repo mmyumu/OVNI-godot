@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8qqyn654lcgf"]
+
+[ext_resource type="Script" path="res://global/icons/earth_marker_icon.gd" id="1_3no8n"]
+[ext_resource type="Texture2D" uid="uid://beqyivjqv58k6" path="res://art/earth_marker-Sheet.png" id="2_i5435"]
+[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="3_q0s4r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8306d"]
+atlas = ExtResource("2_i5435")
+region = Rect2(0, 0, 20, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yahhq"]
+atlas = ExtResource("2_i5435")
+region = Rect2(20, 0, 20, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mgstx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8306d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yahhq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EarthMarkerIcon" type="Node2D"]
+z_index = 2500
+script = ExtResource("1_3no8n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mgstx")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -100.0
+offset_top = -29.0
+offset_right = 100.0
+offset_bottom = -12.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_q0s4r")
+theme_override_font_sizes/font_size = 10
+text = "test"
+horizontal_alignment = 1

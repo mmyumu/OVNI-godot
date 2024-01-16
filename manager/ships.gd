@@ -73,3 +73,10 @@ func move_to(ship: Ship, destination: Vector2):
 		ship_hangared.emit(ship)
 	if previous_destination != ship.destination:
 		ship_new_destination.emit(ship)
+
+func return_to_base(ship: Ship):
+	if not ship.hangared:
+		var previous_destination = ship.destination
+		ship.set_destination(ship.base)
+		if previous_destination != ship.destination:
+			ship_new_destination.emit(ship)

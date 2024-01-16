@@ -1,7 +1,6 @@
 extends Node2D
 
 var ship: Ship
-var previous_hangared: bool
 
 func set_ship(ship_to_set: Ship):
 	ship = ship_to_set

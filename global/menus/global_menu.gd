@@ -109,8 +109,7 @@ func _on_ship_sub_menu_deploy_pressed(ship):
 	display_ship_deploy_attacks_menu(ship)
 
 func _on_ship_sub_menu_return_pressed(ship):
-	if not ship.hangared:
-		ship.set_destination(ship.base)
+	Ships.return_to_base(ship)
 
 func _on_ship_deploy_attacks_sub_menu_back_pressed(ship: Ship):
 	display_ship_menu(ship)

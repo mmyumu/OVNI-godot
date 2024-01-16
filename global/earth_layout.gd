@@ -3,6 +3,7 @@ extends Node2D
 var base_icon_scene: PackedScene = preload("res://global/icons/base_icon.tscn")
 var attack_icon_scene: PackedScene = preload("res://global/icons/attack_icon.tscn")
 var ship_icon_scene: PackedScene = preload("res://global/icons/ship_icon.tscn")
+var earth_marker_icon_scene: PackedScene = preload("res://global/icons/earth_marker_icon.tscn")
 var attack_info_panel_scene: PackedScene = preload("res://global/panels/attack_global_info_panel.tscn")
 var base_info_panel_scene: PackedScene = preload("res://global/panels/base_global_info_panel.tscn")
 
@@ -26,8 +27,11 @@ func _init():
 		for ship in base.get_ships():
 			add_ship(ship)
 
+	build_earth_markers()
+
 func _ready():
 	MastermindIntel.attack_spawned.connect(_on_attack_spawned)
+	Ships.ship_new_destination.connect(_on_ship_new_destination)
 	
 	$NewBaseDialog.close()
 	$NewBaseCursor.visible = false
@@ -53,6 +57,14 @@ func _ready():
 
 func _physics_process(delta):
 	$MothershipIcon.position = Saver.data.mastermind.location
+
+func build_earth_markers():
+	for ship in Saver.data.get_ships():
+		add_earth_marker(ship)
+
+func update_earth_markers():
+	for earth_marker_icon in find_children("*", "EarthMarkerIcon", false, false):
+		earth_marker_icon.update_icon()
 
 func set_creating_new_base():
 	$NewBaseCursor.activate()
@@ -154,6 +166,12 @@ func add_ship(ship: Ship):
 	ship_icon.set_ship(ship)
 	add_child(ship_icon)
 
+func add_earth_marker(ship: Ship):
+	var earth_marker_icon = earth_marker_icon_scene.instantiate()
+	earth_marker_icon.name = "%s_%s_%s" % [earth_marker_icon.name, ship.base.name, ship.name]
+	earth_marker_icon.ship = ship
+	add_child(earth_marker_icon)
+
 func show_attack_info(ship: Ship, attack: Attack):
 	attack_info_panel = attack_info_panel_scene.instantiate()
 	attack_info_panel.set_data(attack, ship)
@@ -181,13 +199,11 @@ func _on_new_base_cursor_validated():
 	$NewBaseDialog.open()
 
 func _on_go_to_cursor_validated():
-	#var base: Base = Base.new()
-	#base.name = base_name
-	#base.location = Vector2(to_local($NewBaseCursor.last_mouse_pos))
-	#
-	#Headquarters.start_base_construction(base)
 	Ships.move_to($GoToCursor.ship, Vector2(to_local($GoToCursor.last_mouse_pos)))
 	selecting_goto_over()
 
 func _on_go_to_cursor_canceled():
 	selecting_goto_over()
+
+func _on_ship_new_destination(ship: Ship):
+	update_earth_markers()
