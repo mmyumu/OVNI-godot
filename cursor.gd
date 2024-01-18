@@ -3,10 +3,8 @@ class_name Cursor extends Sprite2D
 var cursor_sprite = preload("res://art/cursor.png")
 var invalid_cursor_sprite = preload("res://art/invalid_cursor.png")
 
-#var is_active: bool
 var valid: bool
 var mouse_sens: float = 500.0
-#var mouse_pos
 var last_mouse_pos
 
 signal validated()
@@ -15,7 +13,6 @@ signal canceled()
 func _input(event):
 	if visible:
 		if event.is_action_pressed("validate") and is_valid():
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			last_mouse_pos = get_global_mouse_position()
 			Input.warp_mouse(last_mouse_pos)
 			validated.emit()

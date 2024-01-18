@@ -104,7 +104,7 @@ func _on_new_base_dialog_confirmed(base_name):
 func add_base(base: Base):
 	var base_icon = base_icon_scene.instantiate()
 	base_icon.name = "%s_%s" % [base_icon.name, base.name]
-	base_icon.set_base(base)
+	base_icon.base = base
 	base_icons.append(base_icon)
 	add_child(base_icon)
 	
@@ -139,7 +139,7 @@ func _on_attack_spawned(attack: Attack):
 func add_attack(attack: Attack):
 	var attack_icon = attack_icon_scene.instantiate()
 	attack_icon.name = "%s_%s" % [attack_icon.name, attack.name]
-	attack_icon.set_attack(attack)
+	attack_icon.attack = attack
 	attack_icons.append(attack_icon)
 	add_child(attack_icon)
 		
@@ -199,7 +199,20 @@ func _on_new_base_cursor_validated():
 	$NewBaseDialog.open()
 
 func _on_go_to_cursor_validated():
-	Ships.move_to($GoToCursor.ship, Vector2(to_local($GoToCursor.last_mouse_pos)))
+	var hovered = false
+	for node in find_children("*", "Icon", false, false):
+		if node.hovered:
+			hovered = true
+			if node is AttackIcon:
+				Ships.move_to($GoToCursor.ship, node.attack)
+			elif node is BaseIcon:
+				Ships.move_to($GoToCursor.ship, node.base)
+			return
+	
+	if not hovered:
+		var earth_marker = EarthMarker.new(Vector2(to_local($GoToCursor.last_mouse_pos)))
+		Ships.move_to($GoToCursor.ship, earth_marker)
+
 	selecting_goto_over()
 
 func _on_go_to_cursor_canceled():

@@ -1,46 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn2vx8vv4ngm6"]
+[gd_scene load_steps=5 format=3 uid="uid://grxhqomx6k7l"]
 
 [ext_resource type="Texture2D" uid="uid://chvivw8032yvf" path="res://art/conflict_icon-Sheet200.png" id="1_3u6w8"]
 [ext_resource type="Script" path="res://global/icons/attack_icon.gd" id="1_t80wb"]
-[ext_resource type="FontFile" uid="uid://cu1gycbn7rgh1" path="res://fonts/ka1.ttf" id="3_3wpuy"]
+[ext_resource type="PackedScene" uid="uid://wr5h1orw51k7" path="res://common/icon.tscn" id="1_uy2sg"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3r7w4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqh8y"]
 atlas = ExtResource("1_3u6w8")
 region = Rect2(0, 0, 32, 32)
+filter_clip = true
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3wl5"]
-atlas = ExtResource("1_3u6w8")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6xncl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3r7w4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i3wl5")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[node name="AttackIcon" type="Node2D"]
-z_index = 2000
+[node name="AttackIcon" instance=ExtResource("1_uy2sg")]
 script = ExtResource("1_t80wb")
-color = Color(0.631373, 0.0862745, 0.0980392, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_6xncl")
-frame_progress = 0.495685
+[node name="VBoxContainer" parent="." index="0"]
+offset_right = 17.0
+offset_bottom = 28.0
 
-[node name="Label" type="Label" parent="."]
-offset_left = -100.0
-offset_top = -43.0
-offset_right = 100.0
-offset_bottom = -26.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_3wpuy")
-theme_override_font_sizes/font_size = 10
-horizontal_alignment = 1
+[node name="TextureRect" parent="VBoxContainer" index="1"]
+texture = SubResource("AtlasTexture_uqh8y")
+
+[node name="CollisionShape2D" parent="VBoxContainer/TextureRect/Area2D" index="0"]
+position = Vector2(1, 12)

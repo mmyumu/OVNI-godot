@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://wr5h1orw51k7"]
+
+[ext_resource type="FontFile" uid="uid://c1mgwsb6wtd8q" path="res://fonts/shogunate/ShogunateCondensed-nRxWY.otf" id="1_12obu"]
+[ext_resource type="Script" path="res://common/icon.gd" id="1_dxxtt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lw06s"]
+size = Vector2(31, 31)
+
+[node name="Icon" type="Node2D"]
+z_index = 1000
+script = ExtResource("1_dxxtt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 30.0
+offset_bottom = 51.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_12obu")
+theme_override_font_sizes/font_size = 15
+text = "Test"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+stretch_mode = 2
+
+[node name="Area2D" type="Area2D" parent="VBoxContainer/TextureRect"]
+position = Vector2(15, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VBoxContainer/TextureRect/Area2D"]
+shape = SubResource("RectangleShape2D_lw06s")
+
+[connection signal="area_shape_entered" from="VBoxContainer/TextureRect/Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="area_shape_exited" from="VBoxContainer/TextureRect/Area2D" to="." method="_on_area_2d_area_shape_exited"]
