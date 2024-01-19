@@ -8,6 +8,7 @@ func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 	var menu_data: Array[MenuDatum] = []
 	
 	for base in Saver.data.get_bases():
+		print(base.get_ships())
 		for ship in base.get_ships():
 			var menu_datum: MenuDatum = MenuDatum.new()
 			menu_datum.object = ship

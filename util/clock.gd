@@ -8,11 +8,13 @@ func _ready():
 	$VBoxContainer/ButtonsContainer.visible = controls
 
 	if Datetimer.time_factor == 1:
-		set_color($VBoxContainer/ButtonsContainer/x1Button)
-	elif Datetimer.time_factor == 100:
-		set_color($VBoxContainer/ButtonsContainer/x100Button)
-	elif Datetimer.time_factor == 10000:
-		set_color($VBoxContainer/ButtonsContainer/x10000Button)
+		set_color($VBoxContainer/ButtonsContainer/x1SButton)
+	elif Datetimer.time_factor == 60:
+		set_color($VBoxContainer/ButtonsContainer/x1MnButton)
+	elif Datetimer.time_factor == 600:
+		set_color($VBoxContainer/ButtonsContainer/x10MnButton)
+	elif Datetimer.time_factor == 3600:
+		set_color($VBoxContainer/ButtonsContainer/x1HButton)
 
 func _process(delta):
 	if not Engine.is_editor_hint():
@@ -29,15 +31,19 @@ func _input(event):
 
 func faster():
 	if Datetimer.time_factor == 1:
-		_on_x100_button_pressed()
-	elif Datetimer.time_factor == 100:
-		_on_x10000_button_pressed()
+		_on_x_1_mn_button_pressed()
+	elif Datetimer.time_factor == 60:
+		_on_x_10_mn_button_pressed()
+	elif Datetimer.time_factor == 600:
+		_on_x_1h_button_pressed()
 
 func slower():
-	if Datetimer.time_factor == 100:
-		_on_x1_button_pressed()
-	elif Datetimer.time_factor == 10000:
-		_on_x100_button_pressed()
+	if Datetimer.time_factor == 60:
+		_on_x_1s_button_pressed()
+	elif Datetimer.time_factor == 600:
+		_on_x_1_mn_button_pressed()
+	elif Datetimer.time_factor == 3600:
+		_on_x_10_mn_button_pressed()
 
 func set_color(button):
 	for node in find_children("*", "Button", true, false):
@@ -46,14 +52,22 @@ func set_color(button):
 	button.set("theme_override_colors/font_color", Color.DARK_RED)
 	button.set("theme_override_colors/font_focus_color", Color.DARK_RED)
 
-func _on_x1_button_pressed():
+func _on_x_1s_button_pressed():
 	Datetimer.time_factor = 1.
-	set_color($VBoxContainer/ButtonsContainer/x1Button)
+	set_color($VBoxContainer/ButtonsContainer/x1SButton)
 
-func _on_x100_button_pressed():
-	Datetimer.time_factor = 100.
-	set_color($VBoxContainer/ButtonsContainer/x100Button)
+func _on_x_1_mn_button_pressed():
+	Datetimer.time_factor = 60.
+	set_color($VBoxContainer/ButtonsContainer/x1MnButton)
 
-func _on_x10000_button_pressed():
-	Datetimer.time_factor = 10000.
-	set_color($VBoxContainer/ButtonsContainer/x10000Button)
+func _on_x_10_mn_button_pressed():
+	Datetimer.time_factor = 600.
+	set_color($VBoxContainer/ButtonsContainer/x10MnButton)
+
+func _on_x_1h_button_pressed():
+	Datetimer.time_factor = 3600.
+	set_color($VBoxContainer/ButtonsContainer/x1HButton)
+
+#func _on_x_1d_button_pressed():
+	#Datetimer.time_factor = 3600.
+	#set_color($VBoxContainer/ButtonsContainer/x1HButton)

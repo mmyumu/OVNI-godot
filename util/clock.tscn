@@ -36,37 +36,65 @@ horizontal_alignment = 1
 [node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="x1Button" type="Button" parent="VBoxContainer/ButtonsContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_lf8e6")
+text = "x"
+
+[node name="x1SButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_neighbor_right = NodePath("../x100Button")
+focus_neighbor_right = NodePath("../x1MnButton")
 theme_override_colors/font_color = Color(0.545098, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0.545098, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_lf8e6")
 theme_override_font_sizes/font_size = 18
-text = "x1"
+text = "1 s"
 
-[node name="x100Button" type="Button" parent="VBoxContainer/ButtonsContainer"]
+[node name="x1MnButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_neighbor_left = NodePath("../x1Button")
-focus_neighbor_right = NodePath("../x10000Button")
+focus_neighbor_left = NodePath("../x1SButton")
+focus_neighbor_right = NodePath("../x10MnButton")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_lf8e6")
 theme_override_font_sizes/font_size = 18
-text = "x100"
+text = "1 m"
 
-[node name="x10000Button" type="Button" parent="VBoxContainer/ButtonsContainer"]
+[node name="x10MnButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_neighbor_left = NodePath("../x100Button")
+focus_neighbor_left = NodePath("../x1MnButton")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_lf8e6")
 theme_override_font_sizes/font_size = 18
-text = "x10000"
+text = "10 m"
 
-[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x1Button" to="." method="_on_x1_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x100Button" to="." method="_on_x100_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x10000Button" to="." method="_on_x10000_button_pressed"]
+[node name="x1HButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../x1MnButton")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_lf8e6")
+theme_override_font_sizes/font_size = 18
+text = "1 h"
+
+[node name="x1DButton" type="Button" parent="VBoxContainer/ButtonsContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../x1MnButton")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_lf8e6")
+theme_override_font_sizes/font_size = 18
+text = "1 d"
+
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x1SButton" to="." method="_on_x_1s_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x1MnButton" to="." method="_on_x_1_mn_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x10MnButton" to="." method="_on_x_10_mn_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x1HButton" to="." method="_on_x_1h_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/x1DButton" to="." method="_on_x_1d_button_pressed"]
