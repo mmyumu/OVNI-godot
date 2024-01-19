@@ -213,8 +213,6 @@ func _on_go_to_cursor_validated():
 		var earth_marker = EarthMarker.new(Vector2(to_local($GoToCursor.last_mouse_pos)))
 		Ships.move_to($GoToCursor.ship, earth_marker)
 
-	selecting_goto_over()
-
 func _on_go_to_cursor_canceled():
 	selecting_goto_over()
 

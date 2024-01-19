@@ -1,9 +1,13 @@
 extends Node
 
-@export var time_factor = 1.0
+@export var time_factor = 1.0:
+	set(value):
+		time_factor = value
+		time_factor_changed.emit(time_factor)
 
 var previous_date: Datetime
 
+signal time_factor_changed(time_factor)
 signal day_changed(date: Datetime)
 
 func _ready():

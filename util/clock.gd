@@ -5,6 +5,8 @@ extends Node2D
 
 
 func _ready():
+	if controls:
+		Datetimer.time_factor_changed.connect(_on_time_factor_changed)
 	$VBoxContainer/ButtonsContainer.visible = controls
 
 	if Datetimer.time_factor == 1:
@@ -71,3 +73,13 @@ func _on_x_1h_button_pressed():
 #func _on_x_1d_button_pressed():
 	#Datetimer.time_factor = 3600.
 	#set_color($VBoxContainer/ButtonsContainer/x1HButton)
+
+func _on_time_factor_changed(time_factor: float):
+	if time_factor == 1.:
+		set_color($VBoxContainer/ButtonsContainer/x1SButton)
+	elif time_factor == 60.:
+		set_color($VBoxContainer/ButtonsContainer/x1MnButton)
+	elif time_factor == 600.:
+		set_color($VBoxContainer/ButtonsContainer/x10MnButton)
+	elif time_factor == 3600.:
+		set_color($VBoxContainer/ButtonsContainer/x1HButton)
