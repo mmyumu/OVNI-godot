@@ -8,6 +8,8 @@ class_name Data extends Resource
 @export var ships: Dictionary = {}
 @export var money: int = 1000000
 @export var building_templates: BuildingTemplates = BuildingTemplates.new()
+@export var continents: Continents = Continents.new()
+@export var government_records: GovernmentRecords = GovernmentRecords.new()
 
 @export var base_construction_duration: int = 12 * 60 * 60
 @export var base_cost =  500000

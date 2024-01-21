@@ -151,14 +151,14 @@ polygon = PackedVector2Array(-183, 156, -175, 156, -175, 158, -180, 161, -186, 1
 [node name="Island2" type="CollisionPolygon2D" parent="Continents/SouthAmerica"]
 polygon = PackedVector2Array(-114, 163, -111, 163, -107, 166, -107, 168, -111, 169, -116, 166)
 
-[node name="Antartica" type="Area2D" parent="Continents"]
+[node name="Antarctica" type="Area2D" parent="Continents"]
 
-[node name="Antartica" type="CollisionPolygon2D" parent="Continents/Antartica"]
+[node name="Antartica" type="CollisionPolygon2D" parent="Continents/Antarctica"]
 polygon = PackedVector2Array(-547, 274, -547, 273, 547, 274, 547, 237, 530, 234, 497, 234, 506, 227, 518, 225, 521, 216, 506, 213, 483, 209, 466, 206, 447, 204, 445, 201, 410, 199, 378, 198, 366, 201, 347, 199, 336, 199, 333, 201, 317, 199, 312, 196, 310, 197, 299, 198, 294, 195, 289, 197, 289, 199, 271, 200, 267, 199, 249, 201, 227, 211, 223, 208, 215, 208, 212, 204, 177, 203, 169, 199, 155, 199, 146, 202, 119, 208, 117, 211, 107, 207, 89, 209, 85, 211, 50, 211, 46, 210, 40, 211, -8, 212, -30, 214, -37, 216, -45, 219, -59, 220, -66, 224, -77, 224, -78, 228, -83, 229, -86, 231, -104, 234, -108, 236, -123, 235, -133, 236, -183, 228, -178, 221, -181, 217, -181, 211, -176, 208, -182, 205, -180, 200, -174, 197, -167, 194, -172, 190, -176, 187, -186, 191, -195, 197, -208, 202, -210, 207, -207, 208, -210, 211, -212, 208, -221, 208, -223, 211, -231, 212, -234, 217, -230, 219, -240, 219, -248, 223, -273, 220, -289, 219, -291, 218, -310, 217, -316, 222, -312, 227, -323, 226, -383, 222, -391, 225, -445, 229, -462, 234, -482, 234, -486, 236, -499, 236, -547, 237)
 
-[node name="Artic" type="Area2D" parent="Continents"]
+[node name="Arctic" type="Area2D" parent="Continents"]
 
-[node name="Artic" type="CollisionPolygon2D" parent="Continents/Artic"]
+[node name="Artic" type="CollisionPolygon2D" parent="Continents/Arctic"]
 polygon = PackedVector2Array(-390, -225, -339, -246, -224, -252, -172, -250, -99, -254, -54, -254, 14, -250, 177, -252, 202, -251, 208, -246, 276, -249, 303, -247, 307, -246, 327, -245, 356, -237, 460, -234, 465, -228, 479, -223, 536, -221, 547, -218, 547, -274, -547, -274, -547, -221)
 
 [connection signal="canceled" from="NewBaseCursor" to="." method="_on_new_base_cursor_canceled"]
