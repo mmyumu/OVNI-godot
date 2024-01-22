@@ -13,7 +13,7 @@ func create_delegation_notification(delegation_report: Dictionary):
 
 func create_report_notification(final_result: bool, vote_record: VoteRecord, date: Datetime):
 	var notification = ReportNotification.new()
-	notification.name = date.get_date_str()
+	notification.name = "Report: %s" % date.get_date_str()
 	notification.vote_record = vote_record
 	notification.final_result = final_result
 	
