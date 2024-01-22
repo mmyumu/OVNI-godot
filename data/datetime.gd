@@ -18,7 +18,6 @@ func _init(timestamp_to_set: float = -1):
 	timestamp = timestamp_to_set
 
 func spend(time_to_spend):
-	#var previous_date: Datetime = Datetime.new(timestamp)
 	timestamp += time_to_spend
 	return self
 
@@ -33,6 +32,9 @@ func _update():
 
 func changed_day(other_date: Datetime):
 	return other_date != null and (year != other_date.year or month != other_date.month or day != other_date.day)
+
+func changed_hour(other_date: Datetime):
+	return other_date != null and (year != other_date.year or month != other_date.month or day != other_date.day or hour != other_date.hour)
 
 func get_date_str():
 	return "%d-%02d-%02d" % [year, month, day]

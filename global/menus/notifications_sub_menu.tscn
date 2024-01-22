@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5ftk8bd576rl"]
+
+[ext_resource type="PackedScene" uid="uid://bub7i462o7af5" path="res://util/menus/object_sub_menu.tscn" id="1_v8hm7"]
+[ext_resource type="Script" path="res://global/menus/notifications_sub_menu.gd" id="2_5n415"]
+
+[node name="NotificationsSubMenu" instance=ExtResource("1_v8hm7")]
+script = ExtResource("2_5n415")
+menu_offset = null

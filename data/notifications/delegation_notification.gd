@@ -1,0 +1,1 @@
+class_name DelegationNotification extends Notification

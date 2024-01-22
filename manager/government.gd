@@ -4,20 +4,36 @@ extends Node
 
 var rng = RandomNumberGenerator.new()
 
-signal report_result(success: bool, vote_record: VoteRecord)
+#signal report_result(success: bool, vote_record: VoteRecord)
 
 func _ready():
-	Datetimer.day_changed.connect(_on_day_changed)
+	#Datetimer.day_changed.connect(_on_day_changed)
+	Datetimer.hour_changed.connect(_on_hour_changed)
 
-func _on_day_changed(date: Datetime):
-	#if date.day in days_to_check:
-	#if date.day == 1 or date.day == 15:
-	report(date)
+func _on_hour_changed(date: Datetime):
+	if date.hour == 1:
+		if date.day == 1 and date.month == 1 and date.year == 2024:
+			delegation(date)
+		elif date.day == 1 or date.day == 15:
+			report(date)
+
+func delegation(date: Datetime):
+	var delegation_report: Dictionary = {}
+	var total_founding_amount: float = 0.
+	for continent_type in Saver.data.continents.types:
+		var continent = Saver.data.continents.types[continent_type]
+		var founding_amount = continent.gdp * 10
+		delegation_report[continent_type] = founding_amount
+		total_founding_amount += founding_amount
+	Bank.earn(total_founding_amount)
+	NotificationsBox.create_delegation_notification(delegation_report)
 
 func report(date: Datetime):
 	var vote_record = vote(date)
 	var final_result: bool = check_vote(vote_record)
-	report_result.emit(final_result, vote_record)
+	
+	Bank.earn(1)
+	NotificationsBox.create_report_notification(final_result, vote_record, date)
 
 func vote(date: Datetime) -> VoteRecord:
 	var vote_record: VoteRecord = VoteRecord.new()

@@ -11,6 +11,14 @@ func _ready():
 		get_node(Global.last_menu_button_path).grab_focus()
 		Global.last_menu_button_path = ""
 
+func _process(delta):
+	if len(Saver.data.get_unread_notifications()) > 0:
+		$RootMenu/Notifications.set("theme_override_colors/font_color", Color.DARK_RED)
+		$RootMenu/Notifications.set("theme_override_colors/font_focus_color", Color.DARK_RED)
+	else:
+		$RootMenu/Notifications.set("theme_override_colors/font_color", null)
+		$RootMenu/Notifications.set("theme_override_colors/font_focus_color", null)
+
 func _input(event):
 	if event.is_action_pressed("cancel"):
 		if $BasesSubMenu.visible == true:
@@ -25,7 +33,9 @@ func _input(event):
 			display_ships_menu()
 		elif $ShipDeployAttacksSubMenu.visible == true:
 			display_ship_menu($ShipDeployAttacksSubMenu.parent_object)
-
+		elif $NotificationsSubMenu.visible == true:
+			display_root_menu()
+			
 func grab_default_focus():
 	$RootMenu/Bases.grab_focus()
 
@@ -37,6 +47,9 @@ func _on_events_pressed():
 
 func _on_ships_pressed():
 	display_ships_menu()
+
+func _on_notifications_pressed():
+	display_notifications_menu()
 
 func display_bases_menu():
 	hide_all_menus()
@@ -67,6 +80,11 @@ func display_ship_deploy_attacks_menu(ship: Ship):
 	hide_all_menus()
 	$ShipDeployAttacksSubMenu.build(ship)
 	$ShipDeployAttacksSubMenu.display()
+
+func display_notifications_menu():
+	hide_all_menus()
+	$NotificationsSubMenu.build()
+	$NotificationsSubMenu.display()
 
 func _on_quit_pressed():
 	Datetimer.time_factor = 0.
@@ -117,3 +135,6 @@ func _on_ship_deploy_attacks_sub_menu_back_pressed(ship: Ship):
 func _on_ship_sub_menu_goto_pressed(ship):
 	last_focus_control = $ShipSubMenu/GoTo
 	goto_pressed.emit(ship)
+
+func _on_notifications_sub_menu_back_pressed(parent_object):
+	display_root_menu()
