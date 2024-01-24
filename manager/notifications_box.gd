@@ -9,6 +9,7 @@ func _ready():
 func create_delegation_notification(delegation_report: Dictionary):
 	var notification = DelegationNotification.new()
 	notification.name = "Delegation"
+	notification.report = delegation_report
 	notification_created.emit(notification)
 
 func create_report_notification(final_result: bool, vote_record: VoteRecord, date: Datetime):

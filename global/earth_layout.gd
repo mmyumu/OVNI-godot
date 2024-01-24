@@ -192,6 +192,9 @@ func hide_base_info(base: Base):
 	if base_info_panel:
 		base_info_panel.queue_free()
 
+func display_notification(notification: Notification):
+	pass
+
 func _on_new_base_cursor_canceled():
 	creating_new_base_over()
 

@@ -22,6 +22,8 @@ func get_data_name():
 		return "New game"
 
 func add_base(base: Base):
+	if len(base) == 0:
+		base.headquarter = true
 	bases[base.id] = base
 
 func add_ship(ship: Ship):

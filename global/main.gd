@@ -74,3 +74,7 @@ func _on_global_menu_goto_pressed(ship: Ship):
 	Datetimer.time_factor = 1.
 	$GlobalMenu.disable()
 	$EarthLayout.set_selecting_goto(ship)
+
+
+func _on_notifications_sub_menu_menu_object_pressed(menu_button, notification: Notification, parent_object):
+	$EarthLayout.display_notification(notification)
