@@ -22,7 +22,7 @@ func get_data_name():
 		return "New game"
 
 func add_base(base: Base):
-	if len(base) == 0:
+	if len(bases) == 0:
 		base.headquarter = true
 	bases[base.id] = base
 
@@ -43,10 +43,16 @@ func get_ships():
 		ships_to_get.append(ship)
 	return ships_to_get
 
-func get_unread_notifications():
+#func get_ongoing_notifications():
+	#var unread_notifications: Array[Notification] = []
+	#for notification in Saver.data.notifications:
+		#if notification.status == Notification.Status.UNREAD or notification.status == Notification.Status.READ:
+			#unread_notifications.append(notification)
+	#return unread_notifications
+
+func get_notifications(statuses: Array[Notification.Status]):
 	var unread_notifications: Array[Notification] = []
 	for notification in Saver.data.notifications:
-		if notification.status == Notification.Status.UNREAD:
+		if notification.status in statuses:
 			unread_notifications.append(notification)
 	return unread_notifications
-	

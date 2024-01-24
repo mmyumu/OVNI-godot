@@ -28,7 +28,8 @@ func build(parent_object_to_set: Object = null):
 	first_button = $Back
 	
 	var i = 0
-	for datum in self.get_menu_data(parent_object):
+	var menu_data = get_menu_data(parent_object)
+	for datum in menu_data:
 		var create_child = false
 		var menu_object_button = find_child(datum.button_name, true, false)
 		if not menu_object_button:
@@ -60,6 +61,18 @@ func build(parent_object_to_set: Object = null):
 			first_button = menu_object_button
 		previous_menu_button = menu_object_button
 		i += 1
+
+	# Clear items that were deleted
+	for node in find_children("*", "MenuObjectButton", true, false):
+		var found = false
+		for datum in menu_data:
+			if node.object == datum.object:
+				found = true
+				break
+		if not found:
+			if last_focus == node:
+				last_focus = null
+			node.queue_free()
 
 	if previous_menu_button:
 		previous_menu_button.focus_neighbor_bottom = $Back.get_path()

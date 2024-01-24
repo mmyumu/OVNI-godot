@@ -1,11 +1,13 @@
 class_name NotificationPanel extends Node2D
 
+var notification: Notification
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	NotificationsBox.read(notification)
 
+func _on_window_close_requested():
+	queue_free()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_delete_button_pressed():
+	NotificationsBox.delete(notification)
+	queue_free()

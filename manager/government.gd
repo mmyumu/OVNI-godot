@@ -18,12 +18,12 @@ func _on_hour_changed(date: Datetime):
 			report(date)
 
 func delegation(date: Datetime):
-	var delegation_report: Dictionary = {}
+	var delegation_report = MoneyReport.new()
 	var total_founding_amount: float = 0.
 	for continent_type in Saver.data.continents.types:
 		var continent = Saver.data.continents.types[continent_type]
 		var founding_amount = continent.gdp * 10
-		delegation_report[continent_type] = founding_amount
+		delegation_report.add_entry(continent_type, founding_amount)
 		total_founding_amount += founding_amount
 	Bank.earn(total_founding_amount)
 	NotificationsBox.create_delegation_notification(delegation_report)

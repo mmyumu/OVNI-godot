@@ -193,7 +193,14 @@ func hide_base_info(base: Base):
 		base_info_panel.queue_free()
 
 func display_notification(notification: Notification):
-	pass
+	var notification_panel = null
+	if notification is DelegationNotification:
+		notification_panel = DelegationNotification.scene.instantiate()
+		notification_panel.notification = notification
+		notification_panel.report = notification.report
+	
+	if notification_panel:
+		add_child(notification_panel)
 
 func _on_new_base_cursor_canceled():
 	creating_new_base_over()

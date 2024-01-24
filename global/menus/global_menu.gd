@@ -12,7 +12,7 @@ func _ready():
 		Global.last_menu_button_path = ""
 
 func _process(delta):
-	if len(Saver.data.get_unread_notifications()) > 0:
+	if len(Saver.data.get_notifications([Notification.Status.UNREAD])) > 0:
 		$RootMenu/Notifications.set("theme_override_colors/font_color", Color.DARK_RED)
 		$RootMenu/Notifications.set("theme_override_colors/font_focus_color", Color.DARK_RED)
 	else:

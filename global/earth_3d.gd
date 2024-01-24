@@ -10,6 +10,7 @@ func _ready():
 
 func _process(delta):
 	var rs_look = Vector3.ZERO
+	# Probably some dark magic here since we need to swap x and y
 	rs_look.y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	rs_look.x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 
