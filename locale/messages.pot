@@ -1,0 +1,116 @@
+# LANGUAGE translation for Ovni for the following files:
+# res://menu.tscn
+# res://global/notifications/delegation_notification_panel.tscn
+# res://global/notifications/notification_panel.tscn
+# res://global/notifications/delegation_notification_panel.gd
+# res://global/notifications/notification_panel.gd
+# res://global/notifications/report_notification_panel.gd
+# res://global/notifications/report_notification_panel.tscn
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Ovni\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+#: menu.tscn
+msgid "Un Flying OVNI"
+msgstr ""
+
+#: menu.tscn
+msgid "Start"
+msgstr ""
+
+#: menu.tscn
+msgid "Quit"
+msgstr ""
+
+#: global/notifications/delegation_notification_panel.tscn
+#: global/notifications/delegation_notification_panel.gd
+msgid "Delegation mail"
+msgstr ""
+
+#: global/notifications/notification_panel.tscn
+msgid "Notification"
+msgstr ""
+
+#: global/notifications/notification_panel.tscn
+msgid "From:"
+msgstr ""
+
+#: global/notifications/notification_panel.tscn
+msgid "from value"
+msgstr ""
+
+#: global/notifications/notification_panel.tscn
+msgid "To:"
+msgstr ""
+
+#: global/notifications/notification_panel.tscn
+msgid "to value"
+msgstr ""
+
+#: global/notifications/notification_panel.tscn
+msgid "Subject:"
+msgstr ""
+
+#: global/notifications/notification_panel.tscn
+msgid "subject value"
+msgstr ""
+
+#: global/notifications/notification_panel.tscn
+msgid "Delete"
+msgstr ""
+
+#: global/notifications/delegation_notification_panel.gd
+#: global/notifications/report_notification_panel.gd
+msgid "department.of.defense@tsc.gov"
+msgstr ""
+
+#: global/notifications/delegation_notification_panel.gd
+msgid "Transfer of Defense Operations and Enhanced Budget Allocation"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Monthly Confidence Vote Results & Budget Review"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Narrow Confidence Vote Outcome & Budget Status"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Tied Vote Outcome & Budget Report"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Narrow Miss in Confidence Vote & Budget Evaluation"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Confidence Vote Results & Budget Reassessment"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Very positive report mail"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Positive report mail"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Neutral report mail"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Negative report mail"
+msgstr ""
+
+#: global/notifications/report_notification_panel.gd
+msgid "Very negative report mail"
+msgstr ""

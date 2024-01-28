@@ -11,7 +11,7 @@ func _ready():
 	Datetimer.hour_changed.connect(_on_hour_changed)
 
 func _on_hour_changed(date: Datetime):
-	if date.hour == 1:
+	if date.hour == 1: 
 		if date.day == 1 and date.month == 1 and date.year == 2024:
 			delegation(date)
 		elif date.day == 1 or date.day == 15:
@@ -25,15 +25,25 @@ func delegation(date: Datetime):
 		var founding_amount = continent.gdp * 10
 		delegation_report.add_entry(continent_type, founding_amount)
 		total_founding_amount += founding_amount
+		
 	Bank.earn(total_founding_amount)
 	NotificationsBox.create_delegation_notification(delegation_report)
 
 func report(date: Datetime):
+	var money_report = MoneyReport.new()
 	var vote_record = vote(date)
 	var final_result: bool = check_vote(vote_record)
 	
-	Bank.earn(1)
-	NotificationsBox.create_report_notification(final_result, vote_record, date)
+	var total_founding_amount: float = 0.
+	for continent_type in vote_record.confidences:
+		var continent = Saver.data.continents.types[continent_type]
+		var confidence = vote_record.confidences[continent_type]
+		var founding_amount = int(continent.gdp * confidence)
+		money_report.add_entry(continent_type, founding_amount)
+		total_founding_amount += founding_amount
+	
+	Bank.earn(total_founding_amount)
+	NotificationsBox.create_report_notification(final_result, vote_record, money_report, date)
 
 func vote(date: Datetime) -> VoteRecord:
 	var vote_record: VoteRecord = VoteRecord.new()

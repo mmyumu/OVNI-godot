@@ -9,14 +9,14 @@ func _ready():
 
 func create_delegation_notification(delegation_report: MoneyReport):
 	var notification = DelegationNotification.new()
-	notification.name = "Delegation"
 	notification.report = delegation_report
 	notification_created.emit(notification)
 
-func create_report_notification(final_result: bool, vote_record: VoteRecord, date: Datetime):
+func create_report_notification(final_result: bool, vote_record: VoteRecord, money_report: MoneyReport, date: Datetime):
 	var notification = ReportNotification.new()
-	notification.name = "Report: %s" % date.get_date_str()
+	notification.date = Datetime.new(date.timestamp)
 	notification.vote_record = vote_record
+	notification.report = money_report
 	notification.final_result = final_result
 	
 	notification_created.emit(notification)

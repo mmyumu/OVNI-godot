@@ -139,4 +139,6 @@ slower={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://translation/text.en.translation")
+locale/translations=PackedStringArray("res://locale/fr.mo", "res://locale/en.mo")
+locale/translations_pot_files=PackedStringArray("res://menu.tscn", "res://global/notifications/delegation_notification_panel.tscn", "res://global/notifications/notification_panel.tscn", "res://global/notifications/delegation_notification_panel.gd", "res://global/notifications/notification_panel.gd", "res://global/notifications/report_notification_panel.gd", "res://global/notifications/report_notification_panel.tscn")
+locale/test="fr"

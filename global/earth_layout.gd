@@ -194,10 +194,12 @@ func hide_base_info(base: Base):
 
 func display_notification(notification: Notification):
 	var notification_panel = null
-	if notification is DelegationNotification:
-		notification_panel = DelegationNotification.scene.instantiate()
-		notification_panel.notification = notification
-		notification_panel.report = notification.report
+	notification_panel = notification.get_scene().instantiate()
+	notification_panel.notification = notification
+	#if notification is DelegationNotification:
+		#notification_panel = DelegationNotification.scene.instantiate()
+		#notification_panel.notification = notification
+	#elif notification is DelegationNotification:
 	
 	if notification_panel:
 		add_child(notification_panel)

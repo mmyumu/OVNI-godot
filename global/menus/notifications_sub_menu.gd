@@ -12,8 +12,8 @@ func get_menu_data(parent_object: Object) -> Array[MenuDatum]:
 	for notification in Saver.data.get_notifications([Notification.Status.READ, Notification.Status.UNREAD]):
 		var menu_datum: MenuDatum = MenuDatum.new()
 		menu_datum.object = notification
-		menu_datum.button_name = notification.name
-		menu_datum.button_text = notification.name
+		menu_datum.button_name = notification.get_id_name()
+		menu_datum.button_text = notification.get_display_name()
 		menu_datum.font_color = Color.WHITE
 		
 		if notification.status == Notification.Status.UNREAD:

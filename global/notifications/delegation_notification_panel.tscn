@@ -1,38 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3vn8whpr5a3v"]
+[gd_scene load_steps=4 format=3 uid="uid://d3vn8whpr5a3v"]
 
 [ext_resource type="PackedScene" uid="uid://jgjn704ixtq4" path="res://global/notifications/notification_panel.tscn" id="1_w0vtw"]
 [ext_resource type="Script" path="res://global/notifications/delegation_notification_panel.gd" id="2_gjbdu"]
-[ext_resource type="FontFile" uid="uid://coj3rdtalnn11" path="res://fonts/shogunate/Shogunate-MVYep.otf" id="4_bewam"]
-[ext_resource type="FontFile" uid="uid://cjq5gg7e6jn5h" path="res://fonts/shogunate/ShogunateItalic-K7B9p.otf" id="5_4c6ft"]
+[ext_resource type="FontFile" uid="uid://dh3glc605kdtr" path="res://fonts/small_bold_pixel-7.ttf" id="3_1hfjq"]
 
 [node name="DelegationNotificationPanel" instance=ExtResource("1_w0vtw")]
 script = ExtResource("2_gjbdu")
 
 [node name="FromLabelValue" parent="Window/VBoxContainer/GridContainer" index="1"]
-text = "NOTIFICATION_PANEL_GOVERNMENT_MAIL"
+text = "from value"
 
-[node name="ToLabelValue" parent="Window/VBoxContainer/GridContainer" index="3"]
-text = "NOTIFICATION_PANEL_DIRECTOR_MAIL"
+[node name="SubjectLabelValue" parent="Window/VBoxContainer/GridContainer" index="5"]
+text = ""
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Window/VBoxContainer/PanelContainer" index="0"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Window/VBoxContainer/MarginContainer/PanelContainer" index="0"]
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("4_bewam")
-theme_override_fonts/italics_font = ExtResource("5_4c6ft")
+theme_override_fonts/normal_font = ExtResource("3_1hfjq")
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "Dear Director,
-
-This message comes from the Department of Defense at the Terran Sovereign Consortium with an urgent and significant update.
-
-The Planetary Orbital Defense Network (PODN) has been unable to effectively counter the recent extraterrestrial threat. Given these circumstances, the TSC has decided to transfer the responsibility of planetary defense to the Earth Vanguard Alliance (EVA), effective immediately.
-
-We believe in EVA's superior capabilities to handle this critical situation. In support of your efforts, the TSC has also approved an additional budget to aid in your defense operations against the alien forces.
-
-We trust that EVA will utilize these resources strategically and keep us informed of your progress. Your swift action in this matter is imperative for our planet's security.
-
-<report>
-
-
-Best regards,
-
-Department of Defense
-Terran Sovereign Consortium"
+text = "Delegation mail"

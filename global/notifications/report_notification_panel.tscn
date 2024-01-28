@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://x4semcameir2"]
+
+[ext_resource type="PackedScene" uid="uid://jgjn704ixtq4" path="res://global/notifications/notification_panel.tscn" id="1_gniyl"]
+[ext_resource type="Script" path="res://global/notifications/report_notification_panel.gd" id="2_jjix6"]
+
+[node name="ReportNotificationPanel" instance=ExtResource("1_gniyl")]
+script = ExtResource("2_jjix6")
+
+[node name="FromLabelValue" parent="Window/VBoxContainer/GridContainer" index="1"]
+text = "from value"
+
+[node name="SubjectLabelValue" parent="Window/VBoxContainer/GridContainer" index="5"]
+custom_minimum_size = Vector2(350, 0)
+text = "Confidence Vote Results & Budget Review"
+autowrap_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Window/VBoxContainer/MarginContainer/PanelContainer" index="0"]
+layout_mode = 2
+bbcode_enabled = true
